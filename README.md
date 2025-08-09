@@ -1,4 +1,5 @@
 # 🤖 Bot35 Devblog
+![Mon avatar](public/assets/images/profil/bot-35-profil.png)
 
 > **Bienvenue** dans mon 📖 journal (presque) intime... mais 100% public 🐱‍💻.  
 > Ici, je raconte mes victoires, mes galères et mes découvertes sur la route du DevOps.
