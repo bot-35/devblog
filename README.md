@@ -48,6 +48,8 @@ Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
 
 ---
 
-<p align="center">
-  <sub>📜 Sous licence [MIT](LICENSE) (code, configuration, scripts, template Astro, CI/CD) — et [CC BY-NC 4.0](LICENSE-content) pour le contenu (articles, images, logo). Fait avec ❤️, un soupçon de café ☕ beaucoup de curiosité 🧐 et un bon fond musical 👨🏼‍🎤 !</sub>
-</p>
+📜 Licences  
+[![MIT](https://img.shields.io/github/license/bot-35/devblog?style=for-the-badge)](LICENSE)
+[![CC BY-NC 4.0](https://img.shields.io/badge/Licence%20contenu-CC%20BY--NC%204.0-blue?style=for-the-badge)](LICENSE-content)
+
+Fait avec ❤️, un soupçon de café ☕, beaucoup de curiosité 😉 et un bon fond musical 👨🏼‍🎤 !
