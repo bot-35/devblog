@@ -51,7 +51,7 @@ Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
 ## 👾 Stats 
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=calm_pink" alt="Top Langs">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=ambient_gradient&hide=css,mdx" alt="Top Langs">
 </p>
 
 ---
