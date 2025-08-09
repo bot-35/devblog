@@ -4,16 +4,39 @@
     <img src="public/assets/images/profil/bot-35-profil.png" width="200">
 </p>
 
-> **Bienvenue** dans mon 📖 journal (presque) intime... mais 100% public 🐱‍💻.  
-> Ici, je raconte mes victoires, mes galères et mes découvertes sur la route du DevOps.
+<p align="center">
+  <a href="https://ton-site.devops.com"><img src="https://img.shields.io/badge/Visiter%20le%20site-000000?style=for-the-badge&logo=astro&logoColor=white"></a>
+  <img src="https://img.shields.io/github/actions/workflow/status/TON_USER/TON_REPO/deploy.yml?style=for-the-badge&label=Build">
+  <img src="https://img.shields.io/github/license/TON_USER/TON_REPO?style=for-the-badge">
+</p>
 
-## 🍩 Structure du projet
+---
 
-Mon compagnon de voyage : **[Astro](https://astro.build)**.  
-Rapide, flexible, et parfait pour un blog qui respire la modernité.
+## 📖 À propos
+
+Bienvenue dans mon journal (presque) intime… mais **100% public** 🤖  
+Ici, je raconte mes victoires, mes galères et mes découvertes sur la route du **DevOps**.
+
+---
+
+## 🛠 Structure du projet
+
+Mon compagnon de voyage : [Astro](https://astro.build).  
+Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
+
+---
+
+## 📰 Derniers articles
+- [⚙️ CI/CD : Automatiser un blog Astro] => En cours de rédaction
+---
 
 ## 👀 Envie d’en savoir plus ?
+- 📚 [Lire la documentation](https://docs.astro.build)
+- 💬 [Rejoindre le Discord](https://astro.build/chat)
+- ⚡ Bonus : vous pourriez croiser ici des idées qui finiront dans ce blog !
 
-📖 Plongez dans [leur documentation](https://docs.astro.build)  
-💬 Ou venez papoter sur leur [serveur Discord](https://astro.build/chat)  
-⚡ Bonus : vous pourriez même y croiser des idées qui finiront dans ce blog !
+---
+
+<p align="center">
+  <sub>📜 Sous licence MIT — Fait avec ❤️ et un soupçon de café ☕</sub>
+</p>
