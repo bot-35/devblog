@@ -7,9 +7,17 @@
 <p align="center">
   <a href="https://bot-35.github.io/devblog/"><img src="https://img.shields.io/badge/Visiter%20le%20site-000000?style=for-the-badge&logo=astro&logoColor=white"></a>
   <img src="https://img.shields.io/github/actions/workflow/status/bot-35/devblog/deploy.yml?style=for-the-badge&label=Build">
-  <img src="https://img.shields.io/github/license/bot-35/devblog?style=for-the-badge">
 </p>
-
+<p align="center">
+  <!-- Badge licence MIT -->
+  <a href="LICENSE">
+    <img src="https://img.shields.io/github/license/bot-35/devblog?style=for-the-badge">
+  </a>
+  <!-- Badge licence contenu -->
+  <a href="LICENSE-content">
+    <img src="https://img.shields.io/badge/Licence%20contenu-CC%20BY--NC%204.0-blue?style=for-the-badge">
+  </a>
+</p>
 ---
 
 ## 📖 À propos
@@ -38,5 +46,5 @@ Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
 ---
 
 <p align="center">
-  <sub>📜 Sous licence MIT — Fait avec ❤️ et un soupçon de café ☕</sub>
+  <sub>📜 Sous licence [MIT](LICENSE) (code, configuration, scripts, template Astro, CI/CD) — et [CC BY-NC 4.0](LICENSE-content) pour le contenu (articles, images, logo). Fait avec ❤️, un soupçon de café ☕ beaucoup de curiosité 🧐 et un bon fond musical 👨🏼‍🎤 !</sub>
 </p>
