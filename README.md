@@ -48,5 +48,12 @@ Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
 
 ---
 
+## 👾 Stats 
+
+<p align="center">
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=calm_pink)
+</p>
+
+---
 
 Fait avec ❤️, un soupçon de café ☕, beaucoup de curiosité 😉 et un bon fond musical 👨🏼‍🎤 !
