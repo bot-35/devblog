@@ -61,7 +61,7 @@ Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
 &nbsp;&nbsp;
 
 
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=ambient_gradient&cache_seconds=86400&hide=css,mdx" alt="Langages les plus utilisés de bot-35" height="150">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=calm_pink&cache_seconds=86400&hide=css,mdx" alt="Langages les plus utilisés de bot-35" height="150">
 </div>
 
 ---
