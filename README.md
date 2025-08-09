@@ -6,6 +6,8 @@
 
 <p align="center">
   <a href="https://bot-35.github.io/devblog/"><img src="https://img.shields.io/badge/Visiter%20le%20site-000000?style=for-the-badge&logo=astro&logoColor=white"></a>
+</p>
+<p align="center">
   <img src="https://img.shields.io/github/actions/workflow/status/bot-35/devblog/deploy.yml?style=for-the-badge&label=Build">
 </p>
 <p align="center">
