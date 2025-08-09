@@ -65,7 +65,6 @@ Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
   />
 </p>
 
-<p align="center"><b>Langages les plus utilisés</b></p>
 
 ---
 
