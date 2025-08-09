@@ -26,3 +26,6 @@ pnpm-debug.log*
 
 # vscode settings folder
 .vscode/
+
+#on ignore les PSD
+*.psd
