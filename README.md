@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">
-  <a href="https://ton-site.devops.com"><img src="https://img.shields.io/badge/Visiter%20le%20site-000000?style=for-the-badge&logo=astro&logoColor=white"></a>
-  <img src="https://img.shields.io/github/actions/workflow/status/TON_USER/TON_REPO/deploy.yml?style=for-the-badge&label=Build">
-  <img src="https://img.shields.io/github/license/TON_USER/TON_REPO?style=for-the-badge">
+  <a href="https://bot-35.github.io/devblog/"><img src="https://img.shields.io/badge/Visiter%20le%20site-000000?style=for-the-badge&logo=astro&logoColor=white"></a>
+  <img src="https://img.shields.io/github/actions/workflow/status/bot-35/devblog/deploy.yml?style=for-the-badge&label=Build">
+  <img src="https://img.shields.io/github/license/bot-35/devblog?style=for-the-badge">
 </p>
 
 ---
