@@ -51,25 +51,21 @@ Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
 ## 👾📊 Statistiques 
 
 
-<div align="center">
+<p align="center">
+  <img 
+    src="https://github-readme-stats.vercel.app/api?username=bot-35&show_icons=true&theme=calm_pink&hide_title=true&rank_icon=github" 
+    alt="Statistiques GitHub de bot-35" 
+    height="150"
+  />
+  &nbsp;&nbsp;
+  <img 
+    src="https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=calm_pink&hide_title=true" 
+    alt="Langages les plus utilisés" 
+    height="150"
+  />
+</p>
 
-<!-- Carte stats GitHub -->
-<img 
-  src="https://github-readme-stats.vercel.app/api?username=bot-35&show_icons=true&theme=calm_pink&hide_title=true&rank_icon=github" 
-  alt="Statistiques GitHub de bot-35" 
-  height="150"
-/>
-
-&nbsp;&nbsp;
-
-<!-- Carte langages -->
-<img 
-  src="https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=calm_pink&hide_title=true" 
-  alt="Langages les plus utilisés" 
-  height="150"
-/>
-
-</div>
+<p align="center"><b>Langages les plus utilisés</b></p>
 
 ---
 
