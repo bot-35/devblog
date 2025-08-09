@@ -50,23 +50,19 @@ Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
 
 ## 👾📊 Statistiques 
 
-### 📦 Stats du repo
 
-<p align="center">
+<div align="center">
 <img 
   src="https://github-readme-stats.vercel.app/api?username=bot-35&show_icons=true&theme=calm_pink&cache_seconds=86400&hide_title=true&rank_icon=github" 
   alt="Statistiques GitHub de bot-35" 
   height="150"
 />
-</p>
 
 &nbsp;&nbsp;
 
-### 🧰 Langages les plus utilisés
 
-<p align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=ambient_gradient&cache_seconds=86400&hide=css,mdx" alt="Langages les plus utilisés de bot-35" height="150">
-</p>
+</div>
 
 ---
 
