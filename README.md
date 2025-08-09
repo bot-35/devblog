@@ -11,7 +11,7 @@
 <p align="center">
   <!-- Badge licence MIT -->
   <a href="LICENSE">
-    <img src="https://img.shields.io/github/license/bot-35/devblog?style=for-the-badge">
+    <img src="https://img.shields.io/github/License/bot-35/devblog?style=for-the-badge">
   </a>
   <!-- Badge licence contenu -->
   <a href="LICENSE-content">
