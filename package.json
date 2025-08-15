@@ -1,18 +1,11 @@
 {
-  "name": "blog-maximebourdon-fr",
+  "name": "bot-35-Journal_sur_DevOps",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build-test": "npm run build-app && npm run build-docker && npm run build-netlify",
-    "update-web": "npm run build-app && npm run build-netlify-prod",
-    "update-web-test": "npm run build-app && npm run build-netlify",
-    "build": "npm run build-app && npm run build-docker && npm run build-netlify-prod",
-    "build-app": "astro build",
-    "build-docker": "docker build -t blog:latest .",
-    "build-netlify": "netlify deploy --dir=dist",
-    "build-netlify-prod": "netlify deploy --prod --dir=dist",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
