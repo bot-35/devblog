@@ -1,0 +1,98 @@
+---
+title: "Bash : This account is currently not available."
+slug: 'linux_account_not_avaible'
+publishedDate: 2023-10-22
+image: /img/post/13/1.png
+description: Sur Linux, voyons comment switcher sur un compte utilisateur n'ayant aucun shell défini.  
+tags: ["linux","bash","astuce",]
+draft: false
+---
+import CodeBox from '../../components/CodeBox/CodeBox.astro';
+import InfoBox from '../../components/InfoBox/InfoBox.astro';
+import { Icon } from 'astro-icon/components';
+import ImageBox from '../../components/ImageBox/ImageBox.astro';
+
+import LittleCode from '../../components/LittleCode/LittleCode.astro';
+
+import FontBase from '../../img/post/12/fontbase_screenshot.png';
+
+
+<section id='article'>
+
+    <section id='entete'>
+        Sur **Linux**, voyons comment **switcher** sur un compte utilisateur n'ayant **aucun shell défini**. 
+    </section>
+
+        ## L'erreur
+        
+            Vous essayez de **switcher** sur un utilisateur, mais le système vous bloque avec ce message d'**erreur** :
+
+            <CodeBox code={`$ su - www-data 
+'This account is currently not available.'`} lang="bash" theme="vitesse-dark" header="Terminal Linux"/>
+
+            Jetons un coup d'oeil sur cet user dans <LittleCode code='/etc/passwd' lang="bash" theme="vitesse-dark"/>.
+
+
+            <CodeBox code={`www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin`} lang="bash" theme="vitesse-dark" header="/etc/passwd"/>
+            
+
+            Profitons-en pour **décrypter** cette ligne 🧐.
+            
+            De gauche à droite :
+
+- **www-data** : le **nom** de l'utilisateur.
+- **x** : les informations utilisées pour **valider le mot de passe** d'un utilisateur. Ce champ contient "x" car les informations de mot de passe sont stockées dans un **fichier de mots de passe séparé**.
+- **33** : **l'identifiant d'utilisateur (UID)**. Nombre utilisé par le système d'exploitation. Il n'est **pas nécessairement unique**.
+- **33** : **l'identifiant de groupe (GID)**. Un nombre qui identifie le **groupe principal** de l'utilisateur. Tous les fichiers créés par cet utilisateur peuvent être initialement accessibles à ce groupe.
+- **www-data** : **le champ Gecos**. Un commentaire qui décrit la personne ou le compte. Généralement, il s'agit d'un ensemble de valeurs séparées par des virgules, fournissant le nom complet de l'utilisateur et ses coordonnées.
+- **/var/www** : le **chemin** vers le **répertoire personnel** de l'utilisateur.
+- **/usr/sbin/nologin** : le **programme** qui est lancé chaque fois que l'utilisateur se **connecte au système**. Pour un utilisateur interactif, il s'agit généralement d'une **interface en ligne de commande (exemple : /bin/bash)**.
+
+    Le problème vient de cette **dernière valeur** <LittleCode code='/usr/sbin/nologin' lang="bash" theme="vitesse-dark"/>.
+
+
+
+    ## La solution
+
+    Pour changer ce paramètre, vous pourriez modifier le fichier directement avec **Vim**, mais il existe <LittleCode code='chsh' lang="bash" theme="vitesse-dark"/> (change your login shell) qui existe **juste pour ça** 🐱‍👤.
+
+                <CodeBox code={`chsh -s /bin/bash www-data`} lang="bash" theme="vitesse-dark" header="Terminal Linux"/>
+        
+    Ouvrons de nouveau <LittleCode code='/etc/passwd' lang="bash" theme="vitesse-dark"/>.
+
+    <CodeBox code={`www-data:x:33:33:www-data:/var/www:/bin/bash`} lang="bash" theme="vitesse-dark" header="/etc/passwd"/>
+
+    Et si j'essaye de **switcher** sur cet user :
+
+        <CodeBox code={`
+    su www-data 
+    www-data:/$
+    `} lang="bash" theme="vitesse-dark" header="/etc/passwd"/>
+
+    Voilà nous sommes bien **loggé** avec www-data.
+
+    ### Solution secondaire
+
+    Il existe aussi des situations ou vous **ne voulez et/ou ne pouvez pas** modifier le shell de l'utilisateur. 
+
+    Vous avez alors **deux** cas de figures :
+
+    - Vous avez une **unique commande** à passer alors faites : <LittleCode code='su - www-data -s /bin/bash -c "/etc/init.d/daemon start"' lang="bash" theme="vitesse-dark"/>.
+    - Vous avez **plusieurs commandes** à passer alors faites : <LittleCode code='su - www-data -s /bin/bash' lang="bash" theme="vitesse-dark"/>.
+
+    Dans les deux cas, l'utilisateur **restera tel que vous l'aurez trouvé** 😎. 
+
+    ## Conclusion
+    
+    La gestion des utilisateurs, des groupes et des droits est une des **pierres angulaires** des systèmes Linux. 
+    
+    Si vous êtes un admin habitué à Windows, cela peut paraître parfois **un peu compliqué**, mais tout s'éclaire une fois qu'on a appris à **décrypter** les fichiers correspondants et qu'on connait les **bonnes commandes** ainsi que les **bonnes méthodes**.
+
+    Cet article me paraissait être une **bonne manière** d'aborder pour la première fois ce sujet sur mon blog et sera probablement bientôt suivi d'un article sur **la gestion des droits**. 
+
+    Au moment où j'écris ces lignes, la nuit est déjà bien avancée et il est temps pour moi d'aller dormir 😴.
+    
+    A bientôt.
+
+</section>
+

@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+
+const allBlogPosts = await getCollection('posts', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+const tags = [];
+
+allBlogPosts.forEach((entry) => {
+    const entryTags = entry.data.tags;
+    entryTags.forEach((tag) => {
+      if (!tags.includes(tag)) {
+        tags.push(tag);
+      }
+    });
+  });
+
+tags.sort();
+---
+
+<section class='h-fit py-8 w-full relative  flex flex-col gap-8 justify-center items-center content-center'>
+    <p class='uppercase font-medium text-xl'> tag list :</p>
+    <div class='absolute top-0 left-0 h-full w-full backdrop-brightness-150 rounded shadow -z-50' />
+    <ul class='w-5/6 h-full flex flex-row flex-wrap gap-16 justify-around'>
+        {tags.map((tag) => (
+          <li><a class='hover-underline-animation' href=`/tags/${tag}`>#{tag}</a></li>
+        ))}
+      </ul>
+</section>

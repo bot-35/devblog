@@ -1,0 +1,136 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+@import '@fontsource-variable/jost/wght.css';
+@import '@fontsource/rozha-one';
+
+
+
+
+@layer base {
+    body {
+        @apply font-jost  bg-blog-black text-indigo-100   text-blog-marron-text;
+    }
+    h1, h2, h3, h4, h5 {
+        @apply font-medium tracking-widest font-rozha text-blog-marron-fond ;
+    }
+    kbd, blockquote, quote, samp, details, summary,  dl, dd, dt {
+        @apply font-mono;
+    }
+    h1 {
+      @apply text-4xl sm:text-7xl;
+    }
+    h2 {
+        @apply text-3xl sm:text-6xl;
+    }
+    h3 {
+        @apply text-2xl sm:text-5xl;
+    }
+    h4 {
+        @apply text-xl sm:text-4xl;
+    }
+    h5 {
+        @apply text-lg sm:text-3xl;
+    }
+    mark {
+        @apply bg-yellow-500;
+    }
+    strong {
+        @apply text-blog-marron-fond;
+    }
+    .codebox > pre {
+        @apply rounded-sm !pt-4 !pb-2 !px-4;
+    }
+    .codebox > pre > code {
+        @apply bg-transparent;
+    }
+    code {
+        @apply  px-1 py-1 font-mono text-base tracking-tight	 ; 
+        background-color: #121212;
+        color: #c2bfb4;
+
+    }
+    dt {
+        @apply font-semibold;
+    }
+    samp, kbd {
+        @apply inline-block p-2;
+    }
+    samp {
+        @apply bg-neutral-500 ;
+    }
+    blockquote {
+        @apply  rounded-full pl-12 xl:pl-32 p-16 w-full !my-8  bg-blog-black font-serif text-white relative  before:absolute  before:top-0 before:left-4 before:h-fit before:w-fit   before:text-red-500 before:text-5xl before:xl:text-9xl before:font-mono  before:content-['"'];
+        & p {
+            @apply text-sm italic my-4;
+        }
+        & footer {
+            @apply ml-12 text-red-500;
+        }
+    }
+    kbd {
+        @apply bg-gray-100 px-5 font-semibold border-blue-900 border-2 uppercase;
+    }
+    nav a p, nav button {
+        @apply  text-blog-marron-reflet uppercase; 
+    }
+    nav a p {
+        @apply hover-underline-animation text-blog-marron-reflet hover:text-blog-marron-text uppercase before:inline-block before:h-[5px] hover:before:bg-red-800 before:w-[5px] before:mr-[8px]  before:bg-blog-marron-fond; 
+    }
+    .resetmask {
+            mask-image: initial!important;
+    }
+    .animationOpacity {
+        @apply opacity-0;
+    }
+
+    #footer--bottom a {
+        @apply hover-underline-animation;
+    }
+
+    .c-breadcrumbs__crumb a {
+        @apply xl:hover-underline-animation m-2;
+    }
+
+    #article a {
+        @apply hover-underline-animation;
+    }
+
+
+    
+    
+    .btn--two-colors--bl-tr {
+        @apply block relative bg-blog-black transition border border-blog-marron-reflet py-4 px-6 ease-in
+        hover:scale-105 
+        before:absolute before:top-0 before:left-0 before:bg-blog-marron-fond before:w-full before:h-full before:origin-bottom-left before:opacity-50 before:-z-20 before:scale-0 before:transition before:ease-in
+        after:absolute after:top-0 after:left-0 after:bg-red-500 after:w-full after:h-full after:origin-top-right after:opacity-60  after:-z-10 after:scale-0 after:transition after:ease-in;
+        &:hover {
+            @apply text-white bg-transparent;
+            &::before { @apply scale-100 origin-top-right;}
+            &::after { @apply scale-100 origin-bottom-left;}
+        }
+        &:focus {
+            @apply text-white bg-transparent;
+            &::before { @apply scale-100 origin-top-right;}
+            &::after { @apply scale-100 origin-bottom-left;}
+        }
+    }
+    .btn--two-colors--l-r {
+        @apply block relative bg-blog-black transition border border-blog-marron-reflet py-4 px-6 ease-in
+        before:absolute before:top-0 before:left-0 before:bg-blog-marron-fond before:w-full before:h-full before:origin-left before:opacity-50 before:-z-20 before:scale-x-0 before:transition before:ease-in
+        after:absolute after:top-0 after:left-0 after:bg-red-500 after:w-full after:h-full after:origin-right after:opacity-60 after:-z-10 after:scale-x-0 after:transition after:ease-in;
+        &:hover {
+            @apply text-white bg-transparent;
+            &::before { @apply scale-x-100 origin-right;}
+            &::after { @apply scale-x-100 origin-left;}
+        }
+        &:focus {
+            @apply text-white bg-transparent;
+            &::before { @apply scale-x-100 origin-right;}
+            &::after { @apply scale-100 origin-left;}
+        }
+    }
+}
+

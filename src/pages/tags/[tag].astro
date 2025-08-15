@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../layouts/layout.astro';
+import PostCard from '../../components/PostCard/PostCard.astro';
+
+export async function getStaticPaths() {
+    const blogEntries = await getCollection('posts', ({ data }) => {
+      return import.meta.env.PROD ? data.draft !== true : true;
+});;
+    blogEntries.sort((b, a) => a.data.publishedDate - b.data.publishedDate);
+    const uniqueTags = [...new Set(blogEntries.map((post) => post.data.tags).flat())];
+    return uniqueTags.map((tag) => {
+        const filteredPosts = blogEntries.filter((post) => post.data.tags.includes(tag));
+        return {
+            params: { tag },
+            props: { posts: filteredPosts },
+        };
+    });
+}
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+<BaseLayout pageTitle={tag}>
+    <div class="xl:mt-64 mt-32 flex flex-col gap-4 ">
+        <p class="ml-8">Tag : <span class='text-red-500 font-mono capitalize'>{tag}</span></p>
+        <ul class=" grid grid-cols-1 gap-8 xl:grid-cols-3">
+            {posts.map((post) => 			<PostCard collection={post.collection} id={post.id} slug={post.slug} />)} 
+        </ul>
+    </div>
+</BaseLayout>
+
+

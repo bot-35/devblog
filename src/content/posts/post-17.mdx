@@ -1,0 +1,142 @@
+---
+title: "Installation de Docker sur Debian Bookworm 12"
+slug: 'docker_bookworm'
+publishedDate: 2023-12-05
+image: /img/post/17/1.png
+description: Voyons comment installer le gestionnaire de conteneur sur la dernière version stable de Debian.
+tags: ["debian", "docker", "conteneurisation", "linux", "logithèque"]
+draft: false
+---
+
+
+import CodeBox from '../../components/CodeBox/CodeBox.astro';
+
+import InfoBox from '../../components/InfoBox/InfoBox.astro';
+
+import LittleCode from '../../components/LittleCode/LittleCode.astro';
+
+
+
+<section id='article'>
+
+    <section id='entete'>
+        Voyons comment installer le gestionnaire de conteneur sur la dernière version stable de Debian.
+    </section>
+
+        ## Introduction
+
+            Après avoir écrit un article sur <a href="/posts/docker_homepage/">Homepage</a>, il me paraissait logique d'écrire un article sur <a href="https://www.docker.com/">Docker</a>.
+
+            J'ai fait le choix de l'installer sur une Debian pour ce billet, mais c'est aussi disponible sur CentOS, Fedora, Ubuntu...
+
+            <InfoBox> Il existe aussi une version Windows basé sur **WSL2**.<br/><br/> Cependant, certains conteneurs n'aiment pas cette couche intermédiaire donc je vous la **déconseille** pour une utilisation en **production**.<br/><br/>Pour des tests cela peut toujours être une alternative utile, mais gardez à l'esprit que ce n'est pas vraiment le **fonctionnement optimal** de Docker. </InfoBox>
+
+        ## Prérequis
+
+            Si vous avez l'habitude d'utiliser le gestionnaire de paquet, vous avez probablement essayé de lancer une installation à travers le dépôt officiel avec <LittleCode code='apt-get install docker' lang="bash" theme="vitesse-dark"/>.
+
+            Les dépôts Debian ne contenants pas de version officielle du moteur Docker, il est nécessaire de passer par un dépôt prévu à cet effet.
+
+            Mais tout d'abord commençons par nettoyer notre système de notre premier <LittleCode code='apt-get install docker' lang="bash" theme="vitesse-dark"/>.
+
+            <CodeBox code={`
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+            `} lang="bash" theme="vitesse-dark" header="Shell Bash"/>
+
+            <InfoBox>Vous constaterez qu'on vise aussi les paquets **containerd** et **runc** dans l'opération.<br/><br/>C'est normal, le moteur de Docker en ayant besoin, il viendra installer ces dépendances avec un unique paquet : **containerd.io** afin d'éviter tout conflits de versions.<br/><br/></InfoBox>
+
+        ## Installation
+
+            ### Méthodes
+                Il existe **plusieurs méthodes** pour installer Docker :
+
+                - <a href='https://docs.docker.com/desktop/install/linux-install/'>Docker Desktop pour Linux</a>.
+                - Docker Engine depuis leur **dépôt officiel**.
+                - Installation **manuelle**. 
+                - Par script. (uniquement recommandé pour des **tests** et du **dev**)
+
+            Pour cet article on choisira l'installation au travers du **dépôt officiel**.
+
+            ### Mise à jour d'apt
+
+            Tout d'abord mettons à jour apt en **ajoutant** le dépôt Docker dans nos sources.
+
+            <CodeBox code={`
+# On ajoute la clé GPG officiel :
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Ajout du dépôt à la liste (dans /etc/apt/sources.list.d)
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+`} lang="bash" theme="vitesse-dark" header="Shell Bash"/>
+
+        ### Installation avec apt-get
+
+    
+            <CodeBox code={`
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+`} lang="bash" theme="vitesse-dark" header="Shell Bash"/>
+
+    ## Test
+
+    Si tout s'est bien passé, nous devrions pouvoir mettre en place un premier conteneur : **Hello World**🖖🏼.
+
+    Un simple <LittleCode code='sudo docker run hello-world' lang="bash" theme="vitesse-dark"/>  **installera** et **lancera** pour vous le conteneur en question. 
+
+            <CodeBox code={`
+$:/# sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+
+latest: Pulling from library/hello-world
+70f5ac315c5a: Pull complete
+Digest: sha256:c79d06dfdfd3d3eb04cafd0dc2bacab0992ebc243e083cabe208bac4dd7759e0
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (arm64v8)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+`} lang="bash" theme="vitesse-dark" header="Shell Bash"/>
+    
+
+Ici, tout semble OK ! 
+
+## Conclusion
+
+Maintenant que vous savez comment mettre en place un moteur Docker, vous **n'avez plus d'excuses** pour ne pas installer <a href='/posts/docker_homepage/'>Homepage</a>.
+
+Quoique... encore faudrait-il qu'on cause de **Compose**. 
+
+Et c'est étrangement le sujet d'un **prochain billet**... le hasard probablement 😏.
+
+En attendant de vous y retrouver, je vous dis au revoir et à bientôt.
+
+        
+    
+    </section>
+
+

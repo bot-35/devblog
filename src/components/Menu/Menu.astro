@@ -1,0 +1,15 @@
+---
+
+const items = [['Blog','/posts'], ['A Propos','/apropos'],];
+---
+
+
+<nav class='xl:flex flex-row gap-8 mr-8 items-center hidden' id='menu' data-animation='menuLargeAnimation'>
+    {items.map((item) => (
+        <a class='      ' href={item[1]}><p>{item[0]}</p></a>
+    ))}
+    <a class='      ' href='/contact'><button class='btn--two-colors--bl-tr'>Contact</button></a>
+</nav>
+
+
+

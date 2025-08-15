@@ -1,0 +1,66 @@
+---
+title: "PowerShell : Gestion des profils."
+slug: 'powershell_profil'
+publishedDate: 2023-12-18
+image: /img/post/19/2.png
+description: Apprennons à créer votre profil PowerShell. 
+tags: ["windows","powershell","astuce","geek"]
+draft: true
+---
+import ImageBox from '../../components/ImageBox/ImageBox.astro';
+import CodeBox from '../../components/CodeBox/CodeBox.astro';
+import InfoBigBox from '../../components/InfoBigBox/InfoBigBox.astro';
+import Terminal from '../../img/post/20/terminal.png';
+
+
+
+import ghub from '../../img/post/18/ghub_stuck.gif';
+
+
+<section id='article'>
+
+    <section id='entete'>
+Apprennons à créer votre profil PowerShell.
+</section>
+
+        ## Introduction
+
+                Si vous êtes régulièrement ammené à utiliser les mêmes fonctions PowerShell - pour  effectuer par exemple des rapports à destination de vos collègues et supérieurs-, vous devez surement en avoir assez de naviguer dans vos multiples fichiers .ps1 à la recherche de celle-ci.
+
+                Vous vous êtes alors probablement demandé si il n'était pas possible d'accéder à vos fonctions à tout instant depuis votre session. 
+
+                La réponse est évidemment non, bonne journée et à bientôt 🤟🏼.
+        
+                Pardon... restez avec moi, car c'est bien entendu possible et cela grace aux profils PowerShell que nous allons apprendre à configurer ici même.
+
+                Initialiser des fonctions ne sera cependant pas l'unique avantage offert par votre profil, et avec un peu de temps et de patience, vous pourrez même tendre vers un shell qui ressemble à cela (nous verrons comment changer le prompt et personnaliser une 'page d'accueil' pour votre shell dans un ou plusieurs futurs billets).
+
+<ImageBox  src={Terminal} alt="Capture d'écran de mon terminal modifié."  orientation="horizontal"/>
+
+
+            ## Le Profil Powershell en gros : Un script pour les commander tous.
+
+            Pour vous expliquer rapidement ce qu'est un profil ca sera très simple : c'est un script ou plutôt un ensemble de script.
+
+            Des scripts certes mais qui auront la particularité de ce jouer au démarrage de chacune de vos sessions PowerShell.
+
+            J'utilise à escient le mot jouer, car l'ordre d'éxécution de ces scripts sera toujours le même, du plus global au plus ciblé, vous pourrez comme un maitre d'orchestre affiner avec précision le résultat obtenu pour vous et vos utilisateurs. 
+
+            ## Hôtes et utilisateurs
+
+            Avant d'entrer dans le vif du sujet, je penses qu'il est important que vous compreniez bien la philosophie derrière les différents fichiers que nous allons créer.
+
+            Si vous utilisez régulièrement PowerShell pour maintenir votre parc, vous comprendrez rapidement ou je veux en venir, mais pour les néophyte sachez qu'une fois qu'on prend l'habitude de travailler avec ce language, on l'utilise pour TOUT. 
+
+            De la création d'users, à l'analyse des BAL exchange en passant par la vérification des tâches de sauvegarde, on passe son temps à travailler sur différents serveurs. 
+       
+        A bientôt.
+
+
+
+
+        
+    
+    </section>
+
+

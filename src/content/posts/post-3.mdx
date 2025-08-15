@@ -1,0 +1,64 @@
+---
+title: "Powershell : Erreur 0x80131515 lors de l'Add-Type d'une dll."
+slug: 'powershell_erreur_0x80131515'
+publishedDate: 2023-08-27
+image: /img/post/3/1.png
+description: Ou comment gérer les erreurs en Powershell.
+tags: ["script", "powershell", "astuce"]
+draft: false
+
+---
+import CodeBox from '../../components/CodeBox/CodeBox.astro';
+import CodeErrorBox from '../../components/CodeErrorBox/CodeErrorBox.astro';
+import InfoBox from '../../components/InfoBox/InfoBox.astro';
+import ImageBox from '../../components/ImageBox/ImageBox.astro';
+
+import deblok from '../../img/post/3/deblok_file.png';
+
+
+    <section id='article'>
+         <section id='entete'>
+            L'une des forces du Powershell est qu'il permet **d'importer des classes .NET** à travers la bibliothèque de liens dynamiques (DLL), mais on rencontre parfois des erreurs dont la fameuse **0x80131515**.
+        </section>
+
+        ## Le contexte
+
+        Dans le cadre d'un projet personnel, j'avais besoin de récupérer l'ensemble des images d'un site de façon rapide.
+
+        En **bon admin**, j'ai décidé de passer par un script Powershell pour réaliser cette tâche, plutôt que de fatiguer le clic droit de ma souris. 
+
+        ## L'erreur
+
+        C'est dans ce cadre, que j'ai découvert <a href='https://html-agility-pack.net/'>Html Agility Pack (HAP)</a> qui permet de **parser** du HTML et donc d'appliquer **boucles** et **conditions** sur des **noeuds du DOM** plutôt que sur un string qu'on travaillerait avec regex (j'aime regex, mais uniquement si je n'ai pas le choix 👀).
+        
+        Après avoir trouvé la bonne dll, j'ai tenté de l'importer.
+
+        <CodeBox code={`Add-Type -Path ".\\HtmlAgilityPack.dll"`} lang="powershell" theme="vitesse-dark" header="PowerShell"/>
+        
+        Et voici le résultat : 
+        <CodeErrorBox header="PowerShell">Add-Type : Impossible de charger le fichier ou l'assembly 'file:///E:\dev\powershell\HtmlAgilityPack.dll' ou une de ses dépendances. L'opération n'est pas prise en charge. (Exception de HRESULT : 0x80131515)</CodeErrorBox>
+         
+         L'erreur, comme vous pouvez le constater, n'est **pas bien claire**. 
+         De plus, en cherchant sur le web, on trouve des discutions liées à cette erreur, mais la plupart du temps, c'est lié à des projets sur Visual Studio donc pas en rapport avec ce qui nous occupe ici.
+
+        Creusons un peu la question de l'erreur :
+
+        <CodeBox code={`$Error[0].Exception.InnerException`} lang="powershell" theme="vitesse-dark" header="PowerShell"/>
+
+        <InfoBox>**$Error** est une <a href='https://learn.microsoft.com/fr-fr/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.3'> variable automatique </a>. Elle contient un tableau d’objets d’erreur qui représentent les erreurs les plus récentes. L’erreur la plus récente est le premier objet d’erreur dans le tableau **$Error[0]**. </InfoBox>
+
+        <CodeErrorBox header="PowerShell">Tentative de chargement d'un assembly à partir d'un emplacement réseau qui aurait entraîné l'utilisation de l'assembly en mode Bac à sable (sandbox) dans les versions antérieures du .NET
+Framework. Cette version du .NET Framework n'activant pas la stratégie CAS par défaut, ce chargement peut être dangereux. Si ce chargement n'est pas destiné à utiliser l'assembly en mode
+Bac à sable (sandbox), activez le commutateur loadFromRemoteSources. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkId=155569.</CodeErrorBox>
+
+
+        Ce message nous indique que l'erreur est liée au chargement du fichier depuis l'emplacement réseau (tout simplement Internet) pour résoudre ce genre de problème doit vérifier si **le fichier est bloqué**. 
+        
+        ## La solution
+        
+        C'est assez simple, dans l'explorateur de fichier, clique droit sur le fichier, Propriétés, dans Sécurité cochez **Débloquer** puis OK.
+
+        <ImageBox  src={deblok}  alt="Capture d'écran d'une fenêtre Propriété d'un fichier."/>
+
+        Votre **Add-Type** devrait maintenant fonctionner. 👌
+</section>

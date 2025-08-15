@@ -1,0 +1,28 @@
+---
+import { NodeApp } from "astro/app/node";
+const items = {
+                hébergeur: ['Netlify','https://app.netlify.com/'],
+                'stylisé par': ['Tailwindcss 3.3.3','https://tailwindcss.com/'],
+                'propulsé par': ['Astro 3.0.12', 'https://astro.build/'],
+                'tooltipisé par': ['Tippy.js 6.3.7', 'https://atomiks.github.io/tippyjs/'],
+
+                }
+const sections = Object.getOwnPropertyNames(items);
+
+---
+
+ 
+        <div class='relative flex flex-col gap-2     '>
+            <div class='flex flex-row  rounded-sm p-2 xl:p-4 bg-gradient-to-r z-10 from-blog-marron-fond via-blog-marron-shadow to-blog-marron-reflet uppercase      '>
+
+            <p class='text-blog-black uppercase text-xl font-medium'>
+                Pour les geeks </p></div>
+            {sections.map((section) => (
+                <div  class='     flex flex-row justify-between z-10 p-4 xl:p-8 rounded-sm bg-[#FFFFFF10] '>
+                    <p class='uppercase z-10'>
+                        {section}</p> 
+                    <a href={items[section][1]} class='cursor-pointer text-white hover:text-red-500'><p class='uppercase z-10'>
+                        {items[section][0]}</p></a>
+                </div>
+                ))}  
+        </div>

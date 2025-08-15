@@ -1,0 +1,138 @@
+---
+title: "JavaScript : Décompte des valeurs dans un array"
+slug: 'js_reduce'
+publishedDate: 2023-10-06
+image: /img/post/5/2.png
+description: Avec Array.prototype.reduce() 
+tags: ["javascript","développement","astuce"]
+base: "https://www.30secondsofcode.org/js/s/value-frequencies/"
+draft: false
+---
+import CodeBox from '../../components/CodeBox/CodeBox.astro';
+import InfoBox from '../../components/InfoBox/InfoBox.astro';
+import LittleCode from '../../components/LittleCode/LittleCode.astro';
+import ImageBox from '../../components/ImageBox/ImageBox.astro';
+
+import { Icon } from 'astro-icon/components'
+
+import diagram from '../../img/post/5/diagram.png';
+
+
+<section id='article'>
+    <section id='entete'>
+Je vous explique comment compter le nombre d'occurrences des valeurs composants un tableau de données.
+    </section>
+
+## Introduction
+Bonjour,
+
+Dans ce post, nous allons analyser une fonction qui compte le nombre **d'occurrences** d'un **tableau de données**. 
+
+Nous verrons les différentes notions de Javascript la composant dont celle que je considère comme la plus importante de ce billet : <LittleCode code='Array.prototype.reduce()' lang="js" theme="vitesse-dark"/>.
+
+
+
+## <Icon pack="ph" name="file-js-light" class='h-12 pb-3 inline' /> Fonction fléchée + Array.prototype.reduce() + Objet + Opérateur de coalescence des nuls
+
+Tout d'abord, voici la fonction : 
+
+<CodeBox code={`
+const calculOccurences = array =>
+  array.reduce((objOccurences, v) => {
+    objOccurences[v] = (objOccurences[v] ?? 0) + 1;
+    return objOccurences;
+  }, {});
+
+
+
+calculOccurences(['1', '9', '8', '8']); 
+// { 1: 1, 9: 1, 8: 2 }
+
+calculOccurences([...'aha']); 
+// { a: 2, h: 1 }
+
+`} lang="javascript" theme="vitesse-dark" header="JavaScript"/>
+
+
+Ça peut être un peu **complexe** à lire si on n'a pas l'habitude et moi-même la première fois que je suis tombé sur cette fonction, je me suis contenté de l'utiliser sans chercher à la comprendre. (**Évitez de faire ça.** 😈)
+
+Surtout ne vous inquiétez pas nous allons maintenant détailler son fonctionnement.
+
+### Fonction fléchée
+<LittleCode code='const calculOccurences = array =>' lang="js" theme="vitesse-dark"/><br/> <br/>Tout d'abord on déclare une <a href='https://developer.mozilla.org/fr/docs/web/javascript/reference/functions/arrow_functions'>fonction fléchée</a> nommée <LittleCode code='calculOccurences' lang="js" theme="vitesse-dark"/> qui prend comme **paramètre** un tableau (ici nommé arbitrairement  <LittleCode code='array' lang="js" theme="vitesse-dark"/>, mais qui aurait tout aussi bien pu se nommer  <LittleCode code='data' lang="js" theme="vitesse-dark"/>, ou  <LittleCode code='xylophone' lang="js" theme="vitesse-dark"/>).
+
+
+### Array.prototype.reduce()
+<LittleCode code='array.reduce((objOccurences, v) => { // FONCTION DE RAPPEL //  }, {});' lang="js" theme="vitesse-dark"/><br/><br/> Là ça devient tout de suite plus compliqué si l'on ne connait pas la méthode  <a href='https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce'> Array.prototype.reduce()</a>.
+
+Elle fait partie avec <a href='https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/filter'>Array.prototype.filter()</a> et <a href='https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/map'>Array.prototype.map()</a> des trois méthodes que vous devez connaitre en JavaScript pour manipuler les tableaux. 
+
+<LittleCode code='filter()' lang="js" theme="vitesse-dark"/> (qui permet comme son nom l'indique de filtrer un tableau) et <LittleCode code='map()' lang="js" theme="vitesse-dark"/> (qui vous permet de lire le tableau ligne par ligne) sont simples à appréhender, mais c'est moins le cas pour <LittleCode code='reduce()' lang="js" theme="vitesse-dark"/>. 
+
+Tout d'abord sachez que <LittleCode code='reduce()' lang="js" theme="vitesse-dark"/> fonctionne comme <LittleCode code='map()' lang="js" theme="vitesse-dark"/> dans le sens ou la méthode lira votre tableau ligne par ligne, mais ajoutera un accumulateur.
+
+<LittleCode code='Array.prototype.reduce()' lang="js" theme="vitesse-dark"/>   prend ici deux paramètres : 
+
+- Une **fonction de rappel** et elle-même prend deux paramètres :
+  - <LittleCode code='objOccurences' lang="js" theme="vitesse-dark"/> c'est le résultat obtenu après chaque application de la **callback**, aussi appelé **accumulateur**.
+  <InfoBox>**Callback** étant le nom anglais pour **Fonction de rappel**. <br/>On ne précisera pas ce que sont exactement ces fonctions dans ce billet, mais je m'y pencherai bientôt, ayant de toute manière envie de coucher ce concept sur papier pour mieux me l'aproprier.</InfoBox>
+  -  <LittleCode code='v' lang="js" theme="vitesse-dark"/> pour valeur, c'est la valeur du tableau en **cour de traitement**.
+- Une valeur initiale avec <LittleCode code=', {});' lang="js" theme="vitesse-dark"/> qui est un **objet**. 
+<br/>C'est nécessaire de définir cet objet en valeur initiale afin de l'incrémenter au fil du processus pour obtenir à la fin un jeu de **clés/valeurs**. 
+  <InfoBox>Sans l'initialisation de cet objet en valeur initiale, reduce nous aurait alors renvoyé un **tableau** dans <LittleCode code='objOccurences' lang="js" theme="vitesse-dark"/>. Ce qui aurait rendu la callback inopérante.</InfoBox>
+
+
+### La fonction de rappel (callback)
+
+Revoyons ensemble la fonction :
+
+<CodeBox code={`
+(objOccurences, v) => {
+    objOccurences[v] = (objOccurences[v] ?? 0) + 1;
+    return objOccurences;
+`} lang="javascript" theme="vitesse-dark" header="JavaScript"/>
+
+
+
+<LittleCode code='objOccurences[v] = (objOccurences[v] ?? 0) + 1;' lang="js" theme="vitesse-dark"/> cette ligne est **le seul et unique traitement** de votre fonction de rappel. 
+
+C'est elle qui sera appliquée à **chaque tour** de <LittleCode code='reduce()' lang="js" theme="vitesse-dark"/>. 
+
+Comprendre son fonctionnement implique de connaitre l'**opérateur de coalescence des nuls** (**nullish coalescing operator**). 
+
+C'est en fait les <LittleCode code='??' lang="js" theme="vitesse-dark"/> et si vous ne savez pas ce que c'est, cela tombe bien car <a href='js_operateur_coalescence_des_nuls'>j'ai déjà écrit sur lui</a>. 🤭
+
+Donc cet opérateur vérifiera si la valeur en cours de traitement **existe déjà** dans  <LittleCode code='objOccurences' lang="js" theme="vitesse-dark"/> en tant que **clé** et si ce n'est pas le cas en **initialisera** une à 0.
+
+C'est ici que l'objet en valeur initiale prend **tout son sens**. 
+
+En effet, comme vous pouvez le constater on utilise la **valeur en cours de traitement** comme clé de <LittleCode code='objOccurences' lang="js" theme="vitesse-dark"/>  afin de **l'incrémenter de un**.
+
+Finalement, on **retourne** <LittleCode code='objOccurences' lang="js" theme="vitesse-dark"/>  pour la prochaine callback ou pour terminer la reduce.
+
+
+## Croquis
+
+Pour vous aider à mieux appréhender tout cela, voici un petit **croquis** que j'ai concocté rien que pour **vous**. 🙃
+
+
+<ImageBox  src={diagram} alt="Diagramme représentant le fonctionnement de la fonction."  orientation="horizontal"/>
+
+## Conclusion
+
+Avec cette idée qui semblait simple au départ, nous avons pu voir quelques **concepts** du JavaScript et notamment <LittleCode code='Array.prototype.reduce()' lang="js" theme="vitesse-dark"/> .
+
+**N'hésitez pas**, abusez en quand vous aurez à manipuler des tableaux ! 
+
+Ca sera toujours mieux qu'une **boucle for in**. 🧐
+
+A bientôt !
+
+
+
+
+
+
+
+
+</section>

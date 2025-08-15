@@ -1,0 +1,13 @@
+---
+
+const items = [['Blog','/posts'],  ['A Propos','/apropos'],['Contact','/contact'],];
+---
+
+
+<section class='hidden xl:flex flex-row w-full justify-between p-8' id='menuFooter' data-animation='menuFooterAnimation'>
+    {items.map((item) => (
+        <a class='      '  href={item[1]}><p class='uppercase hover-underline-animation text-blog-marron-reflet hover:text-blog-marron-text  before:inline-block before:h-[5px] hover:before:bg-red-800 before:w-[5px] before:mr-[8px]  before:bg-blog-marron-fond'>{item[0]}</p></a>
+    ))}
+</section>
+
+

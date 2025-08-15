@@ -1,0 +1,274 @@
+---
+title: "Homepage : la page de démarrage pour se sentir comme à la maison."
+slug: 'docker_homepage'
+publishedDate: 2023-10-10
+image: /img/post/7/1.png
+description: Une application moderne et sécurisée, entièrement customisable et pleine de widgets en guise de page de démarrage ça vous tente ? Alors, découvrez Homepage avec moi !
+tags: ["logithèque","docker","geek"]
+draft: false
+---
+import CodeBox from '../../components/CodeBox/CodeBox.astro';
+import InfoBox from '../../components/InfoBox/InfoBox.astro';
+import { Icon } from 'astro-icon/components';
+import ImageBox from '../../components/ImageBox/ImageBox.astro';
+
+import LittleCode from '../../components/LittleCode/LittleCode.astro';
+
+import CleanInstall from '../../img/post/7/homepage_clean_install.png';
+import Tuned from '../../img/post/7/homepage_tuned.png';
+import Status from '../../img/post/7/status.png';
+
+
+<section id='article'>
+    <section id='entete'>
+      Une application moderne et sécurisée, entièrement customisable et pleine de widgets en guise de page de démarrage ça vous tente ? 
+      Alors, découvrez Homepage avec moi !
+    </section>
+
+## Introduction
+
+Vous aimez jouer avec toutes les applications web possible ?
+
+Et vous en avez encore plus en local ? 
+
+Mais du coup vos favoris ressembles de plus en plus à votre chambre d'adolescent ?
+
+Alors, venez avec moi et essayons <a href="https://gethomepage.dev/v0.7.3/">Homepage</a>. 
+
+Peut-être que comme pour moi, il vous rendra la vie plus agréable 🎉 !
+
+## Homepage : Beau, rapide et agile. 
+
+<a href="https://gethomepage.dev/v0.7.3/">Homepage</a> est un tableau de bord **moderne**, **rapide** et **sécurisé** (entièrement proxyfié). 
+
+**Customisable** de A à Z,  proposé avec des **centaines de widgets** et traduits dans plus de **40 langues**, il répondra aux besoins de personnalisation des plus pointilleux d'entre vous.
+
+Le tout étant **simple** à mettre en place avec la magie de **Docker** et **facilement configurable** au travers de fichiers **YAML**.
+
+
+
+
+
+
+<InfoBox>YAML signifie « **YAML Ain't Markup Language**. ».<br/>
+Il s'agit d'un format de sérialisation de données lisible par l'homme qui est un sur-ensemble de JSON. <br/>
+Idéal pour les fichiers de configuration, facile à lire et à écrire.<br/> Il prend en charge les types de données complexes tels que les listes et les objets. <br/>
+L'indentation y est importante, mais si vous utilisez déjà Docker Compose, alors vous utilisez déjà YAML.</InfoBox>
+
+## Pourquoi choisir Homepage ?
+
+Parce que voilà ce qu'on peut obtenir en **moins d'une heure**.
+
+<ImageBox  src={Tuned} alt="Capture d'écran de Homepage après une heure de modification."  orientation="horizontal"/>
+
+Ce qui m'aura pris le plus de temps c'est de choisir le fond d'écran 😏.
+
+
+
+## Installation
+
+Pour installer Homepage vous avez plusieurs choix :
+
+- <Icon pack="uim" name="docker" class='h-12 pb-3 inline' /> Docker et Docker Compose
+- <Icon pack="mdi" name="kubernetes" class='h-12 pb-3 inline' /> Kubernetes
+- <Icon pack="simple-icons" name="unraid" class='h-12 pb-3 inline' /> UNRAID
+- <Icon pack="fa-solid" name="file-code" class='h-12 pb-3 inline' />  Depuis les sources
+
+Nous, nous l'installerons avec  **Docker Compose**.
+
+### Docker Compose
+
+Utilisez le contenu de ce fichier <LittleCode code='docker-compose.yml' lang="docker" theme="vitesse-dark"/>.
+
+<CodeBox code={`
+version: "3.3"
+services:
+    homepage:
+        image: ghcr.io/gethomepage/homepage:latest
+        container_name: homepage
+        ports:
+            - 3000:3000
+        volumes:
+            - /path/to/config:/app/config # Assurez-vous que le dossier existe. 
+            - /path/to/images:/app/public/images # Dossier pour stocker les images et icons
+            - /var/run/docker.sock:/var/run/docker.sock # Pour intégration de Docker
+`} lang="docker" theme="vitesse-dark" header="docker-compose.yml"/>
+
+Si vous ne modifiez pas le port d'accès, vous devriez pouvoir accéder à l'application depuis  <a href="https://localhost:3000">https://localhost:3000</a>.
+
+<ImageBox  src={CleanInstall} alt="Capture d'écran de Homepage juste après son installation."  orientation="horizontal"/>
+
+La page par défaut est assez minime, mais nous allons configurer tout ça.
+
+## Configuration
+
+Tel qu'indiqué plus haut, la configuration est très simple et se situe dans 8 fichiers :
+
+  -  **bookmark.yaml** : pour ajouter des favoris.
+  -  **docker.yaml** & **kubernetes.yaml** : pour configurer l'accès aux serveurs Docker & Kubernetes. 
+  -  **services.yaml** : pour configurer des services. (app docker ou kubernetes)
+  -  **settings.yaml** : pour configurer Homepage (langue, thème, fond d'écran...)
+  -  **widgets.yaml** : pour configurer des widgets. (météo, barre de recherche, calendrier...)
+  - <Icon pack="ph" name="file-css-light" class='h-8 inline' /> **custom.css** et <Icon pack="ph" name="file-js-light" class='h-8 inline' /> **custom.js** : Pour modifier plus profondément encore Homepage.
+
+
+
+### <Icon pack="vscode-icons" name="file-type-yaml" class='h-12 pb-2 inline' /> docker.yaml
+
+Nous allons tout d'abord **connecter** Homepage à notre **serveur Docker**.
+
+<CodeBox code={`
+mon-docker:
+    socket: /var/run/docker.sock
+`} lang="yaml" theme="vitesse-dark" header="docker.yaml"/>
+
+
+### <Icon pack="vscode-icons" name="file-type-yaml" class='h-12 pb-2 inline' /> bookmark.yaml
+
+Ajoutons quelques raccourcis
+
+<CodeBox code={`
+- maximebourdon.fr:
+    - Blog:
+        - icon: https://blog.maximebourdon.fr/favicon.svg
+          href: https://blog.maximebourdon.fr/
+          description: Un blog pas comme les autres... 👨‍🎤
+- Journalier:
+    - daily.dev:
+        - icon: https://assets.website-files.com/5e0a5d9d743608d0f3ea6753/5f350958935a5ccf103429ce_daily.dev%20-%2032.png
+          href: https://app.daily.dev/
+- Docker App:
+  - Homepage:
+        - icon: homepage.png
+          href: https://gethomepage.dev/
+- Framework:
+    - Astro:
+        - icon: ariang.png
+          href: https://astro.build/
+          description: Le meilleur framework du monde !
+- CSS:
+    - CSSIRL:
+        - icon: css.png
+          href: https://css-irl.info/ 
+- Blog: 
+    - Medium:
+      - icon: https://miro.medium.com/v2/1*m-R_BkNf1Qjr1YbyOIJY2w.png
+        href: https://medium.com/
+- Media:
+    - Melofi:
+      - icon: https://melofi.app/melofi-fav-icon-white.png
+        href: https://melofi.app/?ref=producthunt
+`} lang="yaml" theme="vitesse-dark" header="bookmarks.yaml"/>
+
+
+### <Icon pack="vscode-icons" name="file-type-yaml" class='h-12 pb-2 inline' /> services.yaml
+
+Configurons maintenant quelques services, qui sont en fait d'**autres applications** qui tournent sur le même serveur Docker. 
+
+<CodeBox code={`
+- Vie courante:
+    - Vikunja:
+        icon: vikunja
+        href: http://localhost:8085/
+        description: To Do Liste
+        server: mon-docker
+        container: vikunja-frontend-1
+- IT:
+    - IT Tools:
+        icon: it-tools.svg
+        href: http://localhost:8081/
+        description: Caisse à outils.
+        server: mon-docker
+        container: it-tools    
+- Fichiers:
+    - Zipline:
+        icon: zipline-light.png
+        href: http://localhost:8083/
+        description: Pour gérer les fichiers.
+        server: mon-docker
+        container: zipline-zipline-1  
+    - Hedgedoc:
+        icon: synology-text-editor.png
+        href: "http://localhost:8084/"
+        description: Editeur de Markdown.
+        server: mon-docker
+        container: hedgedoc-app-1
+- Outils:
+    - Excalidraw: 
+        icon: excalidraw-light.png
+        href: http://localhost:8082/
+        description: Pour dessiner des diagrammes.
+        server: mon-docker
+        container: priceless_grothendieck
+`} lang="yaml" theme="vitesse-dark" header="services.yaml"/>
+
+Deux lignes sont à noter : 
+
+- <LittleCode code='server: mon-docker' lang="yaml" theme="vitesse-dark"/> : c'est le nom donné dans le fichier <LittleCode code='docker.yaml' lang="bash" theme="vitesse-dark"/>.
+- <LittleCode code='container: XXX' lang="yaml" theme="vitesse-dark"/> : c'est le nom du container de l'application sur votre serveur Docker.
+
+C'est grâce à ces deux lignes, couplé au fichier <LittleCode code='docker.yaml' lang="bash" theme="vitesse-dark"/> qu'Homepage peut vérifier de la disponibilité d'un service.
+
+<ImageBox  src={Status} alt="Capture d'écran de deux services affichés dans Homepage."  orientation="horizontal"/>
+
+Tout semble bien aller pour eux 👌.
+
+### <Icon pack="vscode-icons" name="file-type-yaml" class='h-12 pb-2 inline' /> settings.yaml & widgets.yaml
+
+Voici mon fichier <LittleCode code='settings.yaml' lang="bash" theme="vitesse-dark"/>.
+
+
+<CodeBox code={`
+title: Tour de contrôle
+background: 
+  image: /images/5.jpg
+  opacity: 18
+  brightness: 50
+  saturate: 75
+theme: dark
+color: stone
+language: fr
+headerStyle: clean
+hideVersion: true
+`} lang="yaml" theme="vitesse-dark" header="settings.yaml"/>
+
+
+Et mon fichier <LittleCode code='widgets.yaml' lang="bash" theme="vitesse-dark"/>.
+
+
+<CodeBox code={`
+- logo:
+    icon: https://blog.maximebourdon.fr/favicon.svg
+- datetime:
+    locale: fr
+    text_size: xs
+    format:
+        dateStyle: short
+        timeStyle: short
+        hour12: true
+- greeting:
+      text_size: xs
+      text: blog.maximebourdon.fr
+- openmeteo:
+      label: Paris
+      latitude: 48.8220900
+      longitude: 2.4121700
+      timezone: Europe/Paris 
+      units: metric 
+      cache: 5 
+- search:
+    provider: duckduckgo
+    target: _blank
+`} lang="yaml" theme="vitesse-dark" header="widgets.yaml"/>
+
+Libre à vous de vous en inspirer.
+
+## Conclusion
+
+Voilà, nous avons fait le tour de <a href='https://gethomepage.dev/'>Homepage</a> et c'est maintenant à vous d'aller puiser dans la documentation pour faire parler votre **imagination**.
+
+Amusez-vous bien ! 🐱‍💻
+
+A bientôt.
+
+</section>

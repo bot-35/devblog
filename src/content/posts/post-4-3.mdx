@@ -1,0 +1,159 @@
+---
+title: "Astro, le framework du blogeur"
+slug: 'astro3'
+publishedDate: 2023-10-13
+image: /img/post/4/astro_bg.png
+description: La magie derrière mon blog.
+tags: ["blog","développement","javascript","framework"]
+part : 3
+parts : ["astro","astro2","astro3"]
+draft: true
+---
+import { Icon } from 'astro-icon/components'
+import ImageBox from '../../components/ImageBox/ImageBox.astro';
+import CodeBox from '../../components/CodeBox/CodeBox.astro';
+import ColorBox from '../../components/ColorBox/ColorBox.astro';
+
+import LittleCode from '../../components/LittleCode/LittleCode.astro';
+import InfoBigBox from '../../components/InfoBigBox/InfoBigBox.astro';
+
+
+import AstroThreeTransitionGif from '../../img/post/4/astro_three_transition.gif';
+
+<section id='article'>
+    <section id='entete'>
+        Après avoir vu en <a href='/posts/astro'>première partie</a> les grands principes d'Astro, nous allons maintenant mettre les mains dans le cambouis. A la fin de cette article, vous n'aurez plus d'excuse pour ne pas tenir votre propre blog ! 
+    </section>
+
+## Qu'allons nous faire ? 
+
+
+Dans cette troisième partie, nous **développerons un site**. <br/>Pour cela nous allons  :
+- Adapter un modèle trouvé sur <a href='https://www.github.com'>GitHub</a>.
+- Modifier et développer des **composants** et des **layouts**.
+- Utiliser le moteur de **Markdown**.
+- Mettre en place un **Sitemap**.
+- Héberger le site sur **Netlify**.
+
+
+## Le projet
+
+Ma compagne venant d'ouvrir une petite entreprise de ménage à domicile, j'ai décidé de **mettre à son service** les compétences acquises pour le développement de mon blog.
+
+Alors venez avec moi et essayons ensemble de l'aider à se **démarquer** sur cette jungle qu'est Internet.
+
+## <Icon pack="brandico" name="github" class='h-12 pb-3 inline' /> La source d'inspiration.
+
+### View Transitions API
+
+L'un des avantages comparatif des applications SPA sur les MPA est qu'on peut ajouter un **effet de transition** à la modification du DOM.
+
+Cela permet pendant le chargement des données, de **garder l'attention** de l'utilisateur sur l'application en plus d'embellir son expérience.
+
+Cependant, la création de transitions de vues sur le Web a toujours été **difficile**, impliquant d'**importantes** écritures de CSS et JavaScript.
+
+Mais depuis le **Mars 2023** une API nommée <a href='https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API#the_view_transition_process*'>View Transitions API</a> entièrement supporté par Chronium est venue changer la donne.
+
+L'API View Transitions fournit une manière plus **simple** de gérer les animations de transition et les modifications du DOM.
+
+Je vous invites à lire la <a href='https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API'>documentation</a> pour mieux vous familiariser avec cette API mais voici un résumé de son fonctionnement :
+
+- Quand le navigateur reçoit une demande de changement de page, l'API prend une **capture d'écran** de la page actuelle.
+- Le DOM ce **met à jour**.
+- L'API prend une **capture d'écran** de la nouvelle page.
+- L'API anime la première capture pour aller vers l'état de la deuxième capture avec par défaut un **effet d'opacity** où bien avec les **animations définis** dans le CSS.
+
+### Astro 3.0
+
+Bonne nouvelle, avec l'arrivée de la version 3 d'Astro, l'API est nativement supportée par le FrameWork. 😍
+
+Peut être que pour le moment vous vous demandez encore ce que permet réellement cette API.
+
+Après tout, on ne parle que de "transition", ce n'est qu'un ajout esthétique. 
+
+C'était tout du moins mon point de vu, avant la découverte de ce site : <a href='https://astro-3d-view-transitions.pages.dev/'>https://astro-3d-view-transitions.pages.dev/</a>.
+
+<ImageBox  src={AstroThreeTransitionGif} alt="Gif pour représenter l'animation de transition du site astro-3d-view-transitions.pages.dev."  orientation="horizontal"/>
+
+Ici les transitions permettent les **animations du charactère** pendant les changement d'état et franchement c'est cool non ? 😎
+
+Après validation auprès de Madame 👩🏼‍⚖️, il semblerait que nous ayons trouvé le point de départ de notre projet. 
+
+Avec l'aide de DuckDuckGo, on trouve rapidement le dépôt du projet : <a href='https://github.com/Charca/astro-3d-view-transitions'>https://github.com/Charca/astro-3d-view-transitions</a>.
+
+### Découverte du modèle
+
+On a notre point de départ alors clonons le.
+
+<CodeBox code={`
+git clone https://github.com/Charca/astro-3d-view-transitions.git ./
+`} lang="sh" theme="vitesse-dark" header="Terminal"/>
+
+On oublie surtout pas d'installer les modules.
+
+<CodeBox code={`
+npm install
+`} lang="sh" theme="vitesse-dark" header="Terminal"/>
+
+Maitenant regardons les sources.
+
+<CodeBox code={`
+PS E:\\dev\\lajeanette.net> Get-ChildItem .\\src\\
+
+
+    Répertoire : E:\\dev\\lajeanette.old\\src
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        13/10/2023     20:32                components
+d-----        13/10/2023     20:32                layouts
+d-----        13/10/2023     20:32                pages
+-a----        13/10/2023     20:32             40 env.d.ts
+
+`} lang="ps1" theme="vitesse-dark" header="Terminal"/>
+
+Trois dossiers qu'on connais déjà, on ne devrait pas être trop dépaysé ! 😎
+
+Allez on le démarre et on le décortique.
+
+<CodeBox code={`
+npm run dev
+`} lang="sh" theme="vitesse-dark" header="Terminal"/>
+
+### Le modèle 3D
+
+Bon ce qui m'intéresse avant tout c'est de comprendre comment le modèle 3D fonctionne alors partons à sa recherche.
+
+Les dépendences de <LittleCode code='package.json' lang="bash" theme="vitesse-dark"/> devraient nous donner un indice.
+
+<CodeBox code={`
+  "dependencies": {
+    "@astrojs/react": "^3.0.2",
+    "@astrojs/tailwind": "^5.0.0",
+    "@react-spring/three": "9.7.2",
+    "@react-three/drei": "9.68.3",
+    "@react-three/fiber": "8.13.0",
+    "@react-three/postprocessing": "2.11.4",
+    "@types/react": "^18.2.23",
+    "@types/react-dom": "^18.2.8",
+    "astro": "^3.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.3",
+    "three": "0.152.2"
+  }
+`} lang="json" theme="vitesse-dark" header="package.json"/>
+
+Comme prévu, c'est bien <a href='https://threejs.org/'>Three.js</a> qui gère toute la partie 3D.  
+
+ThreeJS est une bibliothèque Javascript qui permet vous l'aurez compris de faire de la 3D dans son site.
+
+Je n'ai pour le moment aucune idée du niveau requis en 3D pour comprendre et adapter ce site... nous verrons bien ! 😁
+
+
+
+
+
+
+</section>

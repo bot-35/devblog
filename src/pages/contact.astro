@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/layout.astro';
+
+
+
+const title = 'Le blog de maximebourdon.fr';
+
+---
+<Layout title={title}>
+	<div class='flex flex-col'>
+		<div class='relative flex flex-col my-32 xl:my-42 mb-16'>
+			<h1  class='uppercase ml-8'>Entrons en contact !</h1>
+			<form id="contact"  class='flex flex-col' name="contact" method="POST" data-netlify="true">
+			<div class="relative w-full flex flex-col gap-2 p-8  mt-8 overflow-hidden">
+				<div class="absolute top-0 left-0 h-full w-full bgContact hidden -z-10 opacity-50  brightness-110"/>
+
+				<label for="email">Courriel :</label>
+				<input type="email" name="courriel"  autofocus required class="placeholder:italic placeholder:text-slate-500 px-3 py-2  bg-[#ffffffbd] border  border-blog-azure-web placeholder-blog-black text-blog-black focus:ease-in focus:bg-white transition focus:outline-none focus:border-blog-oxford-blue focus:ring-blog-oxford-blue block w-full rounded sm:text-sm focus:ring-1" placeholder="mail@domain.zone" />
+				<label for="nom">Nom :</label>
+				
+				<input type="text" name="nom" required class="placeholder:italic placeholder:text-slate-500 px-3 py-2  bg-[#ffffffbd] border  border-blog-azure-web placeholder-blog-black text-blog-black focus:ease-in focus:bg-white transition focus:outline-none focus:border-blog-oxford-blue focus:ring-blog-oxford-blue block w-full rounded sm:text-sm focus:ring-1" placeholder="Nom" />
+				<label for="nom">Prénom :</label>
+				
+				<input type="text" name="prenom" required class="placeholder:italic placeholder:text-slate-500 px-3 py-2  bg-[#ffffffbd] border  border-blog-azure-web placeholder-blog-black text-blog-black focus:ease-in focus:bg-white transition focus:outline-none focus:border-blog-oxford-blue focus:ring-blog-oxford-blue block w-full rounded sm:text-sm focus:ring-1" placeholder="Prénom" />
+				<label for="message">Message :</label>
+				<textarea  rows="8" name="message" required class="placeholder:italic placeholder:text-slate-500 px-3 py-2  bg-[#ffffffbd] border  border-blog-azure-web placeholder-blog-black text-blog-black focus:ease-in focus:bg-white transition focus:outline-none focus:border-blog-oxford-blue focus:ring-blog-oxford-blue block w-full rounded sm:text-sm focus:ring-1" placeholder="Votre message..." />
+
+			</div>
+			<button type="submit" class='btn--two-colors--l-r uppercase'>Envoyer</button>
+		</form>
+		<div id="thanks_contact" class='flex-row justify-center items-center content-center w-full h-full mt-12 opacity-0 scale-y-0 origin-top duration-1000'>        
+			<div class="text-center text-lg  ">
+				<p class='text-4xl '>😍😍😍<br/><span class='text-red-500 font-bold'>Merci</span> pour votre message !</p>
+			</div>
+		</div>
+		</div>
+
+	</div>
+</Layout>
+
+<style>
+	.bgContact {
+
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 700 700' style='overflow: hidden; display: block;' width='700' height='700'%3E%3Cdefs%3E%3C/defs%3E%3Cg id='two-0' transform='matrix(1 0 0 1 0 0)' opacity='1'%3E%3Cpath transform='matrix(1 0 0 1 350 350)' id='two-2' d='M 257.595443 75.636846 C 235.941892 101.17434 184.045411 79.601045 159.812431 102.705213 C 144.917251 116.906551 147.895091 142.808973 140.328478 161.947697 C 130.693274 186.318644 127.995768 218.484236 106.844624 233.957092 C 87.542881 248.077042 56.822536 233.477888 34.964048 243.180296 C 3.306712 257.232156 -11.893426 322.305239 -44.776294 311.425963 C -90.527143 296.289324 -49.430334 208.426128 -77.198421 169.040962 C -87.263339 154.765276 -104.860797 144.647344 -121.860705 140.63475 C -159.165113 131.829556 -201.956377 167.165358 -237.396329 152.565356 C -263.741813 141.711952 -280.927768 111.97837 -292.113531 85.772271 C -303.306405 59.549514 -306.399815 28.243722 -302.500387 0 C -298.630883 -28.026976 -292.904352 -63.216142 -269.516148 -79.137082 C -230.751497 -105.525156 -159.894562 -48.051891 -127.440603 -81.901103 C -112.152955 -97.845994 -146.959153 -136.023429 -128.955203 -148.822237 C -107.8435 -163.830312 -77.288144 -107.472127 -55.42325 -121.35999 C -8.371723 -151.245577 -96.910258 -282.379286 -41.653748 -289.708181 C 15.865242 -297.337157 -38.960102 -135.984308 17.866239 -124.262424 C 53.795165 -116.851165 62.65449 -186.084115 93.819903 -205.436933 C 127.187659 -226.157341 175.073152 -261.540143 207.778368 -239.78902 C 235.285936 -221.494675 211.883393 -172.651803 218.193549 -140.22448 C 222.799619 -116.554297 230.685632 -92.84754 238.398682 -70.00017 C 246.326739 -46.515914 262.352847 -24.568829 265.629591 -0.000001 C 268.947871 24.880269 273.828572 56.492022 257.595443 75.636846 Z ' fill='hsl(32, 100%25, 51%25)' stroke='undefined' stroke-width='1' stroke-opacity='1' fill-opacity='1' visibility='visible' stroke-linecap='butt' stroke-linejoin='miter' stroke-miterlimit='4'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+	}
+</style>
+
+
+
+
+<script>
+	const handleSubmit = (event) => {
+	  event.preventDefault();
+	
+	  const myForm = event.target;
+	  const formData = new FormData(myForm);
+	  
+	  fetch("/", {
+		method: "POST",
+		headers: { "Content-Type": "application/x-www-form-urlencoded" },
+		body: new URLSearchParams(formData).toString(),
+	  })
+		.then(() => {
+						console.log("Form successfully submitted");
+						document.getElementById('thanks_contact').classList.replace('opacity-0', 'opacity-100');
+						document.getElementById('thanks_contact').classList.replace('scale-y-0', 'scale-y-100');
+
+					}
+			)
+		.catch((error) => alert(error));
+	};
+	
+	document.getElementById("contact").addEventListener("submit", handleSubmit);
+	</script>

@@ -1,0 +1,14 @@
+---
+import { Code } from 'astro:components';
+
+const { code, theme = 'rose-pine', lang, header } = Astro.props;
+---
+
+    <Code code={code} theme={theme} lang={lang} inline  />
+
+<style is:global>
+    .codebox > pre > code > span > span {
+        @apply text-xs xl:text-base;
+    }
+</style>
+

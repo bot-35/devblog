@@ -1,0 +1,52 @@
+---
+const { element, content } = Astro.props;
+---
+
+<astro-tippy data-tippyelement={element} data-tippycontent={content}/>
+
+
+<script>
+    import tippy, {followCursor} from 'tippy.js';
+    import 'tippy.js/dist/tippy.css'; // optional for styling
+    import 'tippy.js/animations/scale-extreme.css';
+    import 'tippy.js/themes/light.css';
+
+
+    import 'tippy.js/animations/shift-away.css';
+    import 'tippy.js/animations/shift-toward.css';
+    import 'tippy.js/animations/perspective.css';
+
+
+    class AstroTippy extends HTMLElement {
+      constructor() {
+        super();
+  
+        let element = this.dataset.tippyelement;
+        let content = this.dataset.tippycontent;
+        element = `#${element}`
+        
+        tippy(element, {
+            content: content,
+            animation: 'shift-toward',
+            theme: 'blog',
+            followCursor: 'horizontal',
+            placement: 'top',
+            plugins: [followCursor],
+        });
+      }
+    }
+
+    customElements.define('astro-tippy', AstroTippy);
+  </script>
+
+
+<style is:global>
+
+.tippy-box[data-theme~='blog'] {
+ @apply bg-blog-marron-fond text-blog-black font-medium shadow  ;
+}
+
+.tippy-box[data-theme~='blog']> .tippy-arrow::before {
+  @apply  text-blog-marron-fond ;
+}
+</style>

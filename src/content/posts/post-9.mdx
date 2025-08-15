@@ -1,0 +1,55 @@
+---
+title: "CSS Anchor Positioning, la révolution ?"
+slug: 'css_anchor_positionning'
+publishedDate: 2023-10-15
+image: /img/post/9/1.png
+description: Avec l'encrage, on nous promet une approche révolutionaire du positionnement CSS. Alors promesse tenue ?
+tags: ["logithèque","docker","geek"]
+draft: true
+---
+import CodeBox from '../../components/CodeBox/CodeBox.astro';
+import InfoBox from '../../components/InfoBox/InfoBox.astro';
+import { Icon } from 'astro-icon/components';
+import ImageBox from '../../components/ImageBox/ImageBox.astro';
+
+import LittleCode from '../../components/LittleCode/LittleCode.astro';
+
+import Melofi from '../../img/post/8/melofy.png';
+
+
+<section id='article'>
+    <section id='entete'>
+        Avec l'encrage, on nous promet une approche révolutionaire du positionnement CSS. Alors promesse tenue ?
+    </section>
+
+## Introduction
+
+Dans cet article nous commencerons par rappeler qu'elles sont les techniques de positionnement actuel en CSS, et nous les comparerons à cette nouvelle approche qu'est l'ancrage.
+
+Afin de mieux appréhender cette fonctionnalité, on analysera des cas concrets, avant de finir en parlant des limitations que vous devez avoir en tête avant de les utiliser dans vos projets.
+
+
+## Le positionnement traditionnel : entre hacks CSS et Javascript.
+
+Traditionnellement, faire une mises en page complexe et précise à toujours été une difficulté. Particulierement si vous vouliez jouer avec du contenu dynamique ou réactif.
+
+Le positionnement basé sur <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSSOM_View/Coordinate_systems">le Systèmes de coordonnées</a> fonctionnera bien sur votre écran mais sera complétement déformé sur un écran ayant une taille différente.
+
+Si vous positionner vos éléments les uns par rapport aux autres, il faudra alors pour garder la cohérence de votre mise en page utiliser hacks css et alourdir votre JavaScript de calcul de repositionnement. 
+Ces solutions qui sont fastidieuses à mettre en oeuvre sont en plus de potentielles sources d'erreurs, et peuvent sensiblement impacter les performances de votre application.
+
+## Le position avec Anchor
+
+
+
+
+
+
+L'une des difficultés les plus courantes est de parvenir à des dispositions de mise en page complexes et précises, en particulier lorsqu'il s'agit de contenu dynamique ou de conceptions réactives. Les éléments de positionnement basés sur des coordonnées statiques peuvent conduire à des dispositions incohérentes sur différents appareils et tailles d'écran.
+
+Le positionnement des éléments les uns par rapport aux autres nécessite souvent des hacks CSS complexes ou des calculs basés sur JavaScript. Ces solutions de contournement peuvent être sujettes aux erreurs, prendre beaucoup de temps et avoir un impact sur les performances. En outre, la gestion du défilement et du positionnement fixe peut être lourde, en particulier avec des dispositions complexes.
+
+
+A bientôt.
+
+</section>
