@@ -110,15 +110,15 @@ d-----        29/09/2023     20:56                src
 `} lang="powershell" theme="vitesse-dark" header="Terminal"/>
 
 On y trouve : 
-- <Icon pack="eva" name="npm-outline" class='h-8  pb-2 inline' /> Le **manifest** du projet.
-- <Icon pack="teenyicons" name="git-outline" class='h-8  pb-2 inline' /> Un fichier **github**.
-- <Icon pack="simple-icons" name="astro" class='h-8  pb-2 inline' /> Un fichier de **configuration d'Astro**.
-- <Icon pack="ph" name="file-ts-thin" class='h-8  pb-2 inline' /> Un fichier de **configuration TypeScript**.
-- <Icon pack="gg" name="readme" class='h-8  pb-2 inline' /> Un fichier **readme**.
-- <Icon pack="codicon" name="file-submodule" class='h-8 inline' /> **Trois** dossiers :
-        - <Icon pack="octicon" name="file-directory-24" class='h-8 pb-2 inline' /> src : contient toutes les **sources** de notre projet (composants, pages, styles, etc.).
-        - <Icon pack="octicon" name="file-directory-24" class='h-8 pb-2  inline' /> public : contient les fichiers qui **ne sont pas du code** et donc **pas traités** par Astro (fonts, icon etc...).
-        - <Icon pack="octicon" name="file-directory-24" class='h-8 pb-2  inline' /> node_modules : dossier des **dépendances**. 
+- <Icon name="eva:npm-outline" class='h-8  pb-2 inline' /> Le **manifest** du projet.
+- <Icon name="teenyicons:git-outline" class='h-8  pb-2 inline' /> Un fichier **github**.
+- <Icon name="simple-icons:astro" class='h-8  pb-2 inline' /> Un fichier de **configuration d'Astro**.
+- <Icon name="ph:file-ts-thin" class='h-8  pb-2 inline' /> Un fichier de **configuration TypeScript**.
+- <Icon name="gg:readme" class='h-8  pb-2 inline' /> Un fichier **readme**.
+- <Icon name="codicon:file-submodule" class='h-8 inline' /> **Trois** dossiers :
+        - <Icon name="octicon:file-directory-24" class='h-8 pb-2 inline' /> src : contient toutes les **sources** de notre projet (composants, pages, styles, etc.).
+        - <Icon name="octicon:file-directory-24" class='h-8 pb-2  inline' /> public : contient les fichiers qui **ne sont pas du code** et donc **pas traités** par Astro (fonts, icon etc...).
+        - <Icon name="octicon:file-directory-24" class='h-8 pb-2  inline' /> node_modules : dossier des **dépendances**. 
 
 
 Maintenant, jetons un coup d'oeil au **manifest** :
@@ -153,7 +153,7 @@ On remarque qu'il y a **plusieurs commandes** :
 
 Notons que la version d'Astro installée pour cet exercice est la **3.2.0**.
 
-### <Icon pack="octicon" name="file-directory-24" class='h-12 pb-3 inline' /> .\src
+### <Icon name="octicon:file-directory-24" class='h-12 pb-3 inline' /> .\src
 
 <CodeBox code={`
 PS E:\\dev\\astro_blog> Get-ChildItem .\\src\\
@@ -171,11 +171,11 @@ d-----        28/09/2023     20:26                pages
 `} lang="powershell" theme="vitesse-dark" header="Terminal"/>
 
 
-- <Icon pack="octicon" name="file-directory-24" class='h-8 pb-2  inline' /> **pages** : ici vous retrouverez les pages de votre application... tout simplement 😁.
-- <Icon pack="octicon" name="file-directory-24" class='h-8 pb-2  inline' /> **components** (composants) : les components sont des briques de code réutilisable.
-- <Icon pack="octicon" name="file-directory-24" class='h-8 pb-2  inline' /> **layouts** (modèles) : les layouts sont des squelettes dans lesquels vos pages viendront s'appliquer.
+- <Icon name="octicon:file-directory-24" class='h-8 pb-2  inline' /> **pages** : ici vous retrouverez les pages de votre application... tout simplement 😁.
+- <Icon name="octicon:file-directory-24" class='h-8 pb-2  inline' /> **components** (composants) : les components sont des briques de code réutilisable.
+- <Icon name="octicon:file-directory-24" class='h-8 pb-2  inline' /> **layouts** (modèles) : les layouts sont des squelettes dans lesquels vos pages viendront s'appliquer.
 
-### <Icon pack="octicon" name="file-directory-24" class='h-12 pb-3 inline' /> .\public
+### <Icon name="octicon:file-directory-24" class='h-12 pb-3 inline' /> .\public
 
 
 <CodeBox code={`
@@ -194,7 +194,7 @@ Pour l'instant rien de bien fou dans ce dossier, hormis le favicon 👀.
 
 ## Découverte
 
-### <Icon pack="icomoon-free" name="terminal" class='h-12 pb-3 inline' /> npm run dev
+### <Icon name="icomoon-free:terminal" class='h-12 pb-3 inline' /> npm run dev
 
 Passons aux choses sérieuses en démarrant le serveur de développement.
 
@@ -221,7 +221,7 @@ Le Code Challenge nous invites à **modifier** le titre de la page.
 
 **Allons y !** Cela nous donnera l'occasion d'aller fouiner dans **index.astro**.
 
-### <Icon pack="lucide" name="file" class='h-12 pb-3 inline' /> index.astro
+### <Icon name="lucide:file" class='h-12 pb-3 inline' /> index.astro
 
 
 <CodeBox code={`---
@@ -361,7 +361,7 @@ Modifions donc ce titre par `title="Hello World"`, puis pour répondre au challe
 
 <ImageBox  src={AstroStarterModif} alt="Capture d'ecran de l'index d'Astro."  orientation="horizontal"/>
 
-### <Icon pack="lucide" name="file" class='h-12 pb-3 inline' /> Layout.astro
+### <Icon name="lucide:file" class='h-12 pb-3 inline' /> Layout.astro
 
 Allons voir ce que le fichier **Layout.astro** contient.
 
@@ -442,7 +442,7 @@ Bon ce vert est très bien, mais peut-être faudrait-il aussi changer la couleur
 
 Je suppose que vous aurez déjà compris (et donc déjà ouvert 😼) dans quel fichier cela se passe ! 
 
-### <Icon pack="lucide" name="file" class='h-12 pb-3 inline' /> Card.astro
+### <Icon name="lucide:file" class='h-12 pb-3 inline' /> Card.astro
 
 Oui oui ! C'est bien **Card.astro** que nous devons modifier. 
 

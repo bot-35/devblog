@@ -69,10 +69,10 @@ Ce qui m'aura pris le plus de temps c'est de choisir le fond d'écran 😏.
 
 Pour installer Homepage vous avez plusieurs choix :
 
-- <Icon pack="uim" name="docker" class='h-12 pb-3 inline' /> Docker et Docker Compose
-- <Icon pack="mdi" name="kubernetes" class='h-12 pb-3 inline' /> Kubernetes
-- <Icon pack="simple-icons" name="unraid" class='h-12 pb-3 inline' /> UNRAID
-- <Icon pack="fa-solid" name="file-code" class='h-12 pb-3 inline' />  Depuis les sources
+- <Icon name="uim:docker" class='h-12 pb-3 inline' /> Docker et Docker Compose
+- <Icon name="mdi:kubernetes" class='h-12 pb-3 inline' /> Kubernetes
+- <Icon name="simple-icons:unraid" class='h-12 pb-3 inline' /> UNRAID
+- <Icon name="fa-solid:file-code" class='h-12 pb-3 inline' />  Depuis les sources
 
 Nous, nous l'installerons avec  **Docker Compose**.
 
@@ -109,11 +109,11 @@ Tel qu'indiqué plus haut, la configuration est très simple et se situe dans 8 
   -  **services.yaml** : pour configurer des services. (app docker ou kubernetes)
   -  **settings.yaml** : pour configurer Homepage (langue, thème, fond d'écran...)
   -  **widgets.yaml** : pour configurer des widgets. (météo, barre de recherche, calendrier...)
-  - <Icon pack="ph" name="file-css-light" class='h-8 inline' /> **custom.css** et <Icon pack="ph" name="file-js-light" class='h-8 inline' /> **custom.js** : Pour modifier plus profondément encore Homepage.
+  - <Icon name="ph:file-css-light" class='h-8 inline' /> **custom.css** et <Icon name="ph:file-js-light" class='h-8 inline' /> **custom.js** : Pour modifier plus profondément encore Homepage.
 
 
 
-### <Icon pack="vscode-icons" name="file-type-yaml" class='h-12 pb-2 inline' /> docker.yaml
+### <Icon name="vscode-icons:file-type-yaml" class='h-12 pb-2 inline' /> docker.yaml
 
 Nous allons tout d'abord **connecter** Homepage à notre **serveur Docker**.
 
@@ -123,7 +123,7 @@ mon-docker:
 `} lang="yaml" theme="vitesse-dark" header="docker.yaml"/>
 
 
-### <Icon pack="vscode-icons" name="file-type-yaml" class='h-12 pb-2 inline' /> bookmark.yaml
+### <Icon name="vscode-icons:file-type-yaml" class='h-12 pb-2 inline' /> bookmark.yaml
 
 Ajoutons quelques raccourcis
 
@@ -161,7 +161,7 @@ Ajoutons quelques raccourcis
 `} lang="yaml" theme="vitesse-dark" header="bookmarks.yaml"/>
 
 
-### <Icon pack="vscode-icons" name="file-type-yaml" class='h-12 pb-2 inline' /> services.yaml
+### <Icon name="vscode-icons:file-type-yaml" class='h-12 pb-2 inline' /> services.yaml
 
 Configurons maintenant quelques services, qui sont en fait d'**autres applications** qui tournent sur le même serveur Docker. 
 
@@ -213,7 +213,7 @@ C'est grâce à ces deux lignes, couplé au fichier <LittleCode code='docker.yam
 
 Tout semble bien aller pour eux 👌.
 
-### <Icon pack="vscode-icons" name="file-type-yaml" class='h-12 pb-2 inline' /> settings.yaml & widgets.yaml
+### <Icon name="vscode-icons:file-type-yaml" class='h-12 pb-2 inline' /> settings.yaml & widgets.yaml
 
 Voici mon fichier <LittleCode code='settings.yaml' lang="bash" theme="vitesse-dark"/>.
 
