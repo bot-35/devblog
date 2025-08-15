@@ -15,6 +15,24 @@ import rehypeClassNames from 'rehype-class-names';
 
 // https://astro.build/config
 export default defineConfig({
+   // 👇 ICI : on limite ce que Vite/Astro surveille
+  vite: {
+    server: {
+      watch: {
+        ignored: [
+          '**/node_modules/**',
+          '**/.astro/**',
+          '**/dist/**',
+          '**/.git/**'
+          // ajoute d'autres répertoires lourds si besoin :
+          // '**/public/generated/**',
+          // '**/backups/**',
+        ],
+      },
+      // (optionnel) utile sur lecteurs/réseaux capricieux
+      // fs: { strict: true },
+    },
+  },
     markdown: {
       shikiConfig: { 
         wrap: true,
