@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwind from '@tailwindcss/vite';
 import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 import { listDraftBlogPosts } from "/src/scripts/listDraftPostsBlog";
@@ -17,6 +17,7 @@ import rehypeClassNames from 'rehype-class-names';
 export default defineConfig({
    // 👇 ICI : on limite ce que Vite/Astro surveille
   vite: {
+    plugins: [tailwind()],        // ✅ ← ICI, pas dans `integrations`
     server: {
       watch: {
         ignored: [
@@ -54,12 +55,9 @@ export default defineConfig({
         'blockquote': ''
       }]]
     },
-    site: 'https://blog.maximebourdon.fr',
-    integrations: [tailwind({
-      config: {
-        applyBaseStyles: false
-      }
-    }), mdx({
+    site: 'https://test.fr/',
+    integrations: [
+      mdx({
       shikiConfig: { 
         wrap: true,
       },
@@ -82,7 +80,7 @@ export default defineConfig({
     }), sitemap({
       filter: page => {
       let include = true
-      let slug = page.split('https://blog.maximebourdon.fr/posts/').pop().slice(0, -1);
+      let slug = page.split('https://test.fr/posts/').pop().slice(0, -1);
     
       const isDraftBlogPostPage = Boolean(blogDrafts.find(fileName => fileName.split('.mdx')[0] === slug));
       

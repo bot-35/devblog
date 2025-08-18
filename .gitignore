@@ -43,3 +43,5 @@ robots.txt
 .vscode
 
 archives/
+
+*code-workspace

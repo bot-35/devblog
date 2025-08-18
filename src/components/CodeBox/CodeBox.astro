@@ -48,52 +48,48 @@ for (let i = 0; i < code.length; i++) {
 </astro-codebox>
 
 
+<style is:global>
+  /* Pour que @apply connaisse les utilitaires Tailwind v4 dans ce fichier */
+  @reference "tailwindcss/utilities.css";
+  @reference "tailwindcss/theme.css";
 
-<style is:global lang="less">
-    .codebox > pre > code > span > span {
-        @apply text-xs xl:text-base;
-    }
-    .codebox > input:checked  ~ :last-child  {
-        @apply hidden duration-500 transition-all;
-    }
-    .codebox > input:checked  + div > .codeboxCopyButton  {
-        @apply hidden duration-500 transition-all;
-    }
+  .codebox > pre > code > span > span {
+    @apply text-xs xl:text-base;
+  }
 
-    .codebox > input:checked  + div + div  {
-        @apply opacity-100 h-fit py-4 duration-500 transition-all;
-    }
+  .codebox > input:checked ~ :last-child  {
+    @apply hidden duration-500 transition-all;
+  }
+  .codebox > input:checked + div > .codeboxCopyButton {
+    @apply hidden duration-500 transition-all;
+  }
+  .codebox > input:checked + div + div  {
+    @apply opacity-100 h-fit py-4 duration-500 transition-all;
+  }
+  .codebox > input:checked + div > div + div > label {
+    @apply text-blog-marron-text animate-pulse;
+  }
 
-    .codebox > input:checked  + div > div + div > label   {
-        @apply text-blog-marron-text animate-pulse;
-    }
+  .codebox label:hover + span {
+    @apply scale-y-100 opacity-50;
+  }
 
-    .codebox label:hover + span {
-        @apply scale-y-100 opacity-50 ; 
-    }
-    .codeboxCopyButton {
-        & > div {
-                @apply absolute bg-gray-500 rounded-2xl opacity-40 -top-1 -left-1 h-7 w-7 z-0 duration-500 shadow shadow-blog-marron-text ;
-        }
-        & button:active {
-            @apply scale-125  duration-75;
-        }
-        & button:hover 
-        {
-            & + div {
-                @apply scale-105 bg-blog-black ;
-            }
-            & ~ span {
-            @apply scale-y-100 opacity-50 ; 
-            }
-        }
-        & button:active + div {
-            @apply scale-150 bg-green-400 duration-75  shadow-green-400;
-        }
-
-    }
-
-
+  /* ====== ex-LESS → CSS nesting ====== */
+  .codeboxCopyButton > div {
+    @apply absolute bg-gray-500 rounded-2xl opacity-40 -top-1 -left-1 h-7 w-7 z-0 duration-500 shadow shadow-blog-marron-text;
+  }
+  .codeboxCopyButton button:active {
+    @apply scale-125 duration-75;
+  }
+  .codeboxCopyButton button:hover + div {
+    @apply scale-105 bg-blog-black;
+  }
+  .codeboxCopyButton button:hover ~ span {
+    @apply scale-y-100 opacity-50;
+  }
+  .codeboxCopyButton button:active + div {
+    @apply scale-150 bg-green-400 duration-75 shadow-green-400;
+  }
 </style>
 
 <script>

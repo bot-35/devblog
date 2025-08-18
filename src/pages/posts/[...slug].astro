@@ -112,142 +112,82 @@ else
   });
 </script>
 
-<style lang="less" is:global>
-  .toc li {
-    @apply relative pl-8;
+<style is:global>
+  /* Pour que @apply voie les utilitaires + tes tokens (ajuste le chemin) */
+  @reference "tailwindcss/utilities.css";
+  @reference "tailwindcss/theme.css";
+  @reference "../../styles/main.css";
+  
+
+  .toc li { @apply relative pl-8; }
+
+  .toc-link { color: rgb(225 201 167); }
+  .toc-link:hover { color: rgb(239 68 68); }
+
+  .toc-link-h2 { @apply text-lg; }
+  .toc-link-h2::before {
+    content: "";
+    @apply absolute h-1 w-1 top-3 left-3 bg-red-500;
   }
-  .toc-link {
-    color: rgb(225 201 167);
-    &:hover {
-      color: rgb(239 68 68);
-    }
-    &-h2 {
-      @apply text-lg;
-      &::before {
-        @apply absolute h-1 w-1 top-3 left-3  bg-red-500;
-        content: "";
-      }
-    }
-    &-h3 {
-      @apply text-base;
-      &::before {
-        @apply absolute rounded-full h-1 w-1 top-3 left-3 scale-50  bg-blog-marron-text;
-        content: "";
-      }
-    }
+
+  .toc-link-h3 { @apply text-base; }
+  .toc-link-h3::before {
+    content: "";
+    @apply absolute rounded-full h-1 w-1 top-3 left-3 scale-50 bg-blog-marron-text;
   }
-  #article {
-    @apply px-3 xl:px-0;
 
-    blockquote {
-      @apply leading-relaxed;
-    }
-    p {
-      @apply tracking-widest leading-relaxed xl:text-base text-gray-50 mx-6;
-    }
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply  relative;
-    }
-    h2 {
-      @apply tracking-widest leading-relaxed ml-2  xl:text-5xl;
-    }
-    h3 {
-      @apply tracking-widest leading-relaxed ml-4  xl:text-2xl font-jost font-bold;
-    }
-    h4 {
-      @apply tracking-widest leading-relaxed ml-4  xl:text-lg font-jost font-semibold;
-    }
-    h5 {
-      @apply tracking-widest leading-relaxed ml-5 xl:text-base font-jost font-medium;
-    }
-    h6 {
-      @apply tracking-widest leading-relaxed  ml-6 xl:text-base font-jost;
-    }
-    p + p {
-      @apply mt-4;
-    }
-    * + h2 {
-      @apply mt-24 xl:mt-32;
-    }
-    * + h3 {
-      @apply mt-12 xl:mt-16;
-    }
-    * + h4 {
-      @apply mt-12 xl:mt-12;
-    }
-    * + h5 {
-      @apply mt-6 xl:mt-14;
-    }
-    * + h6 {
-      @apply mt-3 xl:mt-12;
-    }
-    p + .postimagebox,
-    .postimagebox + p {
-      @apply mt-4 xl:mt-6;
-    }
-    h1 + * {
-      @apply mt-2 xl:mt-12;
-    }
-    h2 + * {
-      @apply mt-2 xl:mt-12;
-    }
-    h3 + * {
-      @apply mt-2 xl:mt-4;
-    }
-    h4 + * {
-      @apply mt-2 xl:mt-4;
-    }
-    h5 + * {
-      @apply mt-2 xl:mt-4;
-    }
-    h6 + * {
-      @apply mt-2 xl:mt-4;
-    }
+  #article { @apply px-3 xl:px-0; }
 
-    h2 + h3 {
-      @apply mt-2 xl:mt-6;
-    }
-    h2 + h4 {
-      @apply mt-2 xl:mt-6;
-    }
-    h2 + h5 {
-      @apply mt-2 xl:mt-6;
-    }
+  #article blockquote { @apply leading-relaxed; }
+  #article p { @apply tracking-widest leading-relaxed xl:text-base text-gray-50 mx-6; }
 
-    h2:first-of-type::before {
-      @apply hidden;
-    }
+  #article h2, #article h3, #article h4, #article h5, #article h6 { @apply relative; }
+  #article h2 { @apply tracking-widest leading-relaxed ml-2 xl:text-5xl; }
+  #article h3 { @apply tracking-widest leading-relaxed ml-4 xl:text-2xl font-jost font-bold; }
+  #article h4 { @apply tracking-widest leading-relaxed ml-4 xl:text-lg font-jost font-semibold; }
+  #article h5 { @apply tracking-widest leading-relaxed ml-5 xl:text-base font-jost font-medium; }
+  #article h6 { @apply tracking-widest leading-relaxed ml-6 xl:text-base font-jost; }
 
-    a {
-      @apply text-blog-marron-text;
-    }
-    ul {
-      @apply my-8;
-      li {
-        @apply ml-8 mb-8 text-gray-50 tracking-widest   relative;
-        &::before {
-          @apply absolute h-1 w-1 top-3 -left-4 bg-red-500 bg-gradient-to-tl from-blog-marron-fond via-gray-50 to-blog-marron-text rounded-full;
-          content: "";
-        }
-        img {
-          @apply w-1/4;
-        }
-      }
-    }
-    #et {
-      p {
-        @apply tracking-wider  text-blog-marron-fond italic  text-base text-left  leading-loose;
-      }
-    }
+  #article p + p { @apply mt-4; }
+  #article * + h2 { @apply mt-24 xl:mt-32; }
+  #article * + h3 { @apply mt-12 xl:mt-16; }
+  #article * + h4 { @apply mt-12 xl:mt-12; }
+  #article * + h5 { @apply mt-6  xl:mt-14; }
+  #article * + h6 { @apply mt-3  xl:mt-12; }
 
-    #details {
-      p {
-        @apply text-blog-marron-shadow text-base;
-      }
-    }
+  #article p + .postimagebox,
+  #article .postimagebox + p { @apply mt-4 xl:mt-6; }
+
+  #article h1 + * { @apply mt-2 xl:mt-12; }
+  #article h2 + * { @apply mt-2 xl:mt-12; }
+  #article h3 + * { @apply mt-2 xl:mt-4; }
+  #article h4 + * { @apply mt-2 xl:mt-4; }
+  #article h5 + * { @apply mt-2 xl:mt-4; }
+  #article h6 + * { @apply mt-2 xl:mt-4; }
+
+  #article h2 + h3,
+  #article h2 + h4,
+  #article h2 + h5 { @apply mt-2 xl:mt-6; }
+
+  #article h2:first-of-type::before { @apply hidden; }
+
+  #article a { @apply text-blog-marron-text; }
+
+  #article ul { @apply my-8; }
+  #article ul li {
+    @apply ml-8 mb-8 text-gray-50 tracking-widest relative;
   }
+  #article ul li::before {
+    content: "";
+    @apply absolute h-1 w-1 top-3 -left-4 bg-red-500 bg-gradient-to-tl from-blog-marron-fond via-gray-50 to-blog-marron-text rounded-full;
+  }
+  #article ul li img { @apply w-1/4; }
+
+  #article #et p {
+    @apply tracking-wider text-blog-marron-fond italic text-base text-left leading-loose;
+  }
+
+  /* ⚠️ Si tu n’as pas défini --color-blog-marron-shadow dans @theme,
+     remplace la ligne suivante par `text-blog-marron-text`. */
+  #article #details p { @apply text-blog-marron-text; }
 </style>
