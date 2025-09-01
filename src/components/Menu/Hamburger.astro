@@ -1,5 +1,7 @@
 ---
-const items = [['Blog','/posts'], ['A Propos','/apropos'],['Contact','/contact'],];
+import { Icon } from "astro-icon/components";
+
+const items = [['Blog','/posts'], ['A Propos','/apropos']];
 
 ---
 
@@ -13,7 +15,10 @@ const items = [['Blog','/posts'], ['A Propos','/apropos'],['Contact','/contact']
       {items.map((item) => (
         <a href={item[1]} class="z-10"><li>{item[0]}</li></a>
     ))}
-    </ul>
+    <a  href='https://github.com/bot-35'><button class='btn--two-colors--bl-tr flex flex-col  items-center'>    <Icon name="octicon:logo-github-24" class='h-6 cursor'/></button></a>
+
+  </ul>
+
 </astro-hamburgerbestmenu>
 
 

@@ -35,7 +35,7 @@ else
       <p class="font-bold text-xl underline uppercase mb-8">
         Table des matières
       </p>
-      <section class="overflow-y-scroll max-h-[50vh] text-sm" id="tdm">
+      <section class="overflow-y-scroll max-h-[50vh]  text-sm" id="tdm">
       </section>
       <section class='mt-12' transition:name=`post ${remarkPluginFrontmatter.slug} tag`>
         <p class='ml-8 text-sm mb-2'>Tag(s) :</p>
@@ -119,22 +119,22 @@ else
   @reference "../../styles/main.css";
   
 
-  .toc li { @apply relative pl-8; }
-
-  .toc-link { color: rgb(225 201 167); }
-  .toc-link:hover { color: rgb(239 68 68); }
-
-  .toc-link-h2 { @apply text-lg; }
-  .toc-link-h2::before {
-    content: "";
-    @apply absolute h-1 w-1 top-3 left-3 bg-red-500;
+  .toc li { @apply relative pl-4 font-jost  ; }
+  .toc > ol > li {
+    @apply mb-5;
   }
 
-  .toc-link-h3 { @apply text-base; }
-  .toc-link-h3::before {
-    content: "";
-    @apply absolute rounded-full h-1 w-1 top-3 left-3 scale-50 bg-blog-marron-text;
+  .toc > ol > li > ol > li{
+    @apply my-3;
   }
+  .toc-link { color: rgb(225, 201, 167); }
+  .toc-link:hover { color: rgb(185, 126, 39); }
+
+  .toc-link-h2 { @apply hover:pl-0.5 transition-all text-blog-marron-fond uppercase; }
+
+
+  .toc-link-h3 { @apply text-base hover:pl-1 transition-all text-blog-marron-reflet capitalize; }
+
 
   #article { @apply px-3 xl:px-0; }
 

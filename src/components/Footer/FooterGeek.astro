@@ -1,8 +1,8 @@
 ---
 const items = {
-                hébergeur: ['Vercel','https://app.netlify.com/'],
-                'stylisé par': ['Tailwindcss 6.0.2','https://tailwindcss.com/'],
-                'propulsé par': ['Astro 3.0.12', 'https://astro.build/'],
+                hébergeur: ['Vercel','https://vercel.com//'],
+                'stylisé par': ['Tailwindcss 4.1.12','https://tailwindcss.com/'],
+                'propulsé par': ['Astro 5.13.2', 'https://astro.build/'],
                 'tooltipisé par': ['Tippy.js 6.3.7', 'https://atomiks.github.io/tippyjs/'],
 
                 }
@@ -17,11 +17,13 @@ const sections = Object.getOwnPropertyNames(items);
             <p class='text-blog-black uppercase text-xl font-medium'>
                 Pour les geeks </p></div>
             {sections.map((section) => (
-                <div  class='     flex flex-row justify-between z-10 p-4 xl:p-8 rounded-sm bg-[#FFFFFF10] '>
-                    <p class='uppercase z-10'>
-                        {section}</p> 
-                    <a href={items[section][1]} class='cursor-pointer text-white hover:text-red-500'><p class='uppercase z-10'>
-                        {items[section][0]}</p></a>
-                </div>
+  <a href={items[section][1]} 
+   class="group flex flex-row justify-between z-10 p-2 xl:p-2 rounded-sm 
+          bg-gradient-to-r from-[#1a1a1a]/80 to-[#010101]/60 
+          border border-[#e6a54a]/40 
+          hover:from-[#2a1d0d] hover:to-[#3a2c1d] cursor-pointer hover:shadow-[0_0_10px_#e6a54a40]">
+    <p class="uppercase z-10 tracking-widest xl:tracking-[9px]">{section}</p>
+    <p class="uppercase z-10 text-[#f5f5f5] tracking-widest  group-hover:text-[#e6a54a] ">{items[section][0]}</p>
+</a>
                 ))}  
         </div>

@@ -2,7 +2,7 @@
 
 @layer base {
   body {
-    @apply font-jost bg-blog-black text-indigo-100 text-blog-marron-text;
+    @apply font-jost bg-blog-black  text-blog-marron-text;
   }
 
   h1, h2, h3, h4, h5 {
@@ -36,11 +36,11 @@
   samp { @apply bg-neutral-500; }
 
   blockquote {
-    @apply rounded-full pl-12 xl:pl-32 p-16 w-full !my-8 bg-blog-black font-serif text-white relative
-           before:absolute before:top-0 before:left-4 before:h-fit before:w-fit before:text-red-500
+    @apply  pl-12 xl:pl-32 pt-8 w-full !my-8 bg-blog-black font-serif text-white relative border-b-2  border-b-blog-marron-shadow
+           before:absolute before:top-4 before:left-4 before:h-fit before:w-fit before:text-blog-marron-text
            before:text-5xl before:xl:text-9xl before:font-mono before:content-['"'];
     & p      { @apply text-sm italic my-4; }
-    & footer { @apply ml-12 text-red-500; }
+    & footer { @apply ml-12 text-blog-marron-text; }
   }
 
   kbd { @apply bg-gray-100 px-5 font-semibold border-blue-900 border-2 uppercase; }
@@ -113,10 +113,12 @@
     @apply hover:scale-105;
     @apply before:absolute before:top-0 before:left-0 before:bg-blog-marron-fond before:w-full before:h-full
            before:origin-bottom-left before:opacity-50 before:-z-20 before:scale-0 before:transition before:ease-in;
-    @apply after:absolute after:top-0 after:left-0 after:bg-red-500 after:w-full after:h-full
+    @apply after:absolute after:top-0 after:left-0 after:bg-[#E09947] after:w-full after:h-full
            after:origin-top-right after:opacity-60 after:-z-10 after:scale-0 after:transition after:ease-in;
   }
-  .btn--two-colors--bl-tr:hover { @apply text-white bg-transparent; }
+
+
+  .btn--two-colors--bl-tr:hover { @apply text-blog-black bg-transparent; }
   .btn--two-colors--bl-tr:hover::before { @apply scale-100 origin-top-right; }
   .btn--two-colors--bl-tr:hover::after  { @apply scale-100 origin-bottom-left; }
   .btn--two-colors--bl-tr:focus { @apply text-white bg-transparent; }
@@ -127,10 +129,10 @@
     @apply block relative bg-blog-black transition border border-blog-marron-reflet py-4 px-6 ease-in;
     @apply before:absolute before:top-0 before:left-0 before:bg-blog-marron-fond before:w-full before:h-full
            before:origin-left before:opacity-50 before:-z-20 before:scale-x-0 before:transition before:ease-in;
-    @apply after:absolute after:top-0 after:left-0 after:bg-red-500 after:w-full after:h-full
+    @apply after:absolute after:top-0 after:left-0 after:bg-[#E09947] after:w-full after:h-full
            after:origin-right after:opacity-60 after:-z-10 after:scale-x-0 after:transition after:ease-in;
   }
-  .btn--two-colors--l-r:hover { @apply text-white bg-transparent; }
+  .btn--two-colors--l-r:hover { @apply text-blog-black bg-transparent; }
   .btn--two-colors--l-r:hover::before { @apply scale-x-100 origin-right; }
   .btn--two-colors--l-r:hover::after  { @apply scale-x-100 origin-left; }
   .btn--two-colors--l-r:focus { @apply text-white bg-transparent; }

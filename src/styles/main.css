@@ -1,11 +1,13 @@
 /* Ordre des layers */
+@import '@fontsource-variable/jost/wght.css';
+@import '@fontsource/rozha-one';
+
 @layer theme, base, components, utilities;
 
 /* Tes tokens (repris de ton ancien tailwind.config) */
 @theme {
-  --font-jost: "JostVariable", "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-jost: "Jost Variable", "Times New Roman", ui-sans-serif, system-ui, sans-serif;
   --font-rozha: "Rozha One", ui-serif, Georgia, serif;
-
   /* === palette blog (ex- theme.extend.colors.blog.*) === */
   --color-blog-black: #0e0e0e;
   --color-blog-marron-text: #dd9429;
@@ -13,6 +15,26 @@
   --color-blog-marron-fond: #e8b870;
   --color-blog-marron-reflet: #e1c9a7;
 }
+
+
+@utility text-blog-marron-text {
+  color: var(--color-blog-marron-text);
+}
+
+@utility bg-blog-black {
+  background-color: var(--color-blog-black);
+}
+@utility shadow-blog-marron-text {
+  color: var(--color-blog-marron-shadow);
+}
+
+@utility bg-blog-marron-fond {
+  background-color: var(--color-blog-marron-fond);
+}
+
+@utility bg-blog-marron-reflet {
+  background-color: var(--color-blog-marron-reflet);
+} 
 
 /* Tailwind v4 complet (preflight + theme + utilities) */
 @import "tailwindcss";
@@ -22,7 +44,12 @@
 
 /* Tes styles (base/components) */
 @import "./global.css";
-
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
 /* Composants */
 @layer components {
   .hover-underline-animation { 

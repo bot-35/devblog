@@ -19,7 +19,7 @@ for (let i = 0; i < code.length; i++) {
         <input id={Y} class='hidden' type="checkbox" />
         <div class="flex flex-row justify-between content-end items-end ">
             <div  class='w-fit  px-2 pt-2 rounded-t-xl bg-[#121212] font-mono text-gray-500 text-xs '>
-                <span>📝 <em>blog.maximebourdon.fr</em> | <strong>{header}</strong></span>
+                <span>📝 <em>Journal de Bot-35</em> | <strong>{header}</strong></span>
             </div>
             {code.split('\n').length > 5 ? (
                 <div class='xl:pr-4'>
@@ -49,10 +49,30 @@ for (let i = 0; i < code.length; i++) {
 
 
 <style is:global>
+  
   /* Pour que @apply connaisse les utilitaires Tailwind v4 dans ce fichier */
   @reference "tailwindcss/utilities.css";
   @reference "tailwindcss/theme.css";
+@utility text-blog-marron-text {
+  color: var(--color-blog-marron-text);
+}
 
+@utility bg-blog-black {
+  background-color: var(--color-blog-black);
+}
+@utility shadow-blog-marron-text {
+  --tw-shadow-color: var(--color-blog-marron-shadow);
+  --tw-shadow: var(--tw-shadow-colored);
+  box-shadow: var(--tw-shadow);
+}
+
+@utility bg-blog-marron-fond {
+  background-color: var(--color-blog-marron-fond);
+}
+
+@utility bg-blog-marron-reflet {
+  background-color: var(--color-blog-marron-reflet);
+} 
   .codebox > pre > code > span > span {
     @apply text-xs xl:text-base;
   }
@@ -67,7 +87,7 @@ for (let i = 0; i < code.length; i++) {
     @apply opacity-100 h-fit py-4 duration-500 transition-all;
   }
   .codebox > input:checked + div > div + div > label {
-    @apply text-blog-marron-text animate-pulse;
+    @apply text-blog-marron-text animate-pulse; 
   }
 
   .codebox label:hover + span {

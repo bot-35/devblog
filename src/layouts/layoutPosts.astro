@@ -12,7 +12,7 @@ import Modal from "../components/Modal/Modal.astro";
 import SVG from "../components/SVG/SVG.astro";
 import SVGMarron from "../components/SVG/SVGMarron.astro";
 
-import bg from '../img/photo-bg/bourdon1.png';
+
 
 
 /** Initialisation du titre de la page*/
@@ -32,12 +32,12 @@ const description = 'Le blog de maximebourdon.fr. Ici on traitera des servers, d
 		<Header/>
 
 
-		<div class='w-full flex flex-col items-center pt-44 xl:pt-64'> 
-			<div class='fixed top-0 left-0 w-full h-full bg-fixed bg-cover -z-50 opacity-20' 
-			style=`background-image: url("${bg.src}");`
-			/>
+		<div class='w-full flex flex-col items-center pt-44 xl:pt-64 '> 
+
+			
+	
 			<slot/>
-			<section class='     flex  flex-col xl:flex-row gap-8 w-full content-center justify-center items-center capitalize mt-64  my-8'>
+			<section class='     flex  flex-col xl:flex-row gap-8 w-full content-center justify-center items-center capitalize mt-64  my-8 '>
 				<p class='font-semibold text-xs'>Fil d'Ariane 💃</p>
 				<Breadcrumbs  indexText="Index"/>
 			</section>
@@ -63,5 +63,6 @@ const description = 'Le blog de maximebourdon.fr. Ici on traitera des servers, d
 	.c-breadcrumbs__crumb:first-of-type {
 		@apply   before:content-[''];
 	}
+	
 	
 </style>
