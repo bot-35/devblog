@@ -1,0 +1,74 @@
+/* Ordre des layers */
+@import '@fontsource-variable/jost/wght.css';
+@import '@fontsource/rozha-one';
+
+@layer theme, base, components, utilities;
+
+/* Tes tokens (repris de ton ancien tailwind.config) */
+@theme {
+  --font-jost: "Jost Variable", "Times New Roman", ui-sans-serif, system-ui, sans-serif;
+  --font-rozha: "Rozha One", ui-serif, Georgia, serif;
+  /* === palette blog (ex- theme.extend.colors.blog.*) === */
+  --color-blog-black: #0e0e0e;
+  --color-blog-marron-text: #dd9429;
+  --color-blog-marron-shadow: #c0882e;
+  --color-blog-marron-fond: #e8b870;
+  --color-blog-marron-reflet: #e1c9a7;
+}
+
+
+@utility text-blog-marron-text {
+  color: var(--color-blog-marron-text);
+}
+
+@utility bg-blog-black {
+  background-color: var(--color-blog-black);
+}
+@utility shadow-blog-marron-text {
+  color: var(--color-blog-marron-shadow);
+}
+
+@utility bg-blog-marron-fond {
+  background-color: var(--color-blog-marron-fond);
+}
+
+@utility bg-blog-marron-reflet {
+  background-color: var(--color-blog-marron-reflet);
+} 
+
+/* Tailwind v4 complet (preflight + theme + utilities) */
+@import "tailwindcss";
+
+/* Indique à Tailwind où scanner (relatif à CE fichier) */
+@source "../**/*.{astro,html,js,jsx,ts,tsx,md,mdx}";
+
+/* Tes styles (base/components) */
+@import "./global.css";
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+/* Composants */
+@layer components {
+  .hover-underline-animation { 
+    @apply relative inline-block cursor-pointer; 
+  }
+  .hover-underline-animation::after {
+    content: "";
+    @apply absolute left-0 -bottom-[2px] h-[2px] w-full origin-left scale-x-0 transition-transform bg-blog-marron-fond;
+  }
+  .hover-underline-animation:hover::after,
+  .hover-underline-animation:focus-visible::after {
+    @apply scale-x-100;
+  }
+}
+
+
+/* Scrollbars (WebKit + Firefox) */
+* { scrollbar-width: thin; scrollbar-color: var(--color-blog-marron-reflet) transparent; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { @apply rounded-full; }
+::-webkit-scrollbar-thumb { @apply bg-blog-marron-reflet rounded-full shadow-2xl shadow-blog-marron-reflet; }
+::-webkit-scrollbar-thumb:hover { @apply bg-blog-marron-fond; }

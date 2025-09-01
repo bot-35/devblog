@@ -1,0 +1,16 @@
+---
+import { Icon } from "astro-icon/components";
+
+const items = [['Blog','/posts'], ['A Propos','/apropos'],];
+---
+
+
+<nav class='xl:flex flex-row gap-8 mr-8 items-center hidden' id='menu' >
+    {items.map((item) => (
+        <a  href={item[1]}><p>{item[0]}</p></a>
+    ))}
+    <a  href='https://github.com/bot-35'><button class='btn--two-colors--bl-tr'>    <Icon name="octicon:logo-github-24" class='h-6 cursor'/></button></a>
+</nav>
+
+
+

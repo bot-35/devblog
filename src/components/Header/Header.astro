@@ -1,0 +1,25 @@
+---
+import Logo from "../../components/Logo/Logo.astro";
+import Menu from "../../components/Menu/Menu.astro";
+import Hamburger from "../Menu/Hamburger.astro";
+
+
+---
+<!--<div class="flex flex-row items-center justify-between  py-4 px-16 w-full fixed xl:relative z-[1000]">
+    <input id="menu__toggle" class='hidden' type="checkbox" />
+    <Logo/>
+    <Menu/>
+    <Hamburger/>
+</div>-->
+
+<div  class="hidden xl:flex flex-row items-center justify-between  py-4 px-4 w-full absolute z-50">
+    <Logo/>
+    <Menu/>
+</div>
+
+<div class="flex fixed top-4 left-[8.5%] right-0 bottom-auto xl:hidden flex-row items-center border-[0.5px]  border-[rgba(5,5,5,0.5)] bg-[rgba(5,5,5,0.5)] shadow-md rounded-full justify-between p-4 w-5/6  z-50">
+    <div class='absolute top-0 left-0 h-full w-full bg-[rgba(15,15,15,0.5)] blur rounded-full backdrop-opacity-50 -z-10' />
+    <input id="menu__toggle" class='hidden' type="checkbox" />
+    <Logo/>
+    <Hamburger/>
+</div>

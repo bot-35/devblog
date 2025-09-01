@@ -1,0 +1,132 @@
+---
+import { getEntry } from 'astro:content';
+import AstroTippy from '../AstroTippy/AstroTippy.astro'
+import { Icon } from 'astro-icon/components';
+import {convertDate} from '../../functions/convertDate.js';
+const {  collection, slug, id } = Astro.props
+const entry = await getEntry(collection, slug);
+const { remarkPluginFrontmatter } = await entry.render();
+const bgIMG = `url("${remarkPluginFrontmatter.image}");`;
+let X = remarkPluginFrontmatter.slug;
+let Y = "";
+
+const date = new Date(remarkPluginFrontmatter.publishedDate);
+const day = convertDate(date).daymonth;
+const month = convertDate(date).month.substring(0,3) + '.';
+const year = convertDate(date).year;
+for (let i = 0; i < X.length; i++) {
+  let char = X[i].toLowerCase();
+  if (char >= "a" && char <= "z") {
+    Y += char;
+  }
+
+}
+
+let title 
+if(remarkPluginFrontmatter && remarkPluginFrontmatter.parts){
+   title = `${remarkPluginFrontmatter.title} [PARTIE  ${remarkPluginFrontmatter.part}]`;
+}
+else 
+{
+   title = remarkPluginFrontmatter.title;
+}
+---
+
+
+<section class='astro-postcard relative rounded-xl overflow-hidden xl:overflow-visible' id={Y} tabindex="0">
+  {remarkPluginFrontmatter.draft ? (
+    <div class="absolute top-0 left-0 h-full w-full flex flex-row justify-center pt-8">
+    <div class ='relative h-32 w-32  backdrop-blur-xl backdrop-contrast-150  backdrop-brightness-150 shadow  flex flex-row justify-center content-center items-center border-t-0  rounded-full z-50'>
+        <p class='text-5xl '>📖</p>
+    </div></div>) : null }
+    <section  class='postcarddate hidden xl:block absolute  top-0 left-0  p-4 text-white'>  
+      <div class='absolute top-0 left-0 w-full h-full backdrop-brightness-50 backdrop-opacity-50  rounded-br-xl z-0'/>        
+      <p class='relative z-10'>
+        <span>{day}</span>
+        <span class='mx-2'>{month}</span>
+        <span>{year}</span>
+      </p>
+    </section>
+    <a href={"/posts/" + slug}>
+        <li class='overflow-hidden postCard bg-[rgba(14,14,14,1)] backdrop-contrast-100 xl:rounded-xl xl:shadow-md  transition  active:scale-105'>
+            <div class="postCardBg absolute h-full w-full scale-y-0 origin-bottom transition left-0 bottom-0  bg-blog-marron-text opacity-5 -z-10" />
+            
+            <div     style=`background-image :${bgIMG}` class='postCardBgImg xl:hue-rotate-30 bg-no-repeat bg-cover bg-center h-[192px]  transition' />
+            
+            <p class='p-4 text-xl xl:text-base'>{title}</p>
+        </li>
+    </a>
+    <div class='z-10 bg-blog-black xl:hidden px-4  pt-4 text-sm flex flex-row justify-between items-end'>
+      <p>Tag(s) :</p>   
+      <div>
+        <p class='text-right'>
+          <span>{day}</span>
+          <span class='mx-2'>{month}</span>
+          <span>{year}</span>
+        </p>
+        <p>☕ {remarkPluginFrontmatter.minutesRead}</p>  
+      </div>   
+    </div>
+    <ul class="relative xl:absolute bottom-0 xl:bottom-auto xl:top-[192px] left-0 w-full flex flex-row flex-wrap justify-left   xl:opacity-0 transition    bg-blog-black p-4 xl:p-2 gap-4 pl-8 xl:pl-2"  >
+        {remarkPluginFrontmatter.tags.map((tag : string) => (
+            <a href=`/tags/${tag}`>
+                <li class="postcardtag text-blog-marron-reflet transition hover:text-blog-marron-text  font-mono hover-underline-animation active:scale-105"><span class="hidden text-[0.7rem] transition xl:inline-block mr-2">♦</span><span class="text-[0.7rem] mr-1 xl:hidden">#</span>{tag}</li>
+            </a>
+         ))}
+    </ul> 
+    <div class="postcardglow transition hidden absolute        -bottom-[200px] left-0 h-[200px] w-full bg-slate-100 -z-30 " />
+    <AstroTippy element={Y} content={remarkPluginFrontmatter.minutesRead}/>
+ 
+  </section>
+
+
+<style>
+@reference "tailwindcss/utilities.css";
+@reference "tailwindcss/theme.css";
+@reference "../../styles/main.css";   
+
+.postcardglow {
+    background: linear-gradient(to bottom, rgb(255, 227, 223) -510%, transparent 20%);
+    clip-path: polygon(50% 0, 50% 0, 100% 100%, 0% 100%);}
+
+.astro-postcard:hover > a li .postCardBg {
+  @apply xl:bg-white  xl:scale-y-100;
+}
+
+
+.astro-postcard:hover > .postcardglow  {
+  @apply xl:opacity-100 xl:block;
+}
+
+
+.astro-postcard:hover >  ul {
+  @apply  xl:-translate-y-full xl:opacity-100;
+}
+
+
+
+.astro-postcard:focus-within  >  ul  {
+  @apply  xl:-translate-y-full xl:opacity-100;
+}
+.astro-postcard:focus-within  > a li .postCardBgImg {
+  @apply  xl:hue-rotate-0  xl:saturate-200;
+}
+
+
+.astro-postcard:active >  ul {
+  @apply  xl:scale-105;
+}
+
+.astro-postcard:active >  .postcarddate   {
+  @apply  xl:scale-105;
+}
+
+
+.astro-postcard:hover > a li .postCardBgImg {
+  @apply  xl:hue-rotate-0  xl:saturate-200;
+}
+
+.postcardtag:hover > span {
+    @apply animate-spin text-red-500;
+}
+</style>

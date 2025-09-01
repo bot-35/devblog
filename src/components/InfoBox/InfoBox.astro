@@ -1,0 +1,19 @@
+---
+
+---
+
+<section class='relative w-full flex flex-col items-center justify-center'>
+   <div class="relative  w-3/4 ml-10 xl:ml-16  my-16 py-8 xl:px-6  min-h-[96px] flex flex-col xl:flex-row items-center  border-blue-400 text-gray-50 rounded-full shadow-xl">
+        <div class="absolute top-0 left-0 h-[100%] w-[100%] border border-red-500 opacity-5 rounded-full bg-gradient-to-bl xl:bg-gradient-to-r from-violet-500 via-transparent to-transparent -z-10" />
+        <div class="absolute top-[2%] left-[2%] h-[98%] w-[98%] border border-orange-500 opacity-5 bg-gradient-to-br xl:bg-gradient-to-br from-violet-700 via-transparent to-transparent  rounded-full bg-transparent -z-10" />
+        <div class="absolute top-[4%] left-[4%] h-[96%] w-[96%] border border-orange-500 opacity-5 bg-gradient-to-b xl:bg-gradient-to-tr from-violet-900    via-transparent to-transparent  rounded-full bg-transparent -z-10" />
+
+        <div class='flex flex-row basis-1/4 content-center items-center justify-center'>
+            <div />
+            <p class='!text-7xl !text-blog-marron-text mt-16 xl:mt-0'>?</p>
+        </div>
+        <div class='flex flex-row basis-3/4 content-center items-center justify-center pt-8 pb-16 xl:p-0'>
+            <p class="w-1/2 xl:w-full"><slot/></p>
+        </div>
+    </div>
+</section>

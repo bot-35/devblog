@@ -1,0 +1,15 @@
+PS C:\Users\mbourdon> wsl -d debian -u root
+root@PC-MAX:/mnt/c/Users/mbourdon# passwd root
+New password:
+Retype new password:
+passwd: password updated successfully
+root@PC-MAX:/mnt/c/Users/mbourdon# whoami
+root
+root@PC-MAX:/mnt/c/Users/mbourdon# exit
+logout
+PS C:\Users\mbourdon> debian
+debian@PC-MAX:~$ su
+Password:
+root@PC-MAX:/home/debian# exit
+exit
+debian@PC-MAX:~$

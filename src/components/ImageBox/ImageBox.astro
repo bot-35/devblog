@@ -1,0 +1,36 @@
+---
+const { src, alt, orientation } = Astro.props;
+
+---
+
+<astro-imagebox class='postimagebox w-full flex flex-row justify-center cursor-pointer' data-src={src.src}>
+        <img src={src.src} class=` w-full xl:w-fit rounded ${orientation === 'horizontal' ? 'xl:h-full' : 'h-fit xl:h-[512px]'}` alt={alt}/>
+</astro-imagebox >
+
+
+<script>
+
+class AstroImageBox extends HTMLElement {
+        constructor() {
+      super();
+        
+      const src = this.dataset.src
+      
+      this.addEventListener('click', event => {
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");   
+
+        let image = document.createElement('img');
+        image.setAttribute('src',src,);
+        image.classList.add("bg-blog-black");   
+
+        let modalImg = document.getElementById('modal--img');
+        modalImg.innerHTML=' ';
+        modalImg.appendChild(image);
+
+        })
+    }
+  }
+    customElements.define('astro-imagebox', AstroImageBox);
+</script>

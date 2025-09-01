@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+
+const allBlogPosts = await getCollection('posts', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+const tags = [];
+
+allBlogPosts.forEach((entry) => {
+    const entryTags = entry.data.tags;
+    entryTags.forEach((tag) => {
+      if (!tags.includes(tag)) {
+        tags.push(tag);
+      }
+    });
+  });
+
+tags.sort();
+
+---
+<section class='hidden  h-fit xl:py-8 w-full relative  xl:flex flex-row justify-evenly items-center mb-16'>
+    <p>Nombre de posts : <span class='text-2xl text-blog-marron-reflet ml-4'>{allBlogPosts.length}</span></p>
+    <section>
+        <p>Catégories :</p>
+        <ul class='grid grid-cols-5 gap-4 pl-4 my-4'>
+            {tags.map((tag) => (
+            <li><a class='text-blog-marron-reflet hover:text-blog-marron-text  hover-underline-animation' href=`/tags/${tag}`>#{tag}</a></li>
+            ))}
+        </ul>
+    </section>
+    <div class='absolute top-0 left-0 h-full w-full backdrop-brightness-150 rounded shadow -z-50' />
+</section>

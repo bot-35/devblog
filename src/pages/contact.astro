@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/layout.astro';
+
+
+
+const title = 'Bot-35 : En route vers le DevOps';
+
+---
+<Layout title={title}>
+	<div class='flex flex-col'>
+		<div class='relative flex flex-col my-32 xl:my-42 mb-16'>
+			<h1  class='uppercase ml-8'>Entrons en contact !</h1>
+			<form id="contact"  class='flex flex-col' name="contact" method="POST" data-netlify="true">
+			<div class="relative w-full flex flex-col gap-2 p-8  mt-8 overflow-hidden">
+				<div class="absolute top-0 left-0 h-full w-full bgContact hidden -z-10 opacity-50  brightness-110"/>
+
+				<label for="email">Courriel :</label>
+				<input type="email" name="courriel"  autofocus required class="placeholder:italic placeholder:text-slate-500 px-3 py-2  bg-[#ffffffbd] border  border-blog-azure-web placeholder-blog-black text-blog-black focus:ease-in focus:bg-white transition focus:outline-none focus:border-blog-oxford-blue focus:ring-blog-oxford-blue block w-full rounded sm:text-sm focus:ring-1" placeholder="mail@domain.zone" />
+				<label for="nom">Nom :</label>
+				
+				<input type="text" name="nom" required class="placeholder:italic placeholder:text-slate-500 px-3 py-2  bg-[#ffffffbd] border  border-blog-azure-web placeholder-blog-black text-blog-black focus:ease-in focus:bg-white transition focus:outline-none focus:border-blog-oxford-blue focus:ring-blog-oxford-blue block w-full rounded sm:text-sm focus:ring-1" placeholder="Nom" />
+				<label for="nom">Prénom :</label>
+				
+				<input type="text" name="prenom" required class="placeholder:italic placeholder:text-slate-500 px-3 py-2  bg-[#ffffffbd] border  border-blog-azure-web placeholder-blog-black text-blog-black focus:ease-in focus:bg-white transition focus:outline-none focus:border-blog-oxford-blue focus:ring-blog-oxford-blue block w-full rounded sm:text-sm focus:ring-1" placeholder="Prénom" />
+				<label for="message">Message :</label>
+				<textarea  rows="8" name="message" required class="placeholder:italic placeholder:text-slate-500 px-3 py-2  bg-[#ffffffbd] border  border-blog-azure-web placeholder-blog-black text-blog-black focus:ease-in focus:bg-white transition focus:outline-none focus:border-blog-oxford-blue focus:ring-blog-oxford-blue block w-full rounded sm:text-sm focus:ring-1" placeholder="Votre message..." />
+
+			</div>
+			<button type="submit" class='btn--two-colors--l-r uppercase'>Envoyer</button>
+		</form>
+		<div id="thanks_contact" class='flex-row justify-center items-center content-center w-full h-full mt-12 opacity-0 scale-y-0 origin-top duration-1000'>        
+			<div class="text-center text-lg  ">
+				<p class='text-4xl '>😍😍😍<br/><span class='text-red-500 font-bold'>Merci</span> pour votre message !</p>
+			</div>
+		</div>
+		</div>
+
+	</div>
+</Layout>
+
+
+
+<script>
+	const handleSubmit = (event) => {
+	  event.preventDefault();
+	
+	  const myForm = event.target;
+	  const formData = new FormData(myForm);
+	  
+	  fetch("/", {
+		method: "POST",
+		headers: { "Content-Type": "application/x-www-form-urlencoded" },
+		body: new URLSearchParams(formData).toString(),
+	  })
+		.then(() => {
+						console.log("Form successfully submitted");
+						document.getElementById('thanks_contact').classList.replace('opacity-0', 'opacity-100');
+						document.getElementById('thanks_contact').classList.replace('scale-y-0', 'scale-y-100');
+
+					}
+			)
+		.catch((error) => alert(error));
+	};
+	
+	document.getElementById("contact").addEventListener("submit", handleSubmit);
+	</script>

@@ -1,0 +1,33 @@
+---
+
+const { page } = Astro.props;
+let {currentPage = page.currentPage} = Astro.props;
+let {lastPage = page.lastPage} = Astro.props;
+let pagesArray = Array.from({length: lastPage}, (_, i) => i + 1);
+
+
+---
+
+<astro-pagination class='flex flex-row             self-center mb-32'  >
+    <div class=`flex flex-row  gap-4 px-8 py-6 ${pagesArray.length === 1 ? 'hidden' : ' border-[0.1px]'} border-blog-marron-text rounded`>
+
+    {
+        page.url.prev && (
+            <a class="font-size-1" href={page.url.prev} title="Go to Previous">
+                &larr; Précedente
+            </a>
+        )
+    }
+    {pagesArray.map((pageNumber) => (
+        <a href={pageNumber === 1 ? '/posts/' : `/posts/${pageNumber}`}  class={`border-[0.1px] border-transparent hover:border-red-800 text-center rounded-full w-6 h-6 ${pageNumber === currentPage ? 'bg-red-800 text-center rounded-full w-6 h-6' : ''}`}>{pageNumber}</a>
+    ))}
+    {
+        page.url.next && (
+            <a class="font-size-1" href={page.url.next} title="Go to Next">
+                Suivant &rarr;
+            </a>
+        )
+    }
+    </div>
+</astro-pagination>
+

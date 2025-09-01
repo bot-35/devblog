@@ -1,0 +1,98 @@
+---
+title: "Carnet d’aventure DevOps #1 : qu’est-ce que ce truc ?"
+slug: 'carnet-aventure-devops-1-quest-ce-que-ce-truc'
+publishedDate: 2025-08-15
+image: /img/post/1/1.png
+description: Suivez mon parcours dans l'apprentissage de cette philosophie. 
+tags: ["sysadmin","work","CI","CD","devops","github"]
+draft: true
+---
+import ImageBox from '../../components/ImageBox/ImageBox.astro';
+import CodeBox from '../../components/CodeBox/CodeBox.astro';
+import ColorBox from '../../components/ColorBox/ColorBox.astro';
+
+import LittleCode from '../../components/LittleCode/LittleCode.astro';
+import InfoBigBox from '../../components/InfoBigBox/InfoBigBox.astro';
+
+import CodeErrorBox from '../../components/CodeErrorBox/CodeErrorBox.astro';
+import InfoBox from '../../components/InfoBox/InfoBox.astro';
+import { Icon } from "astro-icon/components";
+
+import AstroStarter from '../../img/post/4/astro-localhost-starter.png';
+import AstroStarterModif from '../../img/post/4/astro-localhost-starter-modif.png';
+import AstroStarterGreen from '../../img/post/4/astro-localhost-starter-green.png';
+import AstroStarterCard from '../../img/post/4/astro-localhost-starter-card.png';
+import AstroStarterCardGreen from '../../img/post/4/astro-localhost-starter-card-green.png';
+
+<section id='article'>
+
+<section id='entete'>
+**Bienvenue** sur ce carnet d'aventure. Comme tout bon geek, j'aime les quêtes et les défis ! Et pour le sysadmin classique que je suis, apprendre et appliquer la philosophie DevOps s'apparente à une grande aventure ! Alors suivez-moi dans cet apprentissage qui, je l'espère, sera aussi gratifiant qu'il promet d'être douloureux.
+</section>
+
+## Le dev quoi ?
+### DEV ?! Moi je suis sysadmin...
+**"Encore un effet de mode"** : c'est ce que j'ai cru quand j'ai lu pour la première fois un papier sur le DevOps.
+
+> Attendons de voir, même si ça a l'air cool...
+<footer>—Bot-35 un jour en 2020</footer>
+
+Les premiers articles à ce sujet parlaient chacun d'une techno ou d'applis différentes et le concept me semblait se disperser dans tous les sens...  
+<br/>(Oui je l'avoue sans honte, je ne l'avais tout simplement pas compris.)
+
+Mais il faut dire que ces pratiques venaient avec tout un tas de nouveaux termes comme CI/CD, IaC et autres, qui ne facilitaient pas l'appropriation du sujet.
+
+J'ai donc mis cette question de côté durant longtemps, mais il est temps de sauter le pas.
+    
+## Mais c'est quoi le DevOps ?
+Le DevOps est une **philosophie** de développement et d'exploitation des systèmes informatiques qui vise à améliorer la collaboration entre les équipes de développement (Dev) et les équipes d'exploitation (Ops).
+    
+L'objectif principal du DevOps est de **rendre le processus de développement logiciel plus rapide, plus efficace et plus fiable** en automatisant les tâches répétitives et en favorisant une culture de collaboration et de communication entre les différentes équipes.
+
+Bon voilà pour la définition officielle, mais concrètement ça veut dire quoi ? 🙄
+  
+### Concrètement ?
+Concrètement, le DevOps repose sur plusieurs **principes clés** :
+- **Automatisation** : Automatiser les tâches répétitives telles que le déploiement, les tests et la configuration des environnements pour réduire les erreurs humaines et accélérer le processus de développement.
+- **Intégration continue (CI)** : Intégrer régulièrement les modifications de code dans un référentiel partagé, suivi de tests automatisés pour détecter rapidement les erreurs.
+- **Déploiement continu (CD)** : Automatiser le processus de déploiement des applications pour permettre des mises à jour fréquentes et fiables.
+- **Surveillance et retour d'information** : Surveiller en continu les performances des applications et des infrastructures pour identifier et résoudre rapidement les problèmes.
+- **Collaboration et communication** : Favoriser une culture de collaboration entre les équipes de développement et d'exploitation pour améliorer la qualité du logiciel et la satisfaction des utilisateurs.    
+    
+Voilà la théorie, mais dans la pratique comment on fait ça ?
+  
+### Par où commencer ?
+Pour commencer à adopter les pratiques DevOps, voici quelques étapes que vous pouvez suivre :
+
+- **Évaluer l'état actuel** : Analysez vos processus de développement et d'exploitation actuels pour identifier les domaines qui pourraient bénéficier des pratiques DevOps.
+- **Former les équipes** : Assurez-vous que les membres de vos équipes comprennent les principes et les pratiques du DevOps.
+- **Automatiser les processus** : Identifiez les tâches répétitives et commencez à les automatiser à l'aide d'outils tels que Jenkins, GitLab CI/CD, Ansible, Terraform, etc.
+- **Mettre en place l'intégration continue (CI)** : Configurez un système d'intégration continue pour automatiser les tests et la validation du code.
+- **Mettre en place le déploiement continu (CD)** : Automatisez le processus de déploiement pour permettre des mises à jour fréquentes et fiables.
+- **Surveiller et améliorer** : Mettez en place des outils de surveillance pour suivre les performances des applications et des infrastructures, et utilisez les retours d'information pour améliorer continuellement vos processus.
+- **Favoriser la collaboration** : Encouragez la communication et la collaboration entre les équipes de développement et d'exploitation pour améliorer la qualité du logiciel et la satisfaction des utilisateurs.
+
+## Conclusion
+En résumé, le DevOps est une philosophie qui vise à améliorer la collaboration entre les équipes de développement et d'exploitation en automatisant les tâches répétitives et en favorisant une culture de collaboration et de communication. En adoptant les pratiques DevOps, vous pouvez rendre le processus de développement logiciel plus rapide, plus efficace et plus fiable.
+
+### ... j'ai rien compris... 😱
+Bah... en fait moi non plus. C'est bien pour ça que j'ai mis de côté cette question pendant longtemps. 🙈🙉🙊  
+Mais j'ai fini par arrêter de lire les concepts et les définitions et j'ai décidé de me lancer dans la pratique.
+
+J'ai alors découvert Terraform, Ansible, GitHub Actions, AWS etc... et j'ai commencé à comprendre petit à petit que le DevOps, c'était l'aboutissement du sysadmin feignant que je suis. 😅
+
+En effet, quel sysadmin n'a jamais rêvé de scripter l'installation de son infrastructure complète, de la VM au service web en passant par le firewall et la base de données ?
+
+Et bah voilà, le DevOps c'est ça. C'est l'automatisation complète de la gestion de l'infrastructure et des applications. 
+
+VM, firewall, base de données, services web : tout peut se scripter, se versionner, se déployer. ✨
+
+Et croyez-moi, une fois qu’on a goûté à ça, revenir en arrière, c’est comme vouloir repasser aux serveurs dédiés après avoir découvert la virtualisation en 2010...  
+<br/>Tout simplement impossible. 🐱‍🏍
+
+## À suivre...
+On parlera des différents outils que j'ai utilisés et de mes aventures dans les prochains articles.  
+On en profitera pour faire une liste de livres, tutos et autres ressources qui m'ont aidé à comprendre tout ça.
+
+À bientôt pour de nouvelles aventures ! 👋
+</section>

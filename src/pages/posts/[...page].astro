@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/layout.astro';
+import PostCard from '../../components/PostCard/PostCard.astro';
+import Pagination from '../../components/Pagination/Pagination.astro';
+import BlogInfo
+ from '../../components/BlogInfo/BlogInfo.astro';
+export async function getStaticPaths({ paginate }) {
+    const PAGE_SIZE = 9;
+    const blogEntries = await getCollection('posts', ({ data }) => {
+      return import.meta.env.PROD ? data.draft !== true : true;
+});
+    //const reverseAllPosts = blogEntries.reverse();
+    
+    const reverseAllPostsByDate = blogEntries.sort((b, a) => a.data.publishedDate - b.data.publishedDate);
+
+    return paginate(reverseAllPostsByDate, {
+        pageSize: PAGE_SIZE,
+    });
+}
+// All paginated data is passed on the "page" prop
+const { page } = Astro.props;
+---
+<Layout title="Le blog de bot-35">
+  <div class="mt-32 xl:mt-44">
+    <BlogInfo/>
+    <ul class=" grid grid-cols-1 gap-8 xl:grid-cols-3">
+  {page.data.map(async (blogPostEntry) => (
+    <PostCard collection={blogPostEntry.collection} id={blogPostEntry.id} slug={blogPostEntry.slug} />
+  ))}
+    </ul>
+  </div>
+  <Pagination page={page} />
+</Layout>

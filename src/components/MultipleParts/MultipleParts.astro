@@ -1,0 +1,19 @@
+---
+import { Icon } from 'astro-icon/components'
+
+
+const { parts, title } = Astro.props;
+---
+
+<section class='w-full xl:w-1/2 flex flex-col justify-center items-center content-center mt-32 xl:mt-64'>
+    <Icon name="ph:link-fill" class='h-8 mb-4 inline' />
+    <p class ='uppercase text-lg font-medium mb-4 '>Pour continuer</p>
+        <ul class="w-fit flex flex-col gap-4 border-blog-marron-text py-4">
+        {parts.map((part : string, index : number) => (
+            <li><a class='hover-underline-animation text-blog-marron-reflet hover:text-blog-marron-text' 
+            href=`/posts/${part}`>
+                <p>{title} [PARTIE {index + 1}]</p>
+            </a></li>
+        ))}
+        </ul>
+</section>

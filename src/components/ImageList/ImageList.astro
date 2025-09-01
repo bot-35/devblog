@@ -1,0 +1,12 @@
+---
+
+const { items } = Astro.props;
+
+---
+<ul class='grid grid-cols-1 gap-8 xl:grid-cols-3'>
+{items.tags.map((item) => (
+   <li class='w-full flex flex-row justify-center     '>
+        <img src={item[0]} alt={item[1]} class='w-fit xl:h-[256px]' />
+    </li> 
+))};
+</ul>

@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import PostCard from "../../PostCard/PostCard.astro";
+
+const allPosts = await getCollection('posts', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+allPosts.sort((a, b) => a.data.publishedDate - b.data.publishedDate);
+
+let allPostsValues = Object.values(allPosts);
+allPostsValues.pop(); 
+
+
+let reverseAllPosts = allPostsValues.reverse().slice(0, 3);
+
+
+---
+
+
+<div class='flex flex-col gap-8 pb-32' transition:name=`postsbox`>
+    <ul class=" grid grid-cols-1 xl:grid-cols-3 gap-8">
+        {reverseAllPosts.map(async (blogPostEntry) => (
+            <PostCard collection={blogPostEntry.collection} id={blogPostEntry.id} slug={blogPostEntry.slug} post={blogPostEntry} />
+        ))}
+    </ul>
+    <div class='    '>
+      <a href='/posts' class='col-span-3'>
+        <button class='btn--two-colors--l-r w-full uppercase'>plus d'articles</button>
+      </a>
+    </div>
+</div>
+
+
+

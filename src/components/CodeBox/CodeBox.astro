@@ -1,0 +1,156 @@
+---
+import { Code } from 'astro:components';
+import { Icon } from 'astro-icon/components';
+
+const { code, theme = 'rose-pine', lang, header } = Astro.props;
+let Y= "";
+for (let i = 0; i < code.length; i++) {
+  let char = code[i].toLowerCase();
+  if (char >= "a" && char <= "z") {
+    Y += char;
+  }
+}
+
+
+
+---
+<astro-codebox data-code={code}>
+    <div class='relative codebox flex flex-col gap-0 m-8 shadow'>
+        <input id={Y} class='hidden' type="checkbox" />
+        <div class="flex flex-row justify-between content-end items-end ">
+            <div  class='w-fit  px-2 pt-2 rounded-t-xl bg-[#121212] font-mono text-gray-500 text-xs '>
+                <span>📝 <em>Journal de Bot-35</em> | <strong>{header}</strong></span>
+            </div>
+            {code.split('\n').length > 5 ? (
+                <div class='xl:pr-4'>
+                    <label class="inline-block h-4 w-4 relative z-10 cursor-pointer text-blog-marron-reflet  hover:text-blog-marron-shadow duration-500 transition-all" for={Y}>
+                        <Icon name="bi:window-dash" class='h-fit w-fit ' />
+                    </label>
+                    <span class="absolute block -top-6 px-4 py-1 -right-12 rounded-xl opacity-50  origin-bottom scale-y-0 w-fit h-fit duration-150 font-mono bg-blog-black text-white text-xs">Réduire la fenêtre</span>
+                </div>
+            ) : null}
+            <div class='codeboxCopyButton absolute bottom-2 right-4 ' >            
+                <button class="h-5 w-5 relative z-10 ">
+                    <Icon name="ph:copy-fill" class='h-fit w-fit text-blog-marron-reflet  hover:text-blog-marron-shadow duration-500 ' />
+                </button>
+                <div />
+                <span class="absolute block bottom-9 px-4 py-1 -right-6 rounded-xl opacity-50  origin-bottom scale-y-0 w-fit h-fit duration-150 font-mono bg-blog-black text-white text-xs">Copier</span>
+            </div>
+        </div>
+        <div class="h-0 flex flex-row justify-center opacity-0 items-center content-center bg-[#e6e6e605]">
+            <span class=' font-mono uppercase text-blog-marron-text text-xs origin-top'>
+                <Icon name="fluent:eye-hide-24-filled" class='h-12 w-fit animate-pulse' />    
+            </span>
+        </div>
+        <Code code={code} theme={theme} lang={lang}  />
+    </div>
+    
+</astro-codebox>
+
+
+<style is:global>
+  
+  /* Pour que @apply connaisse les utilitaires Tailwind v4 dans ce fichier */
+  @reference "tailwindcss/utilities.css";
+  @reference "tailwindcss/theme.css";
+@utility text-blog-marron-text {
+  color: var(--color-blog-marron-text);
+}
+
+@utility bg-blog-black {
+  background-color: var(--color-blog-black);
+}
+@utility shadow-blog-marron-text {
+  --tw-shadow-color: var(--color-blog-marron-shadow);
+  --tw-shadow: var(--tw-shadow-colored);
+  box-shadow: var(--tw-shadow);
+}
+
+@utility bg-blog-marron-fond {
+  background-color: var(--color-blog-marron-fond);
+}
+
+@utility bg-blog-marron-reflet {
+  background-color: var(--color-blog-marron-reflet);
+} 
+  .codebox > pre > code > span > span {
+    @apply text-xs xl:text-base;
+  }
+
+  .codebox > input:checked ~ :last-child  {
+    @apply hidden duration-500 transition-all;
+  }
+  .codebox > input:checked + div > .codeboxCopyButton {
+    @apply hidden duration-500 transition-all;
+  }
+  .codebox > input:checked + div + div  {
+    @apply opacity-100 h-fit py-4 duration-500 transition-all;
+  }
+  .codebox > input:checked + div > div + div > label {
+    @apply text-blog-marron-text animate-pulse; 
+  }
+
+  .codebox label:hover + span {
+    @apply scale-y-100 opacity-50;
+  }
+
+  /* ====== ex-LESS → CSS nesting ====== */
+  .codeboxCopyButton > div {
+    @apply absolute bg-gray-500 rounded-2xl opacity-40 -top-1 -left-1 h-7 w-7 z-0 duration-500 shadow shadow-blog-marron-text;
+  }
+  .codeboxCopyButton button:active {
+    @apply scale-125 duration-75;
+  }
+  .codeboxCopyButton button:hover + div {
+    @apply scale-105 bg-blog-black;
+  }
+  .codeboxCopyButton button:hover ~ span {
+    @apply scale-y-100 opacity-50;
+  }
+  .codeboxCopyButton button:active + div {
+    @apply scale-150 bg-green-400 duration-75 shadow-green-400;
+  }
+</style>
+
+<script>
+
+
+class CodeBox extends HTMLElement {
+    constructor() {
+      super();
+
+      const copyButton = this.querySelector('button');
+      const code = this.dataset.code;
+
+
+
+
+      // Each time the button is clicked, update the count.
+      copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(code).then(
+            function () {
+                document.getElementById('popup_success')?.classList.replace('hidden','flex');
+                setTimeout(function () {
+                    document.getElementById('popup_success')?.classList.replace('scale-y-0', 'scale-y-100');
+                    setTimeout(function () {
+                        document.getElementById('popup_success')?.classList.replace('scale-y-100', 'scale-y-0');
+                        setTimeout(function () {
+                        document.getElementById('popup_success')?.classList.replace('flex','hidden');
+                        }, 1000);
+                    }, 2000);
+                }, 50);
+            },
+            function () {
+            /* échec de l’écriture dans le presse-papiers */
+                console.log('po copié');
+            },
+        );
+
+      });
+    }
+  }
+
+  customElements.define('astro-codebox', CodeBox);
+
+
+</script>

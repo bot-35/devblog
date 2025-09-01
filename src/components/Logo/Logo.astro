@@ -1,0 +1,10 @@
+---
+import logo from '../../img/logo/1.png';
+import { Image } from 'astro:assets';
+---
+
+<!-- Logo du header responsive 640px = ico_min 640 < = ico_max -->
+<div id='logo'>
+        <a href="/">
+        <Image src={logo} alt="Logo site" class='xl:h-[128px] xl:w-auto  h-12 w-auto' />
+</div>

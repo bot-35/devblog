@@ -1,0 +1,193 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/layoutPosts.astro";
+import MultipleParts from "../../components/MultipleParts/MultipleParts.astro";
+import InspiredBy from "../../components/InspiredBy/InspiredBy.astro";
+
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('posts', ({ data }) => {
+      return import.meta.env.PROD ? data.draft !== true : true;
+});;
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await entry.render();
+
+let title 
+if(remarkPluginFrontmatter && remarkPluginFrontmatter.parts){
+   title = `${remarkPluginFrontmatter.title} [PARTIE  ${remarkPluginFrontmatter.part}]`;
+}
+else 
+{
+   title = remarkPluginFrontmatter.title;
+}
+---
+
+<Layout title={title}>
+  <section class="relative flex flex-row xl:gap-8 xl:pr-72 justify-end w-full"  transition:name=`postsbox`>
+    <aside         transition:name=`post ${remarkPluginFrontmatter.slug} box`
+    class="sticky top-1/3 self-start order-2 hidden xl:block basis-1/5">
+      <p class="font-bold text-xl underline uppercase mb-8">
+        Table des matières
+      </p>
+      <section class="overflow-y-scroll max-h-[50vh]  text-sm" id="tdm">
+      </section>
+      <section class='mt-12' transition:name=`post ${remarkPluginFrontmatter.slug} tag`>
+        <p class='ml-8 text-sm mb-2'>Tag(s) :</p>
+        <ul class=" flex flex-col w-fit"  >
+          {remarkPluginFrontmatter.tags.map((tag : string) => (
+              <a href=`/tags/${tag}` class="text-blog-marron-reflet transition hover:text-blog-marron-text  ml-16  font-mono hover-underline-animation">
+                 <li> <span class="text-[0.7rem] mr-1">#</span>{tag}</li>
+              </a>
+          ))}
+      </ul> 
+        </section>
+    </aside>
+    <section class="w-full xl:w-[746.66px]" id="article">
+      <h1 class="ml-4 mb-4 xl:text-5xl text-left" transition:name=`post ${remarkPluginFrontmatter.slug} title`>
+        {title}
+      </h1>
+      <section class="flex flex-row justify-center">
+        <section id="et" class="w-full mb-2 relative p-4" transition:name=`post ${remarkPluginFrontmatter.slug} desc`>
+          <section class="absolute top-0 left-0 h-full w-full -z-50 rounded">
+          </section>
+        </section>
+      </section>
+      <section
+        id="details"
+        class="w-full flex flex-row justify-between mb-4 px-4 pb-2 border-b border-blog-marron-text"
+      >
+        <time         transition:name=`post ${remarkPluginFrontmatter.slug} date`
+        datetime={entry.data.publishedDate.toISOString()}
+          >{entry.data.publishedDate.toLocaleDateString()}</time
+        >
+        <p><span class="mr-4" transition:name=`post ${remarkPluginFrontmatter.slug} mintoread`>☕</span>{remarkPluginFrontmatter.minutesRead}</p>
+      </section>
+      
+      <section class="flex flex-row justify-center w-full">
+        <img
+          src={remarkPluginFrontmatter.image}
+          class="rounded-xl max-h-[420px]  mt-4 mb-12 shadow"
+          transition:name=`post ${remarkPluginFrontmatter.slug} image`
+        />
+      </section>
+      <Content />
+    </section>
+  </section>
+  {remarkPluginFrontmatter && remarkPluginFrontmatter.parts && (
+    <MultipleParts title={remarkPluginFrontmatter.title} parts={remarkPluginFrontmatter.parts}/>
+  )}
+
+  {remarkPluginFrontmatter && remarkPluginFrontmatter.base && (
+   <InspiredBy data={remarkPluginFrontmatter.base}/>
+  )}
+
+<div id="popup_success" class='fixed hidden scale-y-0 duration-1000  origin-bottom z-50   flex-row items-center justify-center content-center bottom-10 left-0 w-screen h-24'>
+  <div class='relative shadow backdrop-blur backdrop-saturate-150 w-72 h-24 flex flex-row items-center justify-center content-center'>
+    <span class='text-white text-xl font-semibold z-50'>
+     Copié
+    </span>
+    <div class='w-full h-full  absolute top-0 left-0 z-40 bg-green-500 opacity-10 rounded' />
+</div>
+
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const toc = document.querySelector(".toc");
+    const tdm = document.getElementById("tdm");
+    if (tdm) {
+      tdm.appendChild(toc);
+    }
+    const entete = document.getElementById("entete");
+    const et = document.getElementById("et");
+    if (entete) {
+      et.appendChild(entete);
+    }
+  });
+</script>
+
+<style is:global>
+  /* Pour que @apply voie les utilitaires + tes tokens (ajuste le chemin) */
+  @reference "tailwindcss/utilities.css";
+  @reference "tailwindcss/theme.css";
+  @reference "../../styles/main.css";
+  
+
+  .toc li { @apply relative pl-4 font-jost  ; }
+  .toc > ol > li {
+    @apply mb-5;
+  }
+
+  .toc > ol > li > ol > li{
+    @apply my-3;
+  }
+  .toc-link { color: rgb(225, 201, 167); }
+  .toc-link:hover { color: rgb(185, 126, 39); }
+
+  .toc-link-h2 { @apply hover:pl-0.5 transition-all text-blog-marron-fond uppercase; }
+
+
+  .toc-link-h3 { @apply text-base hover:pl-1 transition-all text-blog-marron-reflet capitalize; }
+
+
+  #article { @apply px-3 xl:px-0; }
+
+  #article blockquote { @apply leading-relaxed; }
+  #article p { @apply tracking-widest leading-relaxed xl:text-base text-gray-50 mx-6; }
+
+  #article h2, #article h3, #article h4, #article h5, #article h6 { @apply relative; }
+  #article h2 { @apply tracking-widest leading-relaxed ml-2 xl:text-5xl; }
+  #article h3 { @apply tracking-widest leading-relaxed ml-4 xl:text-2xl font-jost font-bold; }
+  #article h4 { @apply tracking-widest leading-relaxed ml-4 xl:text-lg font-jost font-semibold; }
+  #article h5 { @apply tracking-widest leading-relaxed ml-5 xl:text-base font-jost font-medium; }
+  #article h6 { @apply tracking-widest leading-relaxed ml-6 xl:text-base font-jost; }
+
+  #article p + p { @apply mt-4; }
+  #article * + h2 { @apply mt-24 xl:mt-32; }
+  #article * + h3 { @apply mt-12 xl:mt-16; }
+  #article * + h4 { @apply mt-12 xl:mt-12; }
+  #article * + h5 { @apply mt-6  xl:mt-14; }
+  #article * + h6 { @apply mt-3  xl:mt-12; }
+
+  #article p + .postimagebox,
+  #article .postimagebox + p { @apply mt-4 xl:mt-6; }
+
+  #article h1 + * { @apply mt-2 xl:mt-12; }
+  #article h2 + * { @apply mt-2 xl:mt-12; }
+  #article h3 + * { @apply mt-2 xl:mt-4; }
+  #article h4 + * { @apply mt-2 xl:mt-4; }
+  #article h5 + * { @apply mt-2 xl:mt-4; }
+  #article h6 + * { @apply mt-2 xl:mt-4; }
+
+  #article h2 + h3,
+  #article h2 + h4,
+  #article h2 + h5 { @apply mt-2 xl:mt-6; }
+
+  #article h2:first-of-type::before { @apply hidden; }
+
+  #article a { @apply text-blog-marron-text; }
+
+  #article ul { @apply my-8; }
+  #article ul li {
+    @apply ml-8 mb-8 text-gray-50 tracking-widest relative;
+  }
+  #article ul li::before {
+    content: "";
+    @apply absolute h-1 w-1 top-3 -left-4 bg-red-500 bg-gradient-to-tl from-blog-marron-fond via-gray-50 to-blog-marron-text rounded-full;
+  }
+  #article ul li img { @apply w-1/4; }
+
+  #article #et p {
+    @apply tracking-wider text-blog-marron-fond italic text-base text-left leading-loose;
+  }
+
+  /* ⚠️ Si tu n’as pas défini --color-blog-marron-shadow dans @theme,
+     remplace la ligne suivante par `text-blog-marron-text`. */
+  #article #details p { @apply text-blog-marron-text; }
+</style>

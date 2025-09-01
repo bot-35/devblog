@@ -1,0 +1,29 @@
+---
+const items = {
+                hébergeur: ['Vercel','https://vercel.com//'],
+                'stylisé par': ['Tailwindcss 4.1.12','https://tailwindcss.com/'],
+                'propulsé par': ['Astro 5.13.2', 'https://astro.build/'],
+                'tooltipisé par': ['Tippy.js 6.3.7', 'https://atomiks.github.io/tippyjs/'],
+
+                }
+const sections = Object.getOwnPropertyNames(items);
+
+---
+
+ 
+        <div class='relative flex flex-col gap-2     '>
+            <div class='flex flex-row  rounded-sm p-2 xl:p-4 bg-gradient-to-r z-10 from-blog-marron-fond via-blog-marron-shadow to-blog-marron-reflet uppercase      '>
+
+            <p class='text-blog-black uppercase text-xl font-medium'>
+                Pour les geeks </p></div>
+            {sections.map((section) => (
+  <a href={items[section][1]} 
+   class="group flex flex-row justify-between z-10 p-2 xl:p-2 rounded-sm 
+          bg-gradient-to-r from-[#1a1a1a]/80 to-[#010101]/60 
+          border border-[#e6a54a]/40 
+          hover:from-[#2a1d0d] hover:to-[#3a2c1d] cursor-pointer hover:shadow-[0_0_10px_#e6a54a40]">
+    <p class="uppercase z-10 tracking-widest xl:tracking-[9px]">{section}</p>
+    <p class="uppercase z-10 text-[#f5f5f5] tracking-widest  group-hover:text-[#e6a54a] ">{items[section][0]}</p>
+</a>
+                ))}  
+        </div>

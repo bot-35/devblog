@@ -1,0 +1,26 @@
+---
+
+---
+
+<astro-modal  id="modal"  class=" fixed h-full w-full top-0 left-0  hidden flex-row justify-center content-center items-center  z-50">
+    <div class=" absolute h-full w-full backdrop-grayscale backdrop-brightness-50"/>
+    <div id='modal--img' class="z-50 w-10/12 flex flex-row  justify-center content-center items-center"/>
+</astro-modal>
+
+
+<script>
+    class AstroModal extends HTMLElement {
+      constructor() {
+        super();
+        const modal = document.getElementById('modal');
+
+        modal.addEventListener('click', event => {
+            modal.classList.remove("flex");
+            modal.classList.add("hidden");   
+            
+        })
+      }
+    }
+  
+    customElements.define('astro-modal', AstroModal);
+  </script>

@@ -1,0 +1,11 @@
+---
+const { color } = Astro.props;
+---
+
+<span class="bg-[#121212] p-1">{color}</span>
+
+<style define:vars={{ color }}>
+    span {
+        color: var(--color);
+    }
+</style>

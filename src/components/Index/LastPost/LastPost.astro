@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import {convertDate} from '../../../functions/convertDate.js';
+import {cutStr} from '../../../functions/cutStr.js';
+const allPosts = await getCollection('posts', ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+allPosts.sort((a, b) => a.data.publishedDate - b.data.publishedDate);
+
+
+const lastPost = await allPosts[allPosts.length - 1].render();
+const slug = await allPosts[allPosts.length - 1].slug;
+const date = new Date(lastPost.remarkPluginFrontmatter.publishedDate);
+const day = convertDate(date).daymonth;
+const month = convertDate(date).month.substring(0,3) + '.';
+const year = convertDate(date).year;
+const lastPostTitle = lastPost.remarkPluginFrontmatter.title;
+const desc = cutStr(lastPost.remarkPluginFrontmatter.description, 1000);
+const img = lastPost.remarkPluginFrontmatter.image;
+const bgIMG = `url("${img}")`;
+
+let title 
+if(lastPost.remarkPluginFrontmatter && lastPost.remarkPluginFrontmatter.parts){
+   title = `${lastPost.remarkPluginFrontmatter.title} [PARTIE  ${lastPost.remarkPluginFrontmatter.part}]`;
+}
+else 
+{
+   title = lastPost.remarkPluginFrontmatter.title;
+}
+
+
+
+
+---
+
+
+<div id='LastPost'  class="flex flex-col relative xl:flex-row  mt-32  xl:mt-64 shadow-2xl shadow-[#dba55e1e] xl:rounded-l-2xl xl:rounded-r-lg backdrop-contrast-125">
+    <div class="bg-blog-black absolute top-0 left-0 h-full w-full opacity-30  -z-50 bg-gradient-to-b from-zinc-900 via-zinc-800 to-blog-black  xl:rounded-l-2xl  "/>
+
+    <div class='sm:basis-2/3 p-8 h-full sm:px-16 flex flex-col items-start justify-center gap-4 relative'>
+        <h1 class='text-2xl sm:text-5xl' transition:name=`post ${slug} title`>{title}</h1>
+        <div class="flex flex-col gap-4">
+            <p transition:name=`post ${slug} desc`>{desc}</p>
+            <p transition:name=`post ${slug} mintoread`>☕ {lastPost.remarkPluginFrontmatter.minutesRead}</p>
+        </div>
+        <div class='flex xl:flex-row flex-col gap-8 xl:gap-0 justify-between xl:items-end items-center w-full'>
+            <a href={"/posts/" + slug} class='w-full xl:w-6/12 ' transition:name=`post ${slug} box`>
+                <button class='w-full xl:w-full btn--two-colors--bl-tr'>
+                    Lire l'article
+                </button>
+            </a>
+            <div class='relative flex xl:flex-row flex-col bg-transparent gap-4 xl:gap-16 xl:items-end items-center  ' transition:name=`post ${slug} tag`>
+                <p class='text-sm z-10'>Tag(s) :</p>
+                <ul class=" xl:flex xl:flex-col xl:justify-left flex-wrap justify-end  xl:gap-4 pl-4 xl:pl-0 h-32"  >
+                    {lastPost.remarkPluginFrontmatter.tags.map((tag : string) => (
+                        <a href=`/tags/${tag}` class="mr-4 xl:mr-0 z-10">
+                            <li class="text-blog-marron-reflet transition hover:text-blog-marron-text  font-mono hover-underline-animation "><span class="text-[0.7rem] mr-1">#</span>{tag}</li>
+                        </a>
+                    ))}
+                </ul> 
+            </div>
+        </div>
+
+    </div>
+ <div class="xl:rounded-r-lg  xl:basis-1/3 order-first xl:order-last overflow-hidden">
+  <img transition:name={`post ${slug} image`} 
+       class="xl:h-full h-64 w-full object-cover object-center xl:rounded-r-lg " 
+       src={img}  
+       alt="Image en rapport avec la news." />
+</div>
+        <div         transition:name=`post ${slug} date`
+        class="text-blog-black font-semibold font-mono absolute top-8 right-0 z-50  xl:-right-16   xl:text-2xl">
+            <p class='inline-block bg-blog-marron-fond px-1 rounded-bl-3xl rounded-tl-2xl pl-4'>{day} {month} {year}</p>
+        </div>
+    </div>
+</div>
+
+

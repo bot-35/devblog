@@ -1,0 +1,23 @@
+---
+import { ClientRouter  } from 'astro:transitions';
+const { title, description } = Astro.props;
+
+/*IMPORT CSS*/
+//import '../../styles/reset.less';
+import '../../styles/main.css';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+---
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="https://devblog-bot-35.vercel.app/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="canonical" href={canonicalURL} />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+<meta name="title" content={title} />
+
+<ClientRouter   />
+
+<meta name="description" content={description} />

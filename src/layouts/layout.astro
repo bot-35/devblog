@@ -1,0 +1,71 @@
+---
+/** Import */
+import { Breadcrumbs } from "astro-breadcrumbs";
+
+/** Import des entêtes HTML */
+import Head from "../components/Head/Head.astro";
+
+/** Import du contenu fixe du body (Header et Footer ainsi que les <symbol> svg ) */
+import Header from "../components/Header/Header.astro";
+import Footer from "../components/Footer/Footer.astro";
+import SVG from "../components/SVG/SVG.astro";
+import SVGMarron from "../components/SVG/SVGMarron.astro";
+
+import bg from "../img/photo-bg/bourdon1.png";
+
+/** Initialisation du titre de la page*/
+const { title } = Astro.props;
+
+const description =
+	"Le journal de bot-35 sur son aventure vers le monde du DevOps !";
+---
+
+<html lang="fr" class="scroll-smooth">
+	<head>
+		<Head title={title} description={description} />
+	</head>
+	<body class="antialiased">
+		<SVG />
+		<SVGMarron />
+		<Header />
+
+		<div class="w-full overflow-hidden">
+			<!--<div
+				class="fixed top-0 left-0 w-full h-full bg-fixed bg-cover -z-50 opacity-20"
+				style=`background-image: url("${bg.src}");`
+			>
+			</div>-->
+			<div
+				class="fixed top-0 left-0 w-full h-full bg-fixed bg-cover -z-50 opacity-20"
+			>
+			</div>
+
+			<section
+				class="flex flex-col w-full xl:w-10/12 xl:mx-[9%] xl:pt-0 gap-16"
+			>
+				<slot />
+			</section>
+			<section
+				class="flex flex-col xl:flex-row gap-8 w-full content-center justify-center items-center capitalize my-8"
+			>
+				<p class="font-semibold text-xs">Fil d'Ariane 💃</p>
+				<Breadcrumbs indexText="Index" />
+			</section>
+		</div>
+		<Footer />
+	</body></html>
+
+	<style is:global>
+		@reference "tailwindcss/utilities.css";
+		@reference "tailwindcss/theme.css";
+		.c-breadcrumbs__crumbs {
+			@apply flex flex-row gap-1;
+		}
+		.c-breadcrumbs__crumb {
+			@apply before:content-['→'];
+		}
+		.c-breadcrumbs__crumb:first-of-type {
+			@apply before:content-[''];
+		}
+	</style>
+</html>
