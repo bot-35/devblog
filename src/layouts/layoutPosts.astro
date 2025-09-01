@@ -1,6 +1,7 @@
 ---
 /** Import */
 import { Breadcrumbs } from "astro-breadcrumbs";
+import  SpeedInsights  from "@vercel/speed-insights/astro"
 
 /** Import des entêtes HTML */
 import Head from "../components/Head/Head.astro";
@@ -39,6 +40,7 @@ const description = "Le journal de bot-35 sur son aventure vers le monde du DevO
 			<slot/>
 			<section class='     flex  flex-col xl:flex-row gap-8 w-full content-center justify-center items-center capitalize mt-64  my-8 '>
 				<p class='font-semibold text-xs'>Fil d'Ariane 💃</p>
+				<SpeedInsights/>
 				<Breadcrumbs  indexText="Index"/>
 			</section>
 		</div>
