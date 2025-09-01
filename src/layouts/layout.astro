@@ -11,6 +11,7 @@ import Footer from "../components/Footer/Footer.astro";
 import SVG from "../components/SVG/SVG.astro";
 import SVGMarron from "../components/SVG/SVGMarron.astro";
 import  SpeedInsights  from "@vercel/speed-insights/astro"
+import Analytics from '@vercel/analytics/astro'
 
 import bg from "../img/photo-bg/bourdon1.png";
 
@@ -51,6 +52,7 @@ const description =
 			>
 				<p class="font-semibold text-xs">Fil d'Ariane 💃</p>
 				<SpeedInsights/>
+				<Analytics/>
 				<Breadcrumbs indexText="Index" />
 			</section>
 		</div>
