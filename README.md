@@ -1,47 +1,74 @@
-# Astro Starter Kit: Minimal
+# 🤖 Bot35 Devblog
 
-```
-npm create astro@latest -- --template minimal
-```
+<p align="center">
+    <img src="public/img/github/bot-35-profil.png" width="200">
+</p>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+<p align="center">
+  <a href="https://bot-35.github.io/devblog/"><img src="https://img.shields.io/badge/Visiter%20le%20site-000000?style=for-the-badge&logo=astro&logoColor=white"></a>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/github/actions/workflow/status/bot-35/devblog/deploy.yml?style=for-the-badge&label=Build">
+</p>
+<p align="center">
+  <!-- Badge licence MIT -->
+  <a href="LICENSE">
+    <img src="https://img.shields.io/github/license/bot-35/devblog?style=for-the-badge">
+  </a>
+  <!-- Badge licence contenu -->
+  <a href="LICENSE-content">
+    <img src="https://img.shields.io/badge/Licence%20contenu-CC%20BY--NC%204.0-blue?style=for-the-badge">
+  </a>
+</p>
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-## 🚀 Project Structure
+## 📖 À propos
 
-Inside of your Astro project, you'll see the following folders and files:
+Bienvenue dans mon journal (presque) intime… mais **100% public** 🤖  
+Ici, je raconte mes victoires, mes galères et mes découvertes sur la route du **DevOps**.
 
-```
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+---
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🛠 Structure du projet
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Mon compagnon de voyage : [Astro](https://astro.build).  
+Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
 
-Any static assets, like images, can be placed in the `public/` directory.
+---
 
-## 🧞 Commands
+## 📰 Derniers articles
+- [🐱‍🏍 Carnet d'aventure DevOps ] #1 => Qu'est-ce que ce truc ?!
+---
 
-All commands are run from the root of the project, from a terminal:
+## 👀 Envie d’en savoir plus ?
+- 📚 [Lire la documentation Astro](https://docs.astro.build)
+- 💬 [Rejoindre le Discord Astro](https://astro.build/chat)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## 👾📊 Statistiques 
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+<p align="center">
+  <img 
+    src="https://github-readme-stats.vercel.app/api?username=bot-35&show_icons=true&theme=calm_pink&hide_title=true&rank_icon=github" 
+    alt="Statistiques GitHub de bot-35" 
+    height="150"
+  />
+  &nbsp;&nbsp;
+  <img 
+    src="https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=calm_pink&hide_title=true" 
+    alt="Langages les plus utilisés" 
+    height="150"
+  />
+</p>
+
+
+---
+
+
+
+
+
+Fait avec ❤️, un soupçon de ☕, beaucoup de curiosité et un bon fond musical 👨🏼‍🎤 !
