@@ -55,7 +55,7 @@ export default defineConfig({
         'blockquote': ''
       }]]
     },
-    site: 'https://bot-35.github.io/devblog/',
+    site: 'https://devblog-bot-35.vercel.app/devblog/',
     integrations: [
       mdx({
       shikiConfig: { 
@@ -80,7 +80,7 @@ export default defineConfig({
     }), sitemap({
       filter: page => {
       let include = true
-      let slug = page.split('https://bot-35.github.io/devblog/posts/').pop().slice(0, -1);
+      let slug = page.split('https://devblog-bot-35.vercel.app/devblog/posts/').pop().slice(0, -1);
     
       const isDraftBlogPostPage = Boolean(blogDrafts.find(fileName => fileName.split('.mdx')[0] === slug));
       
