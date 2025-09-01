@@ -72,4 +72,3 @@ Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
 
 
 Fait avec ❤️, un soupçon de ☕, beaucoup de curiosité et un bon fond musical 👨🏼‍🎤 !
->>>>>>> refonte-total
