@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# devblog
-Mon journal (presque) intime… mais **100% public** 🤖 
-=======
 # 🤖 Bot35 Devblog
 
 <p align="center">
