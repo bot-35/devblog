@@ -8,7 +8,15 @@
   <a href="https://bot-35.github.io/devblog/"><img src="https://img.shields.io/badge/Visiter%20le%20site-000000?style=for-the-badge&logo=astro&logoColor=white"></a>
 </p>
 <p align="center">
-  ![vercel deploy](https://img.shields.io/github/deployments/bot-35/devblog/Production?label=vercel&logo=vercel)
+  <a href="https://devblog-bot-35.vercel.app/">
+    <img src="https://img.shields.io/github/deployments/bot-35/devblog/Production?label=vercel&logo=vercel&style=for-the-badge" alt="vercel deploy">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://devblog-bot-35.vercel.app/">
+    <img src="https://img.shields.io/website?url=https%3A%2F%2Fton-site.vercel.app%2F&label=site&up_message=online&down_message=offline&style=for-the-badge" alt="site status">
+  </a>
 </p>
 <p align="center">
   <!-- Badge licence MIT -->
