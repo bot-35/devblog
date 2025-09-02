@@ -57,20 +57,6 @@ Rapide, flexible, bref, parfait pour un blog.
 
 ## 👾📊 Statistiques 
 
-
-<p align="center">
-  <img 
-    src="https://github-readme-stats.vercel.app/api?username=bot-35&show_icons=true&theme=calm_pink&hide_title=true&rank_icon=github" 
-    alt="Statistiques GitHub de bot-35" 
-    height="150"
-  />
-  &nbsp;&nbsp;
-  <img 
-    src="https://github-readme-stats.vercel.app/api/top-langs/?username=bot-35&layout=compact&theme=calm_pink&hide_title=true" 
-    alt="Langages les plus utilisés" 
-    height="150"
-  />
-</p>
 <p align="center">
   <img src="https://img.shields.io/github/last-commit/bot-35/devblog?style=for-the-badge&logo=github" alt="Dernier commit">
   <img src="https://img.shields.io/github/languages/top/bot-35/devblog?style=for-the-badge" alt="Langage principal">
