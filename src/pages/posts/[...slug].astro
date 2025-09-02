@@ -49,20 +49,13 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
               </a>
           ))}
       </ul> 
-        </section>
-    </aside>
-    <section class="w-full xl:w-[746.66px]" id="article">
-      <h1 class="ml-4 mb-4 xl:text-5xl text-left" transition:name=`post ${remarkPluginFrontmatter.slug} title`>
-        {title}
-      </h1>
-      
-      {ghUrl && (
+       {ghUrl && (
           <a
             href={ghUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Voir le fichier source sur GitHub"
-            class="inline-flex items-center gap-2 rounded-xl px-3 py-2 border border-zinc-700 hover:bg-zinc-800 transition"
+            class="inline-flex items-center gap-2 px-3 py-2  hover:bg-zinc-800 transition"
             title="Voir le MDX sur GitHub"
           >
             <!-- Icône GitHub minimaliste en inline -->
@@ -72,7 +65,12 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
             <span class="sr-only">Source GitHub</span>
           </a>
         )}
-
+        </section>
+    </aside>
+    <section class="w-full xl:w-[746.66px]" id="article">
+      <h1 class="ml-4 mb-4 xl:text-5xl text-left" transition:name=`post ${remarkPluginFrontmatter.slug} title`>
+        {title}
+      </h1>
 
       <section class="flex flex-row justify-center">
         <section id="et" class="w-full mb-2 relative p-4" transition:name=`post ${remarkPluginFrontmatter.slug} desc`>
