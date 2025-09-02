@@ -33,7 +33,7 @@ Ici, je raconte mes victoires, mes galères et mes découvertes sur la route du 
 ## 🛠 Structure du projet
 
 Mon compagnon de voyage : [Astro](https://astro.build).  
-Rapide, flexible, et parfait pour un blog qui respire la modernité 🚀
+Rapide, flexible, bref, parfait pour un blog.
 
 ---
 
