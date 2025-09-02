@@ -15,7 +15,7 @@
 
 <p align="center">
   <a href="https://devblog-bot-35.vercel.app/">
-    <img src="https://img.shields.io/website?url=https%3A%2F%2Fton-site.vercel.app%2F&label=site&up_message=online&down_message=offline&style=for-the-badge" alt="site status">
+    <img src="https://img.shields.io/website?url=https%3A%2F%2Fdevblog-bot-35.vercel.app%2F&label=site&up_message=online&down_message=offline&style=for-the-badge" alt="site status">
   </a>
 </p>
 <p align="center">
