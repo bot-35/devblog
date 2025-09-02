@@ -18,4 +18,4 @@ export function remarkReadingTime() {
     data.astro.frontmatter.minutesRead = minutesReadFr; // "3 min de lecture"
     data.astro.frontmatter.minutes = minutesRounded;    // 3
     data.astro.frontmatter.nbWords = stats.words;       // 640
-  };
+  }};
