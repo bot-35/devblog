@@ -51,14 +51,7 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
           ))}
       </ul> 
 
-       {ghUrl && (
-          <a href={ghUrl} target="_blank" rel="noopener noreferrer" aria-label="Voir le fichier source sur GitHub"
-            class="inline-flex items-center gap-2 px-3 py-10  transition" title="Voir le MDX sur GitHub"
-          >
-            <Icon name="lucide:github" class='h-6 cursor'/>            
-            <span class="sr-only">Source GitHub</span>
-          </a>
-        )}
+
 
         </section>
     </aside>
@@ -92,6 +85,17 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
         />
       </section>
       <Content />
+    </section>
+    <section>
+          {ghUrl && (
+          <a href={ghUrl} target="_blank" rel="noopener noreferrer" aria-label="Voir le fichier source sur GitHub"
+            class="inline-flex items-center gap-2 px-3 py-10  transition" title="Voir le MDX sur GitHub"
+          >
+            <span>MDX du post sur </span>
+            <Icon name="lucide:github" class='h-6 cursor'/>            
+            <span class="sr-only">Source GitHub</span>
+          </a>
+        )}
     </section>
   </section>
   {remarkPluginFrontmatter && remarkPluginFrontmatter.parts && (
