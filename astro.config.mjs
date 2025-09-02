@@ -7,7 +7,9 @@ import { listDraftBlogPosts } from "/src/scripts/listDraftPostsBlog";
 
 const blogDrafts = await listDraftBlogPosts();
 
-import { remarkReadingTime } from './remark-reading-time.mjs';
+import { remarkGitHubLink } from './src/plugins/remark-github-link.mjs';
+import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs';
+
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeToc from '@jsdevtools/rehype-toc';
@@ -61,7 +63,9 @@ export default defineConfig({
       shikiConfig: { 
         wrap: true,
       },
-      remarkPlugins: [remarkReadingTime],
+      remarkPlugins: 
+      [[remarkReadingTime],       
+      [remarkGitHubLink, {}],],
       rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, {
         behavior: 'append'
       }], [rehypeToc, {
