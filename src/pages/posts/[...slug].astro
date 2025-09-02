@@ -87,10 +87,9 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
       <Content />
               {ghUrl && (
           <a href={ghUrl} target="_blank" rel="noopener noreferrer" aria-label="Voir le fichier source sur GitHub"
-            class="inline-flex items-center gap-2 px-3 py-10  transition" title="Voir le MDX sur GitHub"
+            class="" title="Voir le MDX sur GitHub"
           >
-            <span>MDX du post sur </span>
-            <Icon name="lucide:github" class='h-6 cursor'/>            
+            <Icon name="vscode-icons:file-type-mdxlint" class='h-6 cursor'/>            
             <span class="sr-only">Source GitHub</span>
           </a>
         )}
