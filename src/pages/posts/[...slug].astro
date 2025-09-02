@@ -89,8 +89,12 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
           <a href={ghUrl} target="_blank" rel="noopener noreferrer" aria-label="Voir le fichier source sur GitHub"
             class="" title="Voir le MDX sur GitHub"
           >
-            <Icon name="vscode-icons:file-type-mdxlint" class='h-6 cursor'/>            
-            <span class="sr-only">Source GitHub</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <rect width="28" height="11.4" x="2" y="10.3" fill="#f9ac00" rx=".923" />
+            <path fill="none" stroke="#000" stroke-width="1.23" d="m27 18.6l-6-6m.051 6l6-6zm-15.8.564v-5.13l2.82 2.82l2.87-2.87v5.13m5.38-.769v-6zm-2.77-2.62l2.77 2.77l2.77-2.77" />
+            <path fill="none" stroke="#d00" stroke-width="0.41" d="m4.31 19.8l.615.615l.615-.615l.615.615l.615-.615l.615.615L8 19.8l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615" />
+          </svg>            
+          <span class="sr-only">Source GitHub</span>
           </a>
         )}
     </section>
