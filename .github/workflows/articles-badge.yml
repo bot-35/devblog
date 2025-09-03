@@ -111,8 +111,8 @@ jobs:
           EOF
           }
 
-          mkbadge "Nombre de post sur le blog : " "${{ steps.count.outputs.published }}" "articles-badge.svg"
-          mkbadge "Nombre de mots dans ces posts :" "${{ steps.words.outputs.words_published }}" "words-badge.svg"
+          mkbadge "Nb de posts " "${{ steps.count.outputs.published }}" "articles-badge.svg"
+          mkbadge "Nb de mots " "${{ steps.words.outputs.words_published }}" "words-badge.svg"
 
 
 
