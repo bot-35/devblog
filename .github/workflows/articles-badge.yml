@@ -54,27 +54,19 @@ jobs:
           words_total=0
           words_published=0
 
-          # Parcourt tous les .md/.mdx
           while IFS= read -r -d '' f; do
-            # 1) Retire le front-matter YAML (--- ... ---) s'il est en tête
-            # 2) Retire les blocs de code délimités par ``` ou ~~~ (lignes entières)
-            # 3) Nettoie le markdown/HTML visible pour ne garder que le texte
+            # 1) Enlève le front-matter YAML (--- ... --- en tête)
+            # 2) Enlève les blocs de code ```...``` ou ~~~...~~~
+            # 3) Nettoie le markdown/HTML pour ne garder que le texte
             text="$(
               awk 'NR==1 && /^---$/ {inmeta=1; next} inmeta && /^---$/ {inmeta=0; next} !inmeta {print}' "$f" \
-              | awk 'BEGIN{code=0} /^```/ || /^~~~/ {code = !code; next} !code {print}' \
-              | sed -E \
-                  -e 's/`{1,3}[^`]*`{1,3}//g' \                # inline code
-                  -e 's/!\[[^]]*\]\([^)]*\)//g' \              # images
-                  -e 's/\[([^]]+)\]\([^)]*\)/\1/g' \           # liens -> garde le texte
-                  -e 's/<[^>]+>//g' \                          # balises HTML
-                  -e 's/[#*_>~`{}[\]()>+=-]+/ /g'              # ponctuation markdown
+              | awk 'BEGIN{code=0} /^```/ || /^~~~/ {code=!code; next} !code {print}' \
+              | sed -E -e 's/`{1,3}[^`]*`{1,3}//g' -e 's/!\[[^]]*\]\([^)]*\)//g' -e 's/\[([^]]+)\]\([^)]*\)/\1/g' -e 's/<[^>]+>//g' -e 's/[#*_>~`{}[\]()>+=-]+/ /g'
             )"
 
-            # Compte des mots (séparés par espace)
             count=$(printf "%s" "$text" | wc -w | tr -d ' ')
             words_total=$((words_total + count))
 
-            # Si ce n'est PAS un draft, ajoute au total publié
             if ! grep -Eq '^[[:space:]]*draft:[[:space:]]*true' "$f"; then
               words_published=$((words_published + count))
             fi
@@ -84,6 +76,7 @@ jobs:
             echo "words_total=$words_total"
             echo "words_published=$words_published"
           } >> "$GITHUB_OUTPUT"
+
 
       - name: Générer les badges SVG (style shield-like)
         shell: bash
