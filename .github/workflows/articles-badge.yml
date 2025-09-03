@@ -26,7 +26,27 @@ jobs:
       - name: Compter les articles (.md/.mdx)
         id: count
         shell: bash
+        run: |
+          set -euo pipefail
+          POSTS_DIR="src/content/posts"
+
+          # Compter les fichiers .md et .mdx
+          total=$(find "$POSTS_DIR" -type f \( -name '*.md' -o -name '*.mdx' \) | wc -l || true)
+
+          # Publiés = fichiers qui ne contiennent PAS "draft: true" (tolère espaces)
+          published=0
+          while IFS= read -r -d '' f; do
+            if ! grep -Eq '^[[:space:]]*draft:[[:space:]]*true' "$f"; then
+              published=$((published + 1))
+            fi
+          done < <(find "$POSTS_DIR" -type f \( -name '*.md' -o -name '*.mdx' \) -print0)
+
+          echo "total=$total" >> "$GITHUB_OUTPUT"
+          echo "published=$published" >> "$GITHUB_OUTPUT"
+
       - name: Générer les badges SVG (style shield-like)
+        shell: bash
+              - name: Générer les badges SVG (style shield-like)
         shell: bash
         run: |
           set -euo pipefail
