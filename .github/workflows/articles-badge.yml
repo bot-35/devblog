@@ -46,8 +46,6 @@ jobs:
 
       - name: Générer les badges SVG (style shield-like)
         shell: bash
-              - name: Générer les badges SVG (style shield-like)
-        shell: bash
         run: |
           set -euo pipefail
 
