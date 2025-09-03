@@ -44,6 +44,47 @@ jobs:
           echo "total=$total" >> "$GITHUB_OUTPUT"
           echo "published=$published" >> "$GITHUB_OUTPUT"
 
+      - name: Compter les mots (approx)
+        id: words
+        shell: bash
+        run: |
+          set -euo pipefail
+          POSTS_DIR="src/content/posts"
+
+          words_total=0
+          words_published=0
+
+          # Parcourt tous les .md/.mdx
+          while IFS= read -r -d '' f; do
+            # 1) Retire le front-matter YAML (--- ... ---) s'il est en tête
+            # 2) Retire les blocs de code délimités par ``` ou ~~~ (lignes entières)
+            # 3) Nettoie le markdown/HTML visible pour ne garder que le texte
+            text="$(
+              awk 'NR==1 && /^---$/ {inmeta=1; next} inmeta && /^---$/ {inmeta=0; next} !inmeta {print}' "$f" \
+              | awk 'BEGIN{code=0} /^```/ || /^~~~/ {code = !code; next} !code {print}' \
+              | sed -E \
+                  -e 's/`{1,3}[^`]*`{1,3}//g' \                # inline code
+                  -e 's/!\[[^]]*\]\([^)]*\)//g' \              # images
+                  -e 's/\[([^]]+)\]\([^)]*\)/\1/g' \           # liens -> garde le texte
+                  -e 's/<[^>]+>//g' \                          # balises HTML
+                  -e 's/[#*_>~`{}[\]()>+=-]+/ /g'              # ponctuation markdown
+            )"
+
+            # Compte des mots (séparés par espace)
+            count=$(printf "%s" "$text" | wc -w | tr -d ' ')
+            words_total=$((words_total + count))
+
+            # Si ce n'est PAS un draft, ajoute au total publié
+            if ! grep -Eq '^[[:space:]]*draft:[[:space:]]*true' "$f"; then
+              words_published=$((words_published + count))
+            fi
+          done < <(find "$POSTS_DIR" -type f \( -name '*.md' -o -name '*.mdx' \) -print0)
+
+          {
+            echo "words_total=$words_total"
+            echo "words_published=$words_published"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Générer les badges SVG (style shield-like)
         shell: bash
         run: |
@@ -79,6 +120,10 @@ jobs:
 
           mkbadge "articles publiés" "${{ steps.count.outputs.published }}" "articles-badge.svg"
           mkbadge "articles total"   "${{ steps.count.outputs.total }}"     "articles-total-badge.svg"
+          mkbadge "mots publiés" "${{ steps.words.outputs.words_published }}" "words-badge.svg"
+          mkbadge "mots total"   "${{ steps.words.outputs.words_total }}"     "words-total-badge.svg"
+
+
 
 
       - name: Commit et push des badges
@@ -87,7 +132,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add articles-badge.svg articles-total-badge.svg || true
+          git add articles-badge.svg articles-total-badge.svg words-badge.svg words-total-badge.svg || true
           if ! git diff --cached --quiet; then
             git commit -m "chore(badge): update articles count [skip ci]"
             git push
