@@ -57,27 +57,27 @@ jobs:
             width=$(( labw + valw ))
 
             cat > "$file" <<EOF
-            <svg xmlns="http://www.w3.org/2000/svg" width="$width" height="20" role="img" aria-label="$label: $value">
-            <linearGradient id="s" x2="0" y2="100%">
-            <stop offset="0" stop-color="#fff" stop-opacity=".7"/>
-            <stop offset=".1" stop-opacity=".1"/>
-            <stop offset=".9" stop-opacity=".3"/>
-            <stop offset="1" stop-opacity=".5"/>
-            </linearGradient>
-            <mask id="m"><rect width="$width" height="20" rx="3" fill="#fff"/></mask>
-            <g mask="url(#m)">
-            <rect width="$labw" height="20" fill="#555"/>
-            <rect x="$labw" width="$valw" height="20" fill="#4c1"/>
-            <rect width="$width" height="20" fill="url(#s)"/>
-            </g>
-            <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-            <text x="$((labw/2))" y="14">$label</text>
-            <text x="$((labw + valw/2))" y="14">$value</text>
-            </g>
-            </svg>
-            EOF
+<svg xmlns="http://www.w3.org/2000/svg" width="$width" height="20" role="img" aria-label="$label: $value">
+  <linearGradient id="s" x2="0" y2="100%">
+    <stop offset="0" stop-color="#fff" stop-opacity=".7"/>
+    <stop offset=".1" stop-opacity=".1"/>
+    <stop offset=".9" stop-opacity=".3"/>
+    <stop offset="1" stop-opacity=".5"/>
+  </linearGradient>
+  <mask id="m"><rect width="$width" height="20" rx="3" fill="#fff"/></mask>
+  <g mask="url(#m)">
+    <rect width="$labw" height="20" fill="#555"/>
+    <rect x="$labw" width="$valw" height="20" fill="#4c1"/>
+    <rect width="$width" height="20" fill="url(#s)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+    <text x="$(($labw/2))" y="14">$label</text>
+    <text x="$(($labw + $valw/2))" y="14">$value</text>
+  </g>
+</svg>
+EOF
           }
-          
+
           mkbadge "articles publiés" "${{ steps.count.outputs.published }}" "articles-badge.svg"
           mkbadge "articles total"   "${{ steps.count.outputs.total }}"     "articles-total-badge.svg"
 
