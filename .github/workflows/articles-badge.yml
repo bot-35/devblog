@@ -112,9 +112,7 @@ jobs:
           }
 
           mkbadge "articles publiés" "${{ steps.count.outputs.published }}" "articles-badge.svg"
-          mkbadge "articles total"   "${{ steps.count.outputs.total }}"     "articles-total-badge.svg"
           mkbadge "mots publiés" "${{ steps.words.outputs.words_published }}" "words-badge.svg"
-          mkbadge "mots total"   "${{ steps.words.outputs.words_total }}"     "words-total-badge.svg"
 
 
 
@@ -125,7 +123,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add articles-badge.svg articles-total-badge.svg words-badge.svg words-total-badge.svg || true
+          git add articles-badge.svg words-badge.svg || true
           if ! git diff --cached --quiet; then
             git commit -m "chore(badge): update articles count [skip ci]"
             git push
