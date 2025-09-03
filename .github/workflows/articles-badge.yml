@@ -111,8 +111,8 @@ jobs:
           EOF
           }
 
-          mkbadge "J'ai écris " "${{ steps.count.outputs.published }}" "articles-badge.svg" " posts 🐱‍💻"
-          mkbadge "Avec en tout " "${{ steps.words.outputs.words_published }}" "words-badge.svg" " mots 😎"
+          mkbadge "Nombre de post sur le blog : " "${{ steps.count.outputs.published }}" "articles-badge.svg"
+          mkbadge "Nombre de mots dans ces posts :" "${{ steps.words.outputs.words_published }}" "words-badge.svg"
 
 
 
