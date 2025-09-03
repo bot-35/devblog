@@ -1,0 +1,96 @@
+name: Articles-Badge
+
+on:
+  push: 
+    branches: [ main ]
+    # Ne s'éxécute que si le dossier des articles est modifié
+    paths:
+      - 'src/content/posts/**'
+  # Lancement manuellement si besoin
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-badges:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1   # ne clone que le dernier commit (0 si vous voulez clone l'historique)
+          ref: main        # force une branche ou un tag précis
+          persist-credentials: true  # garde le token pour pouvoir faire git push
+
+      - name: Compter les articles (.md/.mdx)
+        id: count
+        shell: bash
+        run: |
+          set -euo pipefail
+          POSTS_DIR="src/content/posts"
+
+          # Compter les fichiers .md et .mdx
+          total=$(find "$POSTS_DIR" -type f \( -name '*.md' -o -name '*.mdx' \) | wc -l || true)
+
+          # Publiés = fichiers qui ne contiennent PAS "draft: true" (tolère espaces)
+          published=0
+          while IFS= read -r -d '' f; do
+            if ! grep -Eq '^[[:space:]]*draft:[[:space:]]*true' "$f"; then
+              published=$((published + 1))
+            fi
+          done < <(find "$POSTS_DIR" -type f \( -name '*.md' -o -name '*.mdx' \) -print0)
+
+          echo "total=$total" >> "$GITHUB_OUTPUT"
+          echo "published=$published" >> "$GITHUB_OUTPUT"
+
+      - name: Générer les badges SVG (style shield-like)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkbadge () {
+            label="$1"; value="$2"; file="$3"
+            labw=100                       # largeur de l'étiquette
+            # largeur de la valeur proportionnelle à la longueur du texte
+            valw=$(( ${#value} * 10 + 36 ))
+            width=$(( labw + valw ))
+
+            cat > "$file" <<EOF
+            <svg xmlns="http://www.w3.org/2000/svg" width="$width" height="20" role="img" aria-label="$label: $value">
+            <linearGradient id="s" x2="0" y2="100%">
+            <stop offset="0" stop-color="#fff" stop-opacity=".7"/>
+            <stop offset=".1" stop-opacity=".1"/>
+            <stop offset=".9" stop-opacity=".3"/>
+            <stop offset="1" stop-opacity=".5"/>
+            </linearGradient>
+            <mask id="m"><rect width="$width" height="20" rx="3" fill="#fff"/></mask>
+            <g mask="url(#m)">
+            <rect width="$labw" height="20" fill="#555"/>
+            <rect x="$labw" width="$valw" height="20" fill="#4c1"/>
+            <rect width="$width" height="20" fill="url(#s)"/>
+            </g>
+            <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+            <text x="$((labw/2))" y="14">$label</text>
+            <text x="$((labw + valw/2))" y="14">$value</text>
+            </g>
+            </svg>
+            EOF
+          }
+          
+          mkbadge "articles publiés" "${{ steps.count.outputs.published }}" "articles-badge.svg"
+          mkbadge "articles total"   "${{ steps.count.outputs.total }}"     "articles-total-badge.svg"
+
+      - name: Commit et push des badges
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add articles-badge.svg articles-total-badge.svg || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(badge): update articles count [skip ci]"
+            git push
+          else
+            echo "Pas de changement, rien à committer."
+          fi
