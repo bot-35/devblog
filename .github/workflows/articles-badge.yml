@@ -75,7 +75,7 @@ jobs:
             <text x="$((labw + valw/2))" y="14">$value</text>
             </g>
             </svg>
-EOF
+            EOF
           }
           
           mkbadge "articles publiés" "${{ steps.count.outputs.published }}" "articles-badge.svg"
