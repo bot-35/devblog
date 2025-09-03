@@ -195,15 +195,15 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
 
   #article a { @apply text-blog-marron-text; }
 
-  #article ul { @apply my-8; }
-  #article ul li {
+  #article ul, #article ol { @apply my-8; }
+  #article ul li, #article ol li {
     @apply ml-8 mb-8 text-gray-50 tracking-widest relative;
   }
   #article ul li::before {
     content: "";
     @apply absolute h-1 w-1 top-3 -left-4 bg-red-500 bg-gradient-to-tl from-blog-marron-fond via-gray-50 to-blog-marron-text rounded-full;
   }
-  #article ul li img { @apply w-1/4; }
+  #article ul li img, #article ol li img { @apply w-1/4; }
 
   #article #et p {
     @apply tracking-wider text-blog-marron-fond italic text-base text-left leading-loose;
