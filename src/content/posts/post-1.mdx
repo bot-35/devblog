@@ -29,10 +29,16 @@ import result from '../../img/post/2/result.png';
         </section>
 
     ## Le README, c'est quoi ?
-    Le README est un fichier texte qui se trouve généralement à la racine d'un projet. Il sert à **fournir des informations essentielles** sur le projet, telles que son objectif, son installation, son utilisation, sa contribution, etc.
+    Le README est un fichier texte qui se trouve généralement à la racine d'un projet. 
+    
+    Il sert à **fournir des informations essentielles** sur le projet, telles que son objectif, son installation, son utilisation, sa contribution, etc.
+    
     Il est souvent écrit en **Markdown** (fichier README.md) pour permettre une mise en forme simple et lisible.
 
-    Pour être plus clair, dans un repo GitHub, le README est la première chose que les visiteurs voient lorsqu'ils accèdent au projet. Il sert de guide pour comprendre ce qu'est le projet, comment l'utiliser et comment y contribuer.
+    Pour être plus clair, dans un repo GitHub, le README est la **première chose** que les visiteurs voient lorsqu'ils accèdent au projet.
+    
+    Il sert de **guide** pour comprendre ce qu'est le projet, comment l'utiliser et comment y contribuer.
+    
     C'est un peu la page d'accueil de votre projet.
 
     ## Mais pourquoi diable automatiser le README ?
@@ -64,22 +70,28 @@ import result from '../../img/post/2/result.png';
     Pour mon mini-projet, j'ai choisi d'utiliser **GitHub Actions** pour automatiser la mise à jour du README.
 
     ### GitHub Actions ?
-    GitHub Actions est une fonctionnalité de GitHub qui permet d'automatiser des tâches en réponse à des événements dans un dépôt GitHub. Ces tâches sont définies dans des fichiers YAML appelés workflows, qui spécifient les actions à exécuter et les conditions pour les déclencher.
+    **GitHub Actions** est une fonctionnalité de GitHub qui permet d'**automatiser** des tâches en réponse à des événements dans un dépôt GitHub. 
+    
+    Ces tâches sont définies dans des fichiers **YAML** appelés **workflows**, qui spécifient les **actions à exécuter** et les **conditions** pour les déclencher.
 
-    GitHub Actions est souvent utilisé pour des tâches telles que l'intégration continue (CI), le déploiement continu (CD), la gestion des versions, et bien sûr, l'automatisation de la documentation comme le README.
+    GitHub Actions est souvent utilisé pour des tâches telles que l'**intégration continue (CI)**, le **déploiement continu (CD)**, la **gestion des versions**, et bien sûr, l'**automatisation de la documentation** comme le README.
 
     #### Comment ça marche ?
-    GitHub Actions fonctionne en utilisant des workflows, qui sont des ensembles d'actions définies dans des fichiers YAML. Chaque workflow est déclenché par un événement spécifique, comme un push, une pull request, ou un horaire programmé.
-
-    Un workflow est composé de plusieurs jobs, qui sont des ensembles d'étapes à exécuter. Chaque étape peut exécuter une commande, un script, ou utiliser une action prédéfinie.
-
-    En gros ici on va créer un workflow qui s'exécute à chaque fois qu'on push un article dans le repo.
+    GitHub Actions fonctionne en utilisant des workflows, qui sont des **ensembles d'actions définies** dans des fichiers YAML. 
     
-    Ce workflow va compter le nombre d'articles et le nombre de mots, puis mettre à jour le README avec ces informations.
+    Chaque workflow est déclenché par un **événement spécifique**, comme un **push**, une **pull request**, ou un **horaire programmé**.
+
+    Un workflow est composé de **plusieurs jobs**, qui sont des ensembles d'étapes à exécuter. 
+    
+    Chaque étape peut exécuter une **commande**, un **script**, ou utiliser une **a**ction prédéfinie**.
+
+    En gros ici on va créer un workflow qui s'exécute à **chaque fois qu'on push un article** dans le dépôt.
+    
+    Ce workflow va **compter le nombre d'articles et le nombre de mots**, puis **mettre à jour** le README avec ces informations.
 
     ### Mon workflow GitHub Actions pour automatiser le README
 
-    Comment faire ça concrètement ? Tout d'abord il faut ajouter un fichier YAML dans le dossier `.github/workflows/` de votre repo GitHub. Ce fichier va définir le workflow.
+    Comment faire ça concrètement ? Tout d'abord il faut ajouter un fichier YAML dans le dossier `.github/workflows/` de votre repo GitHub. Ce fichier va **définir le workflow**.
 
     <CodeBox code={badgeYaml} lang="yml" theme="vitesse-dark" header="articles-badge.yml"/>
 
@@ -87,9 +99,10 @@ import result from '../../img/post/2/result.png';
 
     ### Explications du workflow
 
-    À la lecture du script, vous avez probablement une idée déjà assez claire de ce qu'il fait. Mais voici tout de même une explication détaillée de chaque section (vous êtes là pour ça, faudrait pas que je l'oublie 🙈) :
-    1. **name: Articles-Badge** : Donne un nom au workflow (qui apparaitra dans GitHub), ici "Articles-Badge".
-    2. **on:** : Définit les événements qui déclenchent le workflow. Ici, il se déclenche sur un push vers la branche `main` et uniquement si des fichiers dans `src/content/posts/` sont modifiés. Il peut aussi être déclenché manuellement via l'interface GitHub grâce à `workflow_dispatch`.
+    À la lecture du script, vous avez probablement une idée déjà assez claire de ce qu'il fait.
+    <br/>Mais voici tout de même une explication détaillée de chaque section (vous êtes là pour ça, faudrait pas que je l'oublie 🙈) :
+    1. **name** : Donne un nom au workflow (qui **apparaitra dans GitHub**), ici "Articles-Badge".
+    2. **on** : Définit les **événements qui déclenchent** le workflow.<br/> Ici, il se déclenche sur un push vers la branche `main` et uniquement si des fichiers dans `src/content/posts/` sont modifiés. <br/>Il peut aussi être déclenché manuellement via l'interface GitHub grâce à `workflow_dispatch`.
     3. **permissions** : Ici, le but étant de **modifier** le README, on donne la permission d'écrire sur le **content** (content ici représente l'**ensemble des données du repo** et n'a pas de rapport avec le nom du dossier *src/content/*)
     4. **jobs** : Définit les actions à effectuer. Elles peuvent être parallèles ou séquentielles ce qui est le cas ici avec l'utilisation de **steps**.
         - **build-badges** : Le nom du job. Interne à GitHub Actions, il sert par exemple à créer des dépendances de job (*needs: build-badges*). Pour donner un nom spécifique au job dans l'interface GitHub on utilisera **name** (name: Générer les badges d'articles)
@@ -115,19 +128,19 @@ import result from '../../img/post/2/result.png';
     Votre YAML se trouve dans le bon dossier (.github/workflows) de votre dépôt local, alors un simple push sur votre repo public et voilà le workflow qui entre en action !
 
     <ImageBox  src={pushYMLGHA} orientation="horizontal" alt=""/>
-    Ici je committe le YML sur mon repo avant de sync. 
+    Ici je **committe** le YML sur mon repo avant de sync. 
 
     <ImageBox  src={action} orientation="horizontal" alt=""/>
-    Le workflow s'effectue dans GitHub Actions.
+    Le **workflow s'exécute** dans GitHub Actions.
 
     <ImageBox  src={erreur} orientation="horizontal" alt=""/>
-    Je vous rassure le YML fourni plus haut fonctionne, mais durant mes tests, j'ai découvert que YML est très très sensible à l'indentation et j'en profite pour vous montrer l'erreur.
+    Je vous rassure le YML fourni plus haut fonctionne, mais durant mes tests, j'ai découvert que YML est **très très sensible** à l'indentation et j'en profite pour vous montrer l'erreur.
 
     <ImageBox  src={erreur2} orientation="horizontal" alt=""/>
-    Les détails de l'erreur.
+    Les détails de l'**erreur**.
 
     <ImageBox  src={ok} orientation="horizontal" alt=""/>
-    Après avoir repris l'indentation, le workflow passe ! ✨
+    Après avoir repris l'indentation, le **workflow passe** ! ✨
 
     <ImageBox  src={jobs} orientation="horizontal" alt=""/>
     Plus de détails sur le déroulement du workflow.
@@ -136,11 +149,12 @@ import result from '../../img/post/2/result.png';
     Les badges ont bien été poussés dans le dépôt. 😎
 
     <ImageBox  src={result} orientation="horizontal" alt=""/>
-    Le résultat en image !
+    **Le résultat en image** !
 
     ## Conclusion
-    On part d’un geste manuel (mettre à jour le README) et on le transforme en pipeline reproductible : un push → un workflow GitHub Actions calcule des métriques (nombre d’articles, nombre de mots), génère des artefacts (badges) et effectue un commit dans le dépôt, avec des droits minimaux (contents: write).
+    On part d’un geste manuel (mettre à jour le README) et on le transforme en pipeline reproductible : **un push → un workflow GitHub Actions calcule des métriques (nombre d’articles, nombre de mots), génère des artefacts (badges) et effectue un commit dans le dépôt, avec des droits minimaux (contents: write)**.
 
-    C’est l’esprit DevOps : automatisation, mise sous version, feedback rapide et mesure. Appliqué à la doc, c’est du DocOps.
-
+    C’est l’**esprit DevOps** : *automatisation, mise sous version, feedback rapide et mesure*. 
+    
+    Appliqué à la doc, c’est du *DocOps*. 🐱‍💻
     </section>
