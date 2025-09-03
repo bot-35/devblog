@@ -7,199 +7,140 @@ description: Premier mini-projet pour comprendre le DevOps, créer un README de 
 tags: ["github","mdx","CI","CD","devops","github actions"]
 draft: true
 ---
+import ImageBox from '../../components/ImageBox/ImageBox.astro';
 import CodeBox from '../../components/CodeBox/CodeBox.astro';
+import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
+import pushYMLGHA from '../../img/post/2/push_yml_ghA.png';
+import action from '../../img/post/2/action1.png';
+import erreur from '../../img/post/2/erreur.png';
+import erreur2 from '../../img/post/2/erreur2.png';
+import ok from '../../img/post/2/ok.png';
+import jobs from '../../img/post/2/jobs.png';
+import badges from '../../img/post/2/badges.png';
+import result from '../../img/post/2/result.png';
+
+
+    <section id='article'>
+
+        <section id='entete'>
+        Je travaillais sur le **README** du repo GitHub de ce blog quand je me suis dit : Ça serait cool si j'avais un badge qui calcule automatiquement le nombre d'articles que j'ai écrits !
+        <br/>Et puis pourquoi pas un badge qui calcule le nombre total de mots écrits dans tous mes articles ?! 😲
+        <br/> Voyons ensemble comment faire ça et pourquoi c'est un peu du DevOps. 😉
+        </section>
+
+    ## Le README, c'est quoi ?
+    Le README est un fichier texte qui se trouve généralement à la racine d'un projet. Il sert à **fournir des informations essentielles** sur le projet, telles que son objectif, son installation, son utilisation, sa contribution, etc.
+    Il est souvent écrit en **Markdown** (fichier README.md) pour permettre une mise en forme simple et lisible.
+
+    Pour être plus clair, dans un repo GitHub, le README est la première chose que les visiteurs voient lorsqu'ils accèdent au projet. Il sert de guide pour comprendre ce qu'est le projet, comment l'utiliser et comment y contribuer.
+    C'est un peu la page d'accueil de votre projet.
+
+    ## Mais pourquoi diable automatiser le README ?
+    Automatiser le README peut être utile pour plusieurs raisons :
+    - **Mise à jour automatique** : Si votre projet évolue fréquemment, automatiser certaines parties du README peut garantir que les informations restent à jour sans nécessiter de modifications manuelles constantes.
+    - **Cohérence** : L'automatisation peut aider à maintenir une structure et un format cohérents dans le README, ce qui facilite la lecture et la compréhension pour les utilisateurs.
+    - **Gain de temps** : En automatisant certaines tâches, vous pouvez économiser du temps et des efforts, surtout si vous avez plusieurs projets ou si vous devez souvent mettre à jour les informations.
+    - **Intégration avec d'autres outils** : L'automatisation peut permettre d'intégrer le README avec d'autres outils ou services, comme des badges de statut, des statistiques de projet, etc.
+    - **Parce que c'est cool ! 😎** : Avouons-le, il y a quelque chose de satisfaisant à voir des informations se mettre à jour automatiquement.
+
+
+    ## Quoi automatiser dans le README ?
+    On peut automatiser plusieurs éléments dans un README, en fonction des besoins du projet. Voici quelques exemples courants :
+    - **Badges de statut** : Afficher des badges qui indiquent l'état du projet, comme le statut de la build, la couverture des tests, les versions, etc.
+    - **Statistiques du projet** : Afficher des statistiques telles que le nombre de contributeurs, le nombre de commits, le nombre de lignes de code, etc.
+    - **Instructions d'installation** : Générer automatiquement des instructions d'installation basées sur les dépendances du projet.
+    - **Changelog** : Générer automatiquement un changelog basé sur les commits ou les versions.
+    - **Liste des contributeurs** : Afficher automatiquement une liste des contributeurs au projet.
+
+    Mais ici, pour mon mini-projet, je vais automatiser deux choses :
+    1. 1 - Le **nombre d'articles** écrits dans ce blog.
+    2. 2 - Le **nombre total de mots** écrits dans tous mes articles.
+
+    ## Comment automatiser le README ?
+    Pour automatiser le README, on peut utiliser plusieurs outils et techniques. Voici quelques options courantes :
+    - **Scripts personnalisés** : Écrire des scripts en Python, JavaScript, Bash, etc., pour extraire les informations nécessaires et mettre à jour le README.
+    - **GitHub Actions** : Utiliser des workflows GitHub Actions pour automatiser la mise à jour du README en fonction des événements GitHub, comme les push ou les pull requests.
+    - **Outils tiers** : Utiliser des outils ou des services tiers qui offrent des fonctionnalités d'automatisation pour les README, comme Shields.io pour les badges.
+    Pour mon mini-projet, j'ai choisi d'utiliser **GitHub Actions** pour automatiser la mise à jour du README.
+
+    ### GitHub Actions ?
+    GitHub Actions est une fonctionnalité de GitHub qui permet d'automatiser des tâches en réponse à des événements dans un dépôt GitHub. Ces tâches sont définies dans des fichiers YAML appelés workflows, qui spécifient les actions à exécuter et les conditions pour les déclencher.
+
+    GitHub Actions est souvent utilisé pour des tâches telles que l'intégration continue (CI), le déploiement continu (CD), la gestion des versions, et bien sûr, l'automatisation de la documentation comme le README.
+
+    #### Comment ça marche ?
+    GitHub Actions fonctionne en utilisant des workflows, qui sont des ensembles d'actions définies dans des fichiers YAML. Chaque workflow est déclenché par un événement spécifique, comme un push, une pull request, ou un horaire programmé.
+
+    Un workflow est composé de plusieurs jobs, qui sont des ensembles d'étapes à exécuter. Chaque étape peut exécuter une commande, un script, ou utiliser une action prédéfinie.
+
+    En gros ici on va créer un workflow qui s'exécute à chaque fois qu'on push un article dans le repo.
+    
+    Ce workflow va compter le nombre d'articles et le nombre de mots, puis mettre à jour le README avec ces informations.
+
+    ### Mon workflow GitHub Actions pour automatiser le README
+
+    Comment faire ça concrètement ? Tout d'abord il faut ajouter un fichier YAML dans le dossier `.github/workflows/` de votre repo GitHub. Ce fichier va définir le workflow.
+
+    <CodeBox code={badgeYaml} lang="yml" theme="vitesse-dark" header="articles-badge.yml"/>
 
 
 
-<section id='article'>
+    ### Explications du workflow
 
-<section id='entete'>
-Je travaillais sur le **README** du repo GitHub de ce blog quand je me suis dit : Ca serait cool si j'avais un badge qui calcule automatiquement le nombre de posts que j'ai écrits !
-<br/>Et puis pourquoi pas un badge qui calcule le nombre de mots écrits dans tous mes posts ?! 😲
-<br/> Voyons ensemble comment faire ça et pourquoi c'est un peu du DevOps. 😉
-</section>
+    À la lecture du script, vous avez probablement une idée déjà assez claire de ce qu'il fait. Mais voici tout de même une explication détaillée de chaque section (vous êtes là pour ça, faudrait pas que je l'oublie 🙈) :
+    1. **name: Articles-Badge** : Donne un nom au workflow (qui apparaitra dans GitHub), ici "Articles-Badge".
+    2. **on:** : Définit les événements qui déclenchent le workflow. Ici, il se déclenche sur un push vers la branche `main` et uniquement si des fichiers dans `src/content/posts/` sont modifiés. Il peut aussi être déclenché manuellement via l'interface GitHub grâce à `workflow_dispatch`.
+    3. **permissions** : Ici, le but étant de **modifier** le README, on donne la permission d'écrire sur le **content** (content ici représente l'**ensemble des données du repo** et n'a pas de rapport avec le nom du dossier *src/content/*)
+    4. **jobs** : Définit les actions à effectuer. Elles peuvent être parallèles ou séquentielles ce qui est le cas ici avec l'utilisation de **steps**.
+        - **build-badges** : Le nom du job. Interne à GitHub Actions, il sert par exemple à créer des dépendances de job (*needs: build-badges*). Pour donner un nom spécifique au job dans l'interface GitHub on utilisera **name** (name: Générer les badges d'articles)
+        - **runs-on** : Pour exécuter vos jobs, GitHub vous fournis des runners hébergés - machines virtuelles jetables. Windows, macOS et distributions Linux sont disponibles. Plus de détails sur les runners disponibles ici : https://github.com/actions/runner-images
+        - **steps** : Comme précisé plus haut, on demande à GitHub Actions d’exécuter les jobs étape par étape.
+        - **uses: actions/checkout@v4** : Ce job copie le dépôt courant dans la machine (runner) où s'éxécute le job. Plus de détails dans les commentaires du code.
+        - **id**: Ce champ sert à récupérer les valeurs renvoyées par le job dans $GITHUB_OUTPUT. Elles sont utilisées dans l'étape de génération des badges avec steps.count.outputs.published et steps.count.outputs.total.
+        - **shell**: Simple à comprendre alors voici une liste des shells disponbles :
+            - **bash** : Bash standard
+            - **sh** : shell POSIX simple
+            - **pwsh** : PowerShell Core (multi-plateforme)
+            - **powershell** : PowerShell Windows
+            - **cmd** : interpréteur Windows classique
+            - **python** : (via une astuce, pour éxécuter du code Python direct)
 
-## Le README, c'est quoi ?
-Le README est un fichier texte qui se trouve généralement à la racine d'un projet. Il sert à **fournir des informations essentielles** sur le projet, telles que son objectif, son installation, son utilisation, sa contribution, etc.
-Il est souvent écrit en **Markdown** (fichier README.md) pour permettre une mise en forme simple et lisible.
+    Je vous fais grâce de l’explication détaillée des scripts, mais retenons que chaque push lance :
+        - un job qui **compte**,
+        - un job qui **édite** les badges avec le résultat du décompte,
+        - puis un job qui **committe/pousse** ces badges dans le dépôt.
 
-Pour être plus clair, dans un repo GitHub, le README est la première chose que les visiteurs voient lorsqu'ils accèdent au projet. Il sert de guide pour comprendre ce qu'est le projet, comment l'utiliser et comment y contribuer.
-C'est un peu la page d'accueil de votre projet.
+    ## L'heure du test 🤸🏼‍♀️
 
-## Mais pourquoi diable automatiser le README ?
-Automatiser le README peut être utile pour plusieurs raisons :
-- **Mise à jour automatique** : Si votre projet évolue fréquemment, automatiser certaines parties du README peut garantir que les informations restent à jour sans nécessiter de modifications manuelles constantes.
-- **Consistance** : L'automatisation peut aider à maintenir une structure et un format cohérents dans le README, ce qui facilite la lecture et la compréhension pour les utilisateurs.
-- **Gain de temps** : En automatisant certaines tâches, vous pouvez économiser du temps et des efforts, surtout si vous avez plusieurs projets ou si vous devez souvent mettre à jour les informations.
-- **Intégration avec d'autres outils** : L'automatisation peut permettre d'intégrer le README avec d'autres outils ou services, comme des badges de statut, des statistiques de projet, etc.
-- **Parceque c'est cool ! 😎** : Avouons-le, il y a quelque chose de satisfaisant à voir des informations se mettre à jour automatiquement.
+    Votre YAML se trouve dans le bon dossier (.github/workflows) de votre dépôt local, alors un simple push sur votre repo public et voilà le workflow qui entre en action !
 
+    <ImageBox  src={pushYMLGHA} orientation="horizontal" alt=""/>
+    Ici je committe le YML sur mon repo avant de sync. 
 
-## Quoi automatiser dans le README ?
-On peut automatiser plusieurs éléments dans un README, en fonction des besoins du projet. Voici quelques exemples courants :
-- **Badges de statut** : Afficher des badges qui indiquent l'état du projet, comme le statut de la build, la couverture des tests, les versions, etc.
-- **Statistiques du projet** : Afficher des statistiques telles que le nombre de contributeurs, le nombre de commits, le nombre de lignes de code, etc.
-- **Instructions d'installation** : Générer automatiquement des instructions d'installation basées sur les dépendances du projet.
-- **Changelog** : Générer automatiquement un changelog basé sur les commits ou les versions.
-- **Liste des contributeurs** : Afficher automatiquement une liste des contributeurs au projet.
+    <ImageBox  src={action} orientation="horizontal" alt=""/>
+    Le workflow s'effectue dans GitHub Actions.
 
-Mais ici, pour mon mini-projet, je vais automatiser deux choses :
-1. 1 - Le **nombre de posts** écrits dans ce blog.
-2. 2 - Le **nombre total de mots** écrits dans tous mes posts.
+    <ImageBox  src={erreur} orientation="horizontal" alt=""/>
+    Je vous rassure le YML fourni plus haut fonctionne, mais durant mes tests, j'ai découvert que YML est très très sensible à l'indentation et j'en profite pour vous montrer l'erreur.
 
-## Comment automatiser le README ?
-Pour automatiser le README, on peut utiliser plusieurs outils et techniques. Voici quelques options courantes :
-- **Scripts personnalisés** : Écrire des scripts en Python, JavaScript, Bash, etc., pour extraire les informations nécessaires et mettre à jour le README.
-- **GitHub Actions** : Utiliser des workflows GitHub Actions pour automatiser la mise à jour du README en fonction des événements GitHub, comme les push ou les pull requests.
-- **Outils tiers** : Utiliser des outils ou des services tiers qui offrent des fonctionnalités d'automatisation pour les README, comme Shields.io pour les badges.
-Pour mon mini-projet, j'ai choisi d'utiliser **GitHub Actions** pour automatiser la mise à jour du README.
+    <ImageBox  src={erreur2} orientation="horizontal" alt=""/>
+    Les détails de l'erreur.
 
-### GitHub Actions ?
-GitHub Actions est une fonctionnalité de GitHub qui permet d'automatiser des tâches en réponse à des événements dans un dépôt GitHub. Ces tâches sont définies dans des fichiers YAML appelés workflows, qui spécifient les actions à exécuter et les conditions pour les déclencher.
+    <ImageBox  src={ok} orientation="horizontal" alt=""/>
+    Après avoir repris l'indentation, le workflow passe ! ✨
 
-GitHub Actions est souvent utilisé pour des tâches telles que l'intégration continue (CI), le déploiement continu (CD), la gestion des versions, et bien sûr, l'automatisation de la documentation comme le README.
+    <ImageBox  src={jobs} orientation="horizontal" alt=""/>
+    Plus de détails sur le déroulement du workflow.
 
-#### Comment ça marche ?
-GitHub Actions fonctionne en utilisant des workflows, qui sont des ensembles d'actions définies dans des fichiers YAML. Chaque workflow est déclenché par un événement spécifique, comme un push, une pull request, ou un horaire programmé.
-Un workflow est composé de plusieurs jobs, qui sont des ensembles d'étapes à exécuter. Chaque étape peut exécuter une commande, un script, ou utiliser une action prédéfinie.
+    <ImageBox  src={badges} orientation="horizontal" alt=""/>
+    Les badges ont bien été poussés dans le dépôt. 😎
 
-En gros ici on va créer un workflow qui s'exécute à chaque fois qu'on pousse du code dans le repo (événement push). Ce workflow va compter le nombre de posts et le nombre de mots, puis mettre à jour le README avec ces informations.
+    <ImageBox  src={result} orientation="horizontal" alt=""/>
+    Le résultat en image !
 
-### Mon workflow GitHub Actions pour automatiser le README
+    ## Conclusion
+    On part d’un geste manuel (mettre à jour le README) et on le transforme en pipeline reproductible : un push → un workflow GitHub Actions calcule des métriques (nombre d’articles, nombre de mots), génère des artefacts (badges) et effectue un commit dans le dépôt, avec des droits minimaux (contents: write).
 
-Comment faire ça concrètement ? Tout d'abord il faut ajouter un fichier YAML dans le dossier `.github/workflows/` de votre repo GitHub. Ce fichier va définir le workflow.
+    C’est l’esprit DevOps : automatisation, mise sous version, feedback rapide et mesure. Appliqué à la doc, c’est du DocOps.
 
-<CodeBox code={`
-name: Articles-Badge
-
-on:
-    push: 
-        branches: [ main ]
-        # Ne s'éxécute que si le dossier des articles est modifié
-        paths:
-          - 'src/content/posts/**'
-    # Lancement manuellement si besoin
-    workflow_dispatch:
-
-permissions:
-    contents: write
-
-jobs:
-    build-badges:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-            with:
-              fetch-depth: 1   # ne clone que le dernier commit (0 si vous voulez clone l'historique)
-              ref: main        # force une branche ou un tag précis
-              persist-credentials: true  # garde le token pour pouvoir faire git push
-
-          - name: Compter les articles (.md/.mdx)
-            id: count
-            shell: bash
-            run: |
-              set -euo pipefail
-              POSTS_DIR="src/content/posts"
-
-              # Compter les fichiers .md et .mdx
-              total=$(find "$POSTS_DIR" -type f ( -name '*.md' -o -name '*.mdx' ) | wc -l || true)
-
-              # Publiés = fichiers qui ne contiennent PAS "draft: true" (tolère espaces)
-              published=0
-              while IFS= read -r -d '' f; do
-                if ! grep -Eq '^[[:space:]]*draft:[[:space:]]*true' "$f"; then
-                  published=$((published + 1))
-                fi
-              done < <(find "$POSTS_DIR" -type f ( -name '*.md' -o -name '*.mdx' ) -print0)
-
-              echo "total=$total" >> "$GITHUB_OUTPUT"
-              echo "published=$published" >> "$GITHUB_OUTPUT"
-
-          - name: Générer les badges SVG (style shield-like)
-            shell: bash
-            run: |
-              set -euo pipefail
-
-              mkbadge () {
-                label="$1"; value="$2"; file="$3"
-                labw=100                       # largeur de l'étiquette
-                # largeur de la valeur proportionnelle à la longueur du texte
-                valw=$(( \${#value} * 10 + 36 ))
-                width=$(( labw + valw ))
-
-                cat > "$file" <<EOF
-                <svg xmlns="http://www.w3.org/2000/svg" width="$width" height="20" role="img" aria-label="$label: $value">
-                <linearGradient id="s" x2="0" y2="100%">
-                <stop offset="0" stop-color="#fff" stop-opacity=".7"/>
-                <stop offset=".1" stop-opacity=".1"/>
-                <stop offset=".9" stop-opacity=".3"/>
-                <stop offset="1" stop-opacity=".5"/>
-                </linearGradient>
-                <mask id="m"><rect width="$width" height="20" rx="3" fill="#fff"/></mask>
-                <g mask="url(#m)">
-                <rect width="$labw" height="20" fill="#555"/>
-                <rect x="$labw" width="$valw" height="20" fill="#4c1"/>
-                <rect width="$width" height="20" fill="url(#s)"/>
-                </g>
-                <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-                <text x="$((labw/2))" y="14">$label</text>
-                <text x="$((labw + valw/2))" y="14">$value</text>
-                </g>
-                </svg>
-                EOF
-              }
-          
-              mkbadge "articles publiés" "\${{ steps.count.outputs.published }}" "articles-badge.svg"
-              mkbadge "articles total"   "\${{ steps.count.outputs.total }}"     "articles-total-badge.svg"
-
-          - name: Commit et push des badges
-            shell: bash
-            run: |
-              set -euo pipefail
-              git config user.name "github-actions"
-              git config user.email "github-actions@github.com"
-              git add articles-badge.svg articles-total-badge.svg || true
-              if ! git diff --cached --quiet; then
-                git commit -m "chore(badge): update articles count [skip ci]"
-                git push
-              else
-                echo "Pas de changement, rien à committer."
-              fi
-
-`} lang="yml" theme="vitesse-dark" header="articles-badge.yml"/>
-
-
-
-### Explications du workflow
-
-A la lecture du script, vous avez probablement une idée déja assez claire de ce qu'il fait. Mais voici tout de même une explication détaillée de chaque section (vous êtes la pour ça, faudrait pas que je l'oublie 🙈) :
-1. **name: Articles-Badge** : Donne un nom au workflow (qui apparaitra dans GitHub), ici "Articles-Badge".
-2. **on:** : Définit les événements qui déclenchent le workflow. Ici, il se déclenche sur un push vers la branche `main` et uniquement si des fichiers dans `src/content/posts/` sont modifiés. Il peut aussi être déclenché manuellement via l'interface GitHub grâce à `workflow_dispatch`.
-3. **permissions** : Ici, le but étant de **modifier** le README, on donne la permission d'écrire sur le content (content ici représente l'**ensemble des données du repo** et n'a pas de rapport avec le nom du dossier *src/content/*)
-4. **jobs** : Définit les actions à effectuer. Elles peuvent être parallèles ou séquentiels ce qui est le cas ici avec l'utilisation de **steps**.
-    - **build-badges** : Le nom du job. Interne à GitHub Actions, il sert par exemple à créer des dépendances de job (*needs: build-badges*). Pour donner un nom spécifique au job dans l'interface GitHub on utilisera **name** (name: Générer les badges d'articles)
-    - **runs-on** : Pour exécuter vos jobs, GitHub vous fournis des runners hébergés - machines virtuelles jetables. Windows, MacOS et distrib Linux sont disponibles. Plus de détails sur les runners disponibles ici : https://github.com/actions/runner-images
-    - **steps** : Comme précisé plus haut, on spécifie ici à GitHub Actions de jouer les jobs étape par étape.
-    - **uses: actions/checkout@v4** : Ce job copie le dépot courant dans la machine (runner) où s'éxécute le job. Plus de détails dans les commentaires du code.
-    - **id**: Ce champ sert à récuperer les valeurs renvoyés par le job dans $GITHUB_OUTPUT. Utilisé dans le job de génération de badge avec steps.count.outputs.published et steps.count.outputs.total.
-    - **shell**: Simple à comprendre alors voici une liste des shells dispo :
-        - **bash** : Bash standard
-        - **sh** : shell POSIX simple
-        - **pwsh** : PowerShell Core (multi-plateforme)
-        - **powershell** : PowerShell Windows
-        - **cmd** : interpréteur Windows classique
-        - **python** : (via une astuce, pour éxécuter du code Python direct)
-
-Je vous fais grâce de l'explication poussée des scripts mais disons simplement que chaque push lancera un job qui compte ce qu'il doit compter, un job qui édit les badges avec le résulat du décompte et enfin un job qui vient écrire dans le repo ces fameux badges.
-
-## L'heure du test 🤸🏼‍♀️
-
-Votre YAML ce trouve dans le bon dossier (.github/workflows) de votre git local, alors un simple push sur votre repo public et voila le workflow qui entre en action !
-
-## Conclusion
-
-
-## À suivre...
-
-</section>
+    </section>
