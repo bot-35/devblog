@@ -17,6 +17,7 @@
   <a href="https://devblog-bot-35.vercel.app/">
     <img src="https://img.shields.io/website?url=https%3A%2F%2Fdevblog-bot-35.vercel.app%2F&label=site&up_message=online&down_message=offline&style=for-the-badge" alt="site status">
   </a>
+  <img src="https://img.shields.io/github/last-commit/bot-35/devblog?style=for-the-badge&logo=github" alt="Dernier commit">
 </p>
 <p align="center">
   <!-- Badge licence MIT -->
@@ -58,7 +59,6 @@ Rapide, flexible, bref, parfait pour un blog.
 ## 👾📊 Statistiques 
 
 <p align="center">
-  <img src="https://img.shields.io/github/last-commit/bot-35/devblog?style=for-the-badge&logo=github" alt="Dernier commit">
   <img src="https://img.shields.io/github/languages/top/bot-35/devblog?style=for-the-badge" alt="Langage principal">
 </p>
 <p align="center">
