@@ -60,9 +60,10 @@ Rapide, flexible, bref, parfait pour un blog.
 <p align="center">
   <img src="https://img.shields.io/github/last-commit/bot-35/devblog?style=for-the-badge&logo=github" alt="Dernier commit">
   <img src="https://img.shields.io/github/languages/top/bot-35/devblog?style=for-the-badge" alt="Langage principal">
+</p>
+<p align="center">
   <img src="https://raw.githubusercontent.com/bot-35/devblog/d5d50d4126cbb791a7c1f630deab65565767120b/articles-badge.svg">
-  <img src="https://raw.githubusercontent.com/bot-35/devblog/d3a1e54d140a27b4566578b484f717af88e87b0c/words-badge.svg">
-
+  <img src="https://raw.githubusercontent.com/bot-35/devblog/d3a1e54d140a27b4566578b484f717af88e87b0c/words-badge.svg"
 </p>
 
 ---
