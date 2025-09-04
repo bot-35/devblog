@@ -8,8 +8,14 @@ tags: ["github","CI","CD","devops"]
 draft: false
 ---
 import ImageBox from '../../components/ImageBox/ImageBox.astro';
-import CodeBox from '../../components/CodeBox/CodeBox.astro';
-import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
+import addRules from '../../img/post/3/1_add_rules.png';
+import branchMain from '../../img/post/3/2-rules_conf.png';
+import rules from '../../img/post/3/3-rules_conf.png';
+import rulesVercel from '../../img/post/3/4-rules_conf_status_vercel.png';
+import ghDeployments from '../../img/post/3/5_gh_branches.png';
+import ghLink from '../../img/post/3/6_gh_lien_dev.png';
+import vercelDeployments from '../../img/post/3/7_vercel_deployements.png';
+import vercelLink from '../../img/post/3/8_vercel_link.png';
 
 
 
@@ -43,13 +49,18 @@ import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
     ### Bloquer les push sur un dépôt.
 
     Sur la page du dépôt, direction ⚙ Settings puis  Branches et enfin Add Branch ruleset.
+    <ImageBox  src={addRules} orientation="horizontal" alt=""/>
+
+    <ImageBox  src={branchMain} orientation="horizontal" alt=""/>
 
     Dans Target Branches, ajouté la branche par défaut et dans Rules, ajouter : 
+    <ImageBox  src={rules} orientation="horizontal" alt=""/>
     - Restrict deletions
     - Require a pull request before merging (laisses 0)
     - Require status checks to pass et ajouter Vercel dans le status check
+        <ImageBox  src={rulesVercel} orientation="horizontal" alt=""/>
     - Block forces pushes
-    
+
     Maintenant, tout push direct sur la branche main est bloqué. 
     
     Seul un merge via PR est possible après que Vercel ait buildé OK.
@@ -64,9 +75,12 @@ import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
 
     Comment y accéder me dirait vous ? Rien de plus simple
 
-    - 
+    - <ImageBox  src={ghDeployments} orientation="horizontal" alt=""/>
+    - <ImageBox  src={ghLink} orientation="horizontal" alt=""/>
     Par GitHub
-    - 
+
+    - <ImageBox  src={vercelDeployments} orientation="horizontal" alt=""/>
+    - <ImageBox  src={vercelLink} orientation="horizontal" alt=""/>
     Ou par Vercel
 
     ##  Interdire les gros commits 😈
