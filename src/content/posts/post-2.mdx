@@ -40,9 +40,22 @@ import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
     - Interdire les commits de plus de 10 fichiers astro (on bloque pas l'ajout ou la modif d'image ou d'article)
     - Donner une vie limité aux branches.
 
-    ### Bloquer les push sur un dépôt github
+    ### Bloquer les push sur un dépôt.
 
-    #### Sur GitHub
+    Sur la page du dépôt, direction ⚙ Settings puis  Branches et enfin Add Branch ruleset.
+
+    Dans Target Branches, ajouté la branche par défaut et dans Rules, ajouter : 
+    - Restrict deletions
+    - Require a pull request before merging (laisses 0)
+    - Require status checks to pass et ajouter Vercel dans le status check
+    - Block forces pushes
+    
+    Maintenant, tout push direct sur main est bloqué. 
+    
+    Seul un merge via PR est possible après que Vercel ait buildé OK.
+
+
+    
 
 
     
