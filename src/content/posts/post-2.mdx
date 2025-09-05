@@ -5,11 +5,17 @@ publishedDate: 2025-09-04
 image: /img/post/3/1.png
 description:  Mini-projet pour comprendre le DevOps, comment éviter les gros lots dans un projet !
 tags: ["github","CI","CD","devops"]
-draft: true
+draft: false
 ---
 import ImageBox from '../../components/ImageBox/ImageBox.astro';
-import CodeBox from '../../components/CodeBox/CodeBox.astro';
-import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
+import addRules from '../../img/post/3/1_add_rules.png';
+import branchMain from '../../img/post/3/2-rules_conf.png';
+import rules from '../../img/post/3/3-rules_conf.png';
+import rulesVercel from '../../img/post/3/4-rules_conf_status_vercel.png';
+import ghDeployments from '../../img/post/3/5_gh_branches.png';
+import ghLink from '../../img/post/3/6_gh_lien_dev.png';
+import vercelDeployments from '../../img/post/3/7_vercel_deployments.png';
+import vercelLink from '../../img/post/3/8_vercel_link.png';
 
 
 
@@ -31,11 +37,57 @@ import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
 
     Mais ce n'est absolument pas une bonne pratique, et dans un cadre professionel, cela pourrait causer de gros problèmes aussi bien à mon employeur qu'à moi même.
 
-    Il me faut donc prendre des mesures drastique pour ne plus y toucher avec des pushs ! 
+    Il me faut donc prendre des mesures drastiques pour ne plus y toucher avec des pushs ! 
 
     ## Les mesures
 
+    Voici une liste de ce qu'il va falloir faire pour protéger le main :
+    - Bloquer les pushs directs.
+    - Interdire les commits de plus de 10 fichiers astro (on bloque pas l'ajout ou la modif d'image ou d'article)
+    - Donner une vie limité aux branches.
 
+    ### Bloquer les push sur un dépôt.
+
+    Sur la page du dépôt, direction ⚙ Settings puis  Branches et enfin Add Branch ruleset.
     
 
+
+    Dans Target Branches, ajouté la branche par défaut et dans Rules, ajouter : 
+    - Restrict deletions
+    - Require a pull request before merging (laisses 0)
+    - Require status checks to pass et ajouter Vercel dans le status check
+    - Block forces pushes
+
+
+    <ImageBox  src={addRules} orientation="horizontal" alt="Capture écran interface GitHub (add rules)" legend="On ajoute une règle."/>
+    <ImageBox  src={branchMain} orientation="horizontal" alt="Capture écran interface GitHub (add dépôt)" legend="On selectionne la branche par défaut."/>
+    <ImageBox  src={rules} orientation="horizontal" alt="Capture écran interface GitHub (sélection règles)" legend="On selectionne les bonnes règles."/>
+    <ImageBox  src={rulesVercel} orientation="horizontal" alt="Capture écran interface GitHub (ajout vercel check)" legend="On ajoute le status check de Vercel."/>
+
+
+    Maintenant, tout push direct sur la branche main est bloqué. 
+    
+    Seul un merge via PR est possible après que Vercel ait buildé OK.
+
+    ### Configurer Vercel
+
+    **Bonne nouvelle** normalement vous n'avez rien à faire ! 🤗
+
+    En effet, Vercel detectera automatiquement les pushs sur une branche ≠ de main et déclenchera en conséquence un Preview Deployment et postera un statut sur le commit/PR.
+
+    ### Accéder à la branche preview 
+
+    Comment y accéder me dirait vous ? Rien de plus simple
+
+    - <ImageBox  src={ghDeployments} orientation="horizontal" alt="Capture écran interface GitHub (les branches déployées)" legend="Nos différentes branches, déployées par Vercel."/>
+    - <ImageBox  src={ghLink} orientation="horizontal" alt="Capture écran interface GitHub (le lien d'une branche en particuliée)" legend="Le lien d'accès à notre branche Preview."/>
+    Par GitHub
+
+    - <ImageBox  src={vercelDeployments} orientation="horizontal" alt="Capture écran interface Vercel (l'accès aux différents deployments)" legend="Les différents déploiements fait par Vercel (ici spécifié preview)" />
+    - <ImageBox  src={vercelLink} orientation="horizontal" alt="Capture écran interface Vercel (l'interface d'un deploiement en particulier)" legend="L'interface de déploiement. Ici preview et le boutton pour y accéder."/>
+    Ou par Vercel
+
+    ##  Interdire les gros commits 😈
+    
+    
     </section>
