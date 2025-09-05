@@ -5,6 +5,7 @@ const { src, alt, orientation, legend = ""  } = Astro.props;
 
 <astro-imagebox class='postimagebox w-full flex flex-row justify-center cursor-pointer' data-src={src.src}>
         <img src={src.src} class=` w-full xl:w-fit rounded ${orientation === 'horizontal' ? 'xl:h-full' : 'h-fit xl:h-[512px]'}` alt={alt}/>
+        <p>{legend}</p>
 </astro-imagebox >
 
 
