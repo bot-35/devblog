@@ -49,17 +49,21 @@ import vercelLink from '../../img/post/3/8_vercel_link.png';
     ### Bloquer les push sur un dépôt.
 
     Sur la page du dépôt, direction ⚙ Settings puis  Branches et enfin Add Branch ruleset.
-    <ImageBox  src={addRules} orientation="horizontal" alt=""/>
+    
 
-    <ImageBox  src={branchMain} orientation="horizontal" alt=""/>
 
     Dans Target Branches, ajouté la branche par défaut et dans Rules, ajouter : 
-    <ImageBox  src={rules} orientation="horizontal" alt=""/>
     - Restrict deletions
     - Require a pull request before merging (laisses 0)
     - Require status checks to pass et ajouter Vercel dans le status check
-        <ImageBox  src={rulesVercel} orientation="horizontal" alt=""/>
     - Block forces pushes
+
+
+    <ImageBox  src={addRules} orientation="horizontal" alt="Capture écran interface GitHub (add rules)" legend="On ajoute une règle."/>
+    <ImageBox  src={branchMain} orientation="horizontal" alt="Capture écran interface GitHub (add dépôt)" legend="On selectionne la branche par défaut."/>
+    <ImageBox  src={rules} orientation="horizontal" alt="Capture écran interface GitHub (sélection règles)" legend="On selectionne les bonnes règles."/>
+    <ImageBox  src={rulesVercel} orientation="horizontal" alt="Capture écran interface GitHub (ajout vercel check)" legend="On ajoute le status check de Vercel."/>
+
 
     Maintenant, tout push direct sur la branche main est bloqué. 
     
@@ -75,12 +79,12 @@ import vercelLink from '../../img/post/3/8_vercel_link.png';
 
     Comment y accéder me dirait vous ? Rien de plus simple
 
-    - <ImageBox  src={ghDeployments} orientation="horizontal" alt=""/>
-    - <ImageBox  src={ghLink} orientation="horizontal" alt=""/>
+    - <ImageBox  src={ghDeployments} orientation="horizontal" alt="Capture écran interface GitHub (les branches déployées)" legend="Nos différentes branches, déployées par Vercel."/>
+    - <ImageBox  src={ghLink} orientation="horizontal" alt="Capture écran interface GitHub (le lien d'une branche en particuliée)" legend="Le lien d'accès à notre branche Preview."/>
     Par GitHub
 
-    - <ImageBox  src={vercelDeployments} orientation="horizontal" alt=""/>
-    - <ImageBox  src={vercelLink} orientation="horizontal" alt=""/>
+    - <ImageBox  src={vercelDeployments} orientation="horizontal" alt="Capture écran interface Vercel (l'accès aux différents deployments)" legend="Les différents déploiements fait par Vercel (ici spécifié preview)" />
+    - <ImageBox  src={vercelLink} orientation="horizontal" alt="Capture écran interface Vercel (l'interface d'un deploiement en particulier)" legend="L'interface de déploiement. Ici preview et le boutton pour y accéder."/>
     Ou par Vercel
 
     ##  Interdire les gros commits 😈
