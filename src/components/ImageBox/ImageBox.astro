@@ -1,37 +1,178 @@
 ---
-const { src, alt, orientation, legend = ""  } = Astro.props;
+const {
+  src,
+  alt,
+  orientation,          // 'horizontal' | autre
+  legend,               // string (optionnel)
+  step = null,          // number | null
+  icon = null           // chemin ou import d'image | null
+} = Astro.props;
 
+import profil from '../../img/profil/citation.png';
+
+// Assure un chemin string (si icon est un import d'image Astro)
+const overlayIcon =
+  (icon && (icon.src ?? icon)) || (profil?.src ?? '');
 ---
 
-<astro-imagebox class='postimagebox w-full flex flex-row justify-center cursor-pointer' data-src={src.src}>
-        <img src={src.src} class=` w-full xl:w-fit rounded ${orientation === 'horizontal' ? 'xl:h-full' : 'h-fit xl:h-[512px]'}` alt={alt}/>
-        <p>{legend}</p>
-</astro-imagebox >
+<astro-imagebox
+  class="relative postimagebox my-32 w-full flex flex-col justify-center items-center cursor-pointer"
+  data-src={src.src}
+  data-legend={legend || ""}
+  data-step={(step ?? "").toString()}
+  data-icon={overlayIcon || ""}
+  role="button"
+  tabindex="0"
+>
+  <figure class="relative w-full xl:w-fit">
+    <img
+      src={src.src}
+      alt={alt}
+      class={`w-full xl:w-fit rounded-xl shadow-xl ${orientation === 'horizontal' ? 'xl:h-full' : 'h-fit xl:h-[512px]'}`}
+    />
 
+    {legend && (
+      <figcaption class="absolute inset-x-0 bottom-0 rounded-b-xl pointer-events-none">
+        <div class="flex items-center gap-3 px-4 py-2
+                    bg-gradient-to-t from-black/100 to-blog-black/90
+                    backdrop-blur-[2px] rounded-b-xl">
+          {overlayIcon && (
+            <img src={overlayIcon} alt="" aria-hidden="true" class="h-8 w-8 opacity-90 shrink-0" />
+          )}
+          <span class="text-sm leading-tight text-white/95 font-mono">
+            {legend}
+          </span>
+          {step && (
+            <span class="ml-auto text-[11px] px-4 py-0.5 rounded-full
+                         bg-blog-black ring-1 ring-blog-marron-fond text-blog-marron-text
+                         uppercase shadow-blog-marron-shadow shadow">
+              Étape {step}
+            </span>
+          )}
+        </div>
+      </figcaption>
+    )}
+  </figure>
+</astro-imagebox>
 
 <script>
+  // Helpers modal
+function getOrCreateModal() {
+    let modal = document.getElementById('modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'modal';
+      modal.className = 'fixed inset-0 hidden z-50';
+      document.body.appendChild(modal);
+    }
 
-class AstroImageBox extends HTMLElement {
-        constructor() {
+    // (Re)structure le modal à chaque ouverture
+    modal.innerHTML = `
+      <div id="modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+      <div id="modal-panel" class="relative z-10 min-h-full w-full p-4 flex items-center justify-center">
+        <button id="modal-close" class="absolute top-4 right-4 rounded-full px-3 py-1 bg-black/60 text-white/90 text-sm ring-1 ring-white/20" aria-label="Fermer">Esc ✕</button>
+        <div id="modal--img" class="w-full max-w-6xl max-h-[85vh] overflow-auto"></div>
+      </div>
+    `;
+    modal.setAttribute('tabindex', '-1');
+
+    const backdrop = modal.querySelector('#modal-backdrop');
+    const closeBtn = modal.querySelector('#modal-close');
+
+    // ✅ Tous ces chemins appellent closeModal()
+    backdrop.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    // ✅ Clic "en dehors de l'image" → fermeture propre (et déblocage du scroll)
+    modal.addEventListener('click', (e) => {
+      const slot = modal.querySelector('#modal--img');
+      if (!slot.contains(e.target)) closeModal();
+    });
+
+    // ✅ Esc (une fois par ouverture)
+    document.addEventListener('keydown', onEscOnce, { once: true });
+
+    return modal;
+  }
+
+  function onEscOnce(e) {
+    if (e.key === 'Escape') closeModal();
+  }
+
+  function openModal(figure) {
+    const modal = getOrCreateModal();
+    const slot  = modal.querySelector('#modal--img');
+    slot.innerHTML = '';
+    slot.appendChild(figure);
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex'); // centre
+
+    // Bloque le scroll derrière
+    document.documentElement.classList.add('overflow-hidden');
+    modal.dataset.prevOverflow = document.body.style.overflow || '';
+    document.body.style.overflow = 'hidden';
+
+    modal.focus();
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('modal');
+    if (!modal) return;
+
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+
+    // Débloque le scroll
+    document.documentElement.classList.remove('overflow-hidden');
+    document.body.style.overflow = modal.dataset.prevOverflow || '';
+    delete modal.dataset.prevOverflow;
+  }
+
+  class AstroImageBox extends HTMLElement {
+    constructor() {
       super();
-        
-      const src = this.dataset.src
-      
-      this.addEventListener('click', event => {
+      const src    = this.dataset.src;
+      const legend = this.dataset.legend || "";
+      const step   = this.dataset.step || "";
+      const icon   = this.dataset.icon || "";
 
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");   
+      const open = () => {
+        // Figure plein écran
+        const figure = document.createElement('figure');
+        figure.className = 'relative w-full max-w-6xl overflow-hidden';
 
-        let image = document.createElement('img');
-        image.setAttribute('src',src,);
-        image.classList.add("bg-blog-black");   
+        const image = document.createElement('img');
+        image.src = src;
+        image.className = 'w-full h-auto rounded-xl bg-blog-black';
+        figure.appendChild(image);
 
-        let modalImg = document.getElementById('modal--img');
-        modalImg.innerHTML=' ';
-        modalImg.appendChild(image);
+        // Overlay plein écran (mêmes styles que la version inline)
+        if (legend) {
+          const figcap = document.createElement('figcaption');
+          figcap.className = 'absolute inset-x-0 bottom-0 z-10 pointer-events-none';
+          figcap.innerHTML = `
+            <div class="flex items-center gap-3 px-4 py-2
+                        bg-gradient-to-t from-black/100 to-blog-black/90
+                        backdrop-blur-[2px] rounded-b-xl">
+              ${icon ? `<img src="${icon}" alt="" class="h-8 w-8 opacity-90 shrink-0">` : ''}
+              <span class="text-sm leading-tight text-white/95 font-mono">${legend}</span>
+              ${step ? `<span class="ml-auto text-[11px] px-4 py-0.5 rounded-full
+                                   bg-blog-black ring-1 ring-blog-marron-fond text-blog-marron-text
+                                   uppercase shadow-blog-marron-shadow shadow">Étape ${step}</span>` : ''}
+            </div>
+          `;
+          figure.appendChild(figcap);
+        }
 
-        })
+        openModal(figure);
+      };
+
+      this.addEventListener('click', open);
+      this.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
     }
   }
-    customElements.define('astro-imagebox', AstroImageBox);
+  customElements.define('astro-imagebox', AstroImageBox);
 </script>
