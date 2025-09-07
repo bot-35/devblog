@@ -1,0 +1,29 @@
+name: limit-astro-files
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Count changed .astro files
+        id: count
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+          COUNT=$(git diff --name-only --diff-filter=ACMR "$BASE...$HEAD" -- '*.astro' | sort -u | wc -l)
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "Changed .astro files: $COUNT"
+      - name: Enforce limit
+        run: |
+          LIMIT=10
+          if [ "${{ steps.count.outputs.count }}" -gt "$LIMIT" ]; then
+            echo "::error ::${{ steps.count.outputs.count }} fichiers .astro modifiés (limite $LIMIT). Scinde ta PR."
+            exit 1
+          fi
