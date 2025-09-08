@@ -126,17 +126,15 @@ Votre YAML se trouve dans le bon dossier (.github/workflows) de votre dépôt lo
 
 <ImageBox  src={action} orientation="horizontal" step="2" legend="Le workflow s’exécute dans GitHub Actions" alt="Screen de GitHub Actions et du workflow en cours d’exécution."/>
 
-<ImageBox  src={erreur} orientation="horizontal" step="3" legend="Parfois on commet des erreurs 🙈" alt="Screen de GitHub Actions et du workflow en erreur."/>
+<ImageBox  src={erreur} orientation="horizontal" error legend="Parfois on commet des erreurs 🙈" alt="Screen de GitHub Actions et du workflow en erreur."/>
 
-<ImageBox  src={erreur2} orientation="horizontal" step="3.1" legend="Les détails de l’erreur" alt="Screen de GitHub Actions et du détail de l’erreur du workflow."/>
+<ImageBox  src={erreur2} orientation="horizontal" error legend="Les détails de l’erreur" alt="Screen de GitHub Actions et du détail de l’erreur du workflow."/>
 
-<ImageBox  src={ok} orientation="horizontal" step="4" legend="Après avoir revu l’indentation, le workflow passe ✨"  alt="Screen de GitHub Actions et du workflow réussi."/>
+<ImageBox  src={ok} orientation="horizontal" step="3" legend="Après avoir revu l’indentation, le workflow passe ✨"  alt="Screen de GitHub Actions et du workflow réussi."/>
 
-<ImageBox  src={jobs} orientation="horizontal" step="4.1" legend="Les détails sur le déroulement du workflow" alt="Screen de GitHub Actions et des détails du workflow."/>
+<ImageBox  src={jobs} orientation="horizontal" step="3.1" legend="Les détails sur le déroulement du workflow" alt="Screen de GitHub Actions et des détails du workflow."/>
 
-<ImageBox  src={badges} orientation="horizontal" step="résultat 1" legend="Les badges ont bien été poussés dans le dépôt 😎" alt="Screen de GitHub et du dépôt contenant maintenant les deux badges."/>
-
-<ImageBox  src={result} orientation="horizontal" step="résultat 2" legend="Le résultat en image" alt="Les badges dans le README."/>
+<ImageBox  src={result} orientation="horizontal" result legend="Le résultat en image" alt="Les badges dans le README."/>
 
 ## Conclusion
 On part d’un geste manuel (mettre à jour le README) et on le transforme en pipeline reproductible : **un push → un workflow GitHub Actions calcule des métriques (nombre d’articles, nombre de mots), génère des artefacts (badges) et effectue un commit dans le dépôt, avec des droits minimaux (contents: write)**.
