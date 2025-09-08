@@ -5,7 +5,9 @@ const {
   orientation,          // 'horizontal' | autre
   legend,               // string (optionnel)
   step = null,          // number | null
-  icon = null           // chemin ou import d'image | null
+  error,         // number | null
+  icon = null,           // chemin ou import d'image | null
+  result          // number | null
 } = Astro.props;
 
 import profil from '../../img/profil/citation.png';
@@ -20,6 +22,8 @@ const overlayIcon =
   data-src={src.src}
   data-legend={legend || ""}
   data-step={(step ?? "").toString()}
+  data-error={(error ?? "")}
+  data-result={(result ?? "")}
   data-icon={overlayIcon || ""}
   role="button"
   tabindex="0"
@@ -46,7 +50,21 @@ const overlayIcon =
             <span class="ml-auto text-[11px] px-4 py-0.5 rounded-full
                          bg-blog-black ring-1 ring-blog-marron-fond text-blog-marron-text
                          uppercase shadow-blog-marron-shadow shadow">
-              Étape {step}
+             ➡ Étape {step}
+            </span>
+          )}
+          {error && (
+            <span class="ml-auto text-[11px] px-4 py-0.5 rounded-full
+                         bg-red-200/0 ring-1 ring-red-600/70 text-red-400
+                         uppercase shadow-red-600/50 shadow">
+              Erreur ❌
+            </span>
+          )}
+           {result && (
+            <span class="ml-auto text-[11px] px-4 py-0.5 rounded-full
+                         bg-green-600/25 ring-1 ring-green-600/70 text-green-600
+                         uppercase shadow-green-600/50 shadow">
+              Résultat ✔
             </span>
           )}
         </div>
@@ -138,6 +156,8 @@ function getOrCreateModal() {
       const src    = this.dataset.src;
       const legend = this.dataset.legend || "";
       const step   = this.dataset.step || "";
+      const error   = this.dataset.error || "";
+      const result   = this.dataset.result || "";
       const icon   = this.dataset.icon || "";
 
       const open = () => {
@@ -162,7 +182,13 @@ function getOrCreateModal() {
               <span class="text-sm leading-tight text-white/95 font-mono">${legend}</span>
               ${step ? `<span class="ml-auto text-[11px] px-4 py-0.5 rounded-full
                                    bg-blog-black ring-1 ring-blog-marron-fond text-blog-marron-text
-                                   uppercase shadow-blog-marron-shadow shadow">Étape ${step}</span>` : ''}
+                                   uppercase shadow-blog-marron-shadow shadow">➡ Étape ${step}</span>` : ''}
+              ${error ? `<span class="ml-auto text-[11px] px-4 py-0.5 rounded-full
+                                    bg-red-200/0 ring-1 ring-red-600/70 text-red-400
+                                    uppercase shadow-red-600/50 shadow">Erreur ❌</span>` : ''}
+              ${result ? `<span class="ml-auto text-[11px] px-4 py-0.5 rounded-full
+                                    bg-green-600/25 ring-1 ring-green-600/70 text-green-600
+                                    uppercase shadow-green-600/50 shadow">Résultat ✔</span>` : ''}
             </div>
           `;
           figure.appendChild(figcap);
