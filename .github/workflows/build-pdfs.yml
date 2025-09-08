@@ -10,7 +10,6 @@ on:
       - 'package.json'
       - 'package-lock.json'
   workflow_dispatch:
-
 permissions:
   contents: write
 
@@ -19,13 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
+        with: { fetch-depth: 1 }
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
 
       - name: Install deps
         run: npm ci
@@ -33,60 +29,19 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Start preview (background)
-        run: npm run preview -- --host 0.0.0.0 &
-
-      - name: Wait for preview to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -sSf http://127.0.0.1:4321 >/dev/null; then
-              echo "Preview is up!";
-              break
-            fi
-            echo "Waiting for preview..."
-            sleep 2
-          done
-
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Generate PDFs (depuis src/content/posts)
+      - name: Generate PDFs (guarded)
         run: |
           node --input-type=module -e '
           import { globby } from "globby";
-          import matter from "gray-matter";
           import { chromium } from "playwright";
-          import { readFileSync, writeFileSync, mkdirSync } from "fs";
+          import { writeFileSync, mkdirSync, statSync } from "fs";
           import { join, relative } from "path";
 
           (async () => {
-            const base = "http://127.0.0.1:4321";
-            const contentGlob = [
-              "src/content/posts/**/*.md",
-              "src/content/posts/**/*.mdx"
-            ];
-
-            const files = await globby(contentGlob, { gitignore: true });
-
-            // Construit la liste { slug, url } à partir du front-matter
-            const posts = files.map(fp => {
-              const raw = readFileSync(fp, "utf8");
-              const { data } = matter(raw) || {};
-              if (data?.draft === true) return null;
-
-              // Priorité au front-matter "slug"
-              let slug = data?.slug;
-              if (!slug) {
-                // fallback : chemin relatif à src/content/posts (sans extension)
-                const rel = relative("src/content/posts", fp)
-                  .replace(/\\/g, "/")
-                  .replace(/\.(md|mdx)$/i, "");
-                slug = rel; // supporte dossiers imbriqués: a/b/c -> /posts/a/b/c
-              }
-              const url = `${base}/posts/${slug}`;
-              return { slug, url };
-            }).filter(Boolean);
-
+            const files = await globby(["dist/posts/**/*index.html","dist/posts/**/*.html"]);
             const outDir = "public/pdfs";
             mkdirSync(outDir, { recursive: true });
 
@@ -94,24 +49,58 @@ jobs:
             const page = await browser.newPage();
             await page.emulateMedia({ media: "print" });
 
-            for (const p of posts) {
-              console.log("PDF =>", p.slug, p.url);
-              await page.goto(p.url, { waitUntil: "networkidle" });
-              const pdf = await page.pdf({
-                format: "A4",
-                printBackground: true,
-                margin: { top: "16mm", right: "16mm", bottom: "16mm", left: "16mm" },
-              });
-              // Remplace les "/" dans les slugs imbriqués pour créer un nom de fichier stable
-              const safeName = p.slug.replace(/\/*$/, "").replace(/\//g, "__") || "article";
-              writeFileSync(join(outDir, `${safeName}.pdf`), pdf);
-            }
+            const minBytes = 30 * 1024; // PDF < 30 Ko => considéré comme raté
 
+            for (const f of files) {
+              const rel = relative("dist/posts", f).replace(/\\/g, "/");
+              const slug = rel.endsWith("index.html")
+                ? rel.slice(0, -"index.html".length).replace(/\/$/, "")
+                : rel.replace(/\.html$/, "");
+
+              const url = "file://" + join(process.cwd(), "dist/posts", rel);
+              const safe = (slug || "article").replace(/\/*$/, "").replace(/\//g, "__");
+              const out = join(outDir, `${safe}.pdf`);
+
+              try {
+                await page.goto(url, { waitUntil: "load" });
+                // Validation : attendre la présence d’un contenu article
+                await page.waitForSelector("article, main", { timeout: 5000 });
+
+                const pdf = await page.pdf({
+                  format: "A4",
+                  printBackground: true,
+                  margin: { top: "16mm", right: "16mm", bottom: "16mm", left: "16mm" },
+                });
+                writeFileSync(out, pdf);
+
+                const size = statSync(out).size;
+                if (size < minBytes) {
+                  console.warn("PDF trop petit, on supprime:", safe, size);
+                  await page.screenshot({ path: `public/pdfs/${safe}.png`, fullPage: true }).catch(()=>{});
+                  // Si trop petit, on supprime le PDF pour éviter un commit pourri
+                  await import("fs").then(fs => fs.unlinkSync(out));
+                } else {
+                  console.log("PDF OK:", safe, size, "bytes");
+                }
+              } catch (e) {
+                console.error("Raté pour:", safe, e.toString());
+              }
+            }
             await browser.close();
           })().catch(e => { console.error(e); process.exit(1); });
           '
 
-      - name: Commit PDFs
+      - name: Upload PDFs as artifact (non-main)
+        if: github.ref != 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdfs-${{ github.ref_name }}
+          path: public/pdfs
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Commit PDFs (main only)
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
