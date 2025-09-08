@@ -102,12 +102,13 @@ function getOrCreateModal() {
   function openModal(figure) {
     const modal = getOrCreateModal();
     const slot  = modal.querySelector('#modal--img');
+    const menu = document.getElementById('menu_small')
     slot.innerHTML = '';
     slot.appendChild(figure);
 
     modal.classList.remove('hidden');
     modal.classList.add('flex'); // centre
-
+    menu?.classList.add('hidden');
     // Bloque le scroll derrière
     document.documentElement.classList.add('overflow-hidden');
     modal.dataset.prevOverflow = document.body.style.overflow || '';
@@ -118,10 +119,12 @@ function getOrCreateModal() {
 
   function closeModal() {
     const modal = document.getElementById('modal');
+    const menu = document.getElementById('menu-small')
     if (!modal) return;
 
     modal.classList.add('hidden');
     modal.classList.remove('flex');
+    menu?.classList.remove('hidden');
 
     // Débloque le scroll
     document.documentElement.classList.remove('overflow-hidden');
