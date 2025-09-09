@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import { Icon } from "astro-icon/components";
 import Layout from "../../layouts/layoutPosts.astro";
 import MultipleParts from "../../components/MultipleParts/MultipleParts.astro";
 import InspiredBy from "../../components/InspiredBy/InspiredBy.astro";
+import ServeurPDF from '../../img/profil/serveur_pdf.png';
 
 
 export async function getStaticPaths() {
@@ -53,6 +53,16 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
       </p>
       <section class="overflow-y-auto max-h-[50vh] py-2 my-8  text-sm border-b" id="tdm">
       </section>
+      <section class="stickky bottom-8 left-4 ">
+              <a
+                class="no-print px-3 py-2 rounded-md border text-sm hover:bg-gray-100"
+                href={`/pdfs/${remarkPluginFrontmatter.slug.replaceAll('/', '__')}.pdf`}
+                download
+              >
+              <img src={ServeurPDF.src} alt=""/>  
+                ⬇️ Télécharger en PDF
+              </a>
+      </section>
       <section class="w-full flex flex-row justify-center gap-2  items-center">
         <p class = "text-xs text-white">
           Source :
@@ -84,7 +94,7 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
       </section>
       <section
         id="details"
-        class="w-full flex flex-row justify-between mb-4 px-4 pb-2 border-b border-blog-marron-text"
+        class="w-full flex flex-row justify-between mb-4 px-4 pb-2 border-b border-blog-marron-text no-print"
       >
         <time         transition:name=`post ${remarkPluginFrontmatter.slug} date`
         datetime={entry.data.publishedDate.toISOString()}
@@ -93,7 +103,7 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
         <p><span class="mr-4" transition:name=`post ${remarkPluginFrontmatter.slug} mintoread`>☕</span>{remarkPluginFrontmatter.minutesRead}</p>
       </section>
       
-      <section class="flex flex-row justify-center w-full">
+      <section class="flex flex-row justify-center w-full no-print">
         <img
           src={remarkPluginFrontmatter.image}
           class="rounded-xl max-h-[420px]  mt-4 mb-12 shadow"
@@ -140,6 +150,7 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
   @reference "tailwindcss/theme.css";
   @reference "../../styles/main.css";
   
+
 
   .toc li { @apply relative pl-4 font-jost  ; }
   .toc > ol > li {
