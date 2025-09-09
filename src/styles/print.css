@@ -1,0 +1,132 @@
+@media print {
+  /* Masquer ce qui n'est pas utile */
+  header, nav, footer, aside,
+  .menu, .mobile-menu, .hamburger,
+  .no-print, [data-print="hide"] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Neutraliser les layouts perturbateurs */
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 14px !important;
+  }
+
+  /* Forcer la zone principale */
+  section#article {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 1rem !important;
+    background: #fff !important;
+    color: #000 !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Images propres */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Titres et paragraphes */
+  h1, h2, h3, h4, h5, h6 {
+    color: #000 !important;
+    font-weight: bold !important;
+    page-break-after: avoid;
+    margin: 1em 0 0.5em 0 !important;
+
+  }
+
+h1 {
+    font-size: 45px !important;
+}
+
+h2 {
+    font-size: 35px !important;
+}
+
+h3 {
+    font-size: 19px !important;
+}
+h4 {
+    font-size: 14px !important;
+}
+
+em {
+   font-size: initial !important;
+}
+
+  p {
+    margin: 0 0 1em 0 !important;
+    color: #000 !important;
+    font-size: 12px !important;
+  }
+
+code {
+  background-color: #aaaaaa !important;
+  color: black !important;
+}
+
+  span {
+    color: #000 !important;  /* surclasse l’inline */
+  }
+figcaption div span {
+    color: white !important;  /* surclasse l’inline */
+}
+
+a {
+  text-decoration: none !important;
+  color: #000 !important;
+}
+
+  ul, ol, li {
+    color: #000 !important;            /* texte noir */
+    background: transparent !important;/* enlève fonds éventuels */
+  }
+
+blockquote::before {
+  color: black !important;
+}
+
+blockquote{
+  border-bottom-color: #000 !important;
+}
+
+  ul, ol {
+    margin: 0 0 1em 2em !important;    /* marge gauche pour les puces */
+    padding: 0 !important;
+  }
+
+  li {
+    margin: 0.2em 0 !important;
+    list-style-position: outside !important;
+  }
+strong {
+    color: black !important;
+}
+
+    ul {
+    list-style-type: disc !important;
+  }
+  ol {
+    list-style-type: decimal !important;
+  }
+
+  a::after {
+    content: " (" attr(href) ")" !important;
+    font-size: 10pt !important;
+    color: #555 !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 16mm;
+  }
+}
