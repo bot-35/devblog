@@ -20,3 +20,4 @@ pnpm-debug.log*
 *.mp4
 .vscode
 *code-workspace
+public/pdfs
