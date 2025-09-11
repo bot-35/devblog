@@ -34,7 +34,7 @@ jobs:
           START_MARKER: LAST_POST_START
           END_MARKER: LAST_POST_END
         run: |
-          node scripts/latest-post.js
+          node scripts/latest-post.cjs
 
       - name: Commit changes if any
         run: |
