@@ -1,7 +1,7 @@
 # 🤖 Bot35 Devblog
 
 <p align="center">
-    <img src="public/img/github/bot-35-profil.png" width="200">
+    <img src="public/src/img/pdf/small_couverture.png" width="200">
 </p>
 
 <p align="center">
