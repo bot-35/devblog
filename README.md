@@ -48,6 +48,10 @@ Rapide, flexible, bref, parfait pour un blog.
 
 ## 📰 Derniers articles
 - [🐱‍🏍 Carnet d'aventure DevOps ] #1 => Qu'est-ce que ce truc ?!
+
+<!-- LAST_POST_START -->
+*(calcul en cours…)*
+<!-- LAST_POST_END -->
 ---
 
 ## 👀 Envie d’en savoir plus ?
