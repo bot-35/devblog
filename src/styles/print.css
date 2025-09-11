@@ -1,8 +1,60 @@
+/* Invisible à l'écran, visible en impression (pdf) */
+.print-only {
+  display: none !important;
+}
+
 @media print {
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Premier enfant du body doit occuper directement la page 1 */
+  body>.cover:first-child,
+  body>.print-cover:first-child {
+    page: coverpage;
+    break-before: avoid-page !important;
+    page-break-before: avoid !important;
+  }
+
+  /* Couverture pleine page */
+  .print-cover {
+    page-break-after: always;
+    /* force saut après la couverture */
+    display: block;
+    height: 100vh;
+    /* occupe la page */
+    margin: 0 !important;
+    padding: 0 !important;
+    /* Mise en page au choix : centré, gros titres, etc. */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #000 !important;
+    color: #000 !important;
+    page: coverpage;
+  }
+
+  .print-cover img {
+    width: 100%;
+    max-height: 100vh;
+    object-fit: cover;
+  }
+
   /* Masquer ce qui n'est pas utile */
-  header, nav, footer, aside,
-  .menu, .mobile-menu, .hamburger,
-  .no-print, [data-print="hide"] {
+  header,
+  nav,
+  footer,
+  aside,
+  .menu,
+  .mobile-menu,
+  .hamburger,
+  .no-print,
+  [data-print="hide"] {
     display: none !important;
     visibility: hidden !important;
   }
@@ -18,12 +70,22 @@
     font-size: 14px !important;
   }
 
+  body div {
+    padding: 0 !important;
+  }
+
+  body div section {
+    display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   /* Forcer la zone principale */
   section#article {
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0 auto !important;
-    padding: 0 1rem !important;
+    margin: 0 !important;
+    padding: 0 0.1rem !important;
     background: #fff !important;
     color: #000 !important;
     line-height: 1.5 !important;
@@ -36,71 +98,91 @@
   }
 
   /* Titres et paragraphes */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: #000 !important;
     font-weight: bold !important;
+    break-after: avoid;
     page-break-after: avoid;
     margin: 1em 0 0.5em 0 !important;
-
   }
 
-h1 {
+  h1 {
     font-size: 45px !important;
-}
+  }
 
-h2 {
+  h2 {
     font-size: 35px !important;
-}
+  }
 
-h3 {
+  h3 {
     font-size: 19px !important;
-}
-h4 {
-    font-size: 14px !important;
-}
+  }
 
-em {
-   font-size: initial !important;
-}
+  h4 {
+    font-size: 14px !important;
+  }
+
+  em {
+    font-size: initial !important;
+  }
 
   p {
     margin: 0 0 1em 0 !important;
     color: #000 !important;
     font-size: 12px !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    widows: 3;
+    orphans: 3;
   }
 
-code {
-  background-color: #aaaaaa !important;
-  color: black !important;
-}
+
+  code {
+    background-color: #aaaaaa !important;
+    color: black !important;
+  }
 
   span {
-    color: #000 !important;  /* surclasse l’inline */
-  }
-figcaption div span {
-    color: white !important;  /* surclasse l’inline */
-}
-
-a {
-  text-decoration: none !important;
-  color: #000 !important;
-}
-
-  ul, ol, li {
-    color: #000 !important;            /* texte noir */
-    background: transparent !important;/* enlève fonds éventuels */
+    color: #000 !important;
+    /* surclasse l’inline */
   }
 
-blockquote::before {
-  color: black !important;
-}
+  figcaption div span {
+    color: white !important;
+    /* surclasse l’inline */
+  }
 
-blockquote{
-  border-bottom-color: #000 !important;
-}
+  a {
+    text-decoration: none !important;
+    color: #000 !important;
+  }
 
-  ul, ol {
-    margin: 0 0 1em 2em !important;    /* marge gauche pour les puces */
+  ul,
+  ol,
+  li {
+    color: #000 !important;
+    /* texte noir */
+    background: transparent !important;
+    /* enlève fonds éventuels */
+  }
+
+  blockquote::before {
+    color: black !important;
+  }
+
+  blockquote {
+    border-bottom-color: #000 !important;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 1em 2em !important;
+    /* marge gauche pour les puces */
     padding: 0 !important;
   }
 
@@ -108,13 +190,15 @@ blockquote{
     margin: 0.2em 0 !important;
     list-style-position: outside !important;
   }
-strong {
-    color: black !important;
-}
 
-    ul {
+  strong {
+    color: black !important;
+  }
+
+  ul {
     list-style-type: disc !important;
   }
+
   ol {
     list-style-type: decimal !important;
   }
@@ -128,5 +212,14 @@ strong {
   @page {
     size: A4;
     margin: 16mm;
+    /* aucune marge */
   }
+
+  @page coverpage {
+    margin: 0 0 0 0 !important;
+    /* pas de marge du tout */
+    padding: 0 0 0 0 !important;
+  }
+
+
 }
