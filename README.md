@@ -50,7 +50,9 @@ Rapide, flexible, bref, parfait pour un blog.
 - [🐱‍🏍 Carnet d'aventure DevOps ] #1 => Qu'est-ce que ce truc ?!
 
 <!-- LAST_POST_START -->
-*(calcul en cours…)*
+**Dernier article :** [Carnet d'aventure DevOps #2 : Mini Projet - Un README de DevOpseur !](https://devblog-bot-35.vercel.app/posts/carnet-aventure-devops-2-miniprojet_readme_devopseur)
+> Premier mini-projet pour comprendre le DevOps, créer un README de DevOpseur !
+*Publié le 2025-09-02*
 <!-- LAST_POST_END -->
 ---
 
