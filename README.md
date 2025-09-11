@@ -1,7 +1,7 @@
 # 🤖 Bot35 Devblog
 
 <p align="center">
-    <img src="src/img/pdf/main_couverture.png" width="200">
+    <img src="src/img/pdf/main_couverture.png" width="650">
 </p>
 
 <p align="center">
