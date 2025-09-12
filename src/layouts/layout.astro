@@ -12,7 +12,7 @@ import SVG from "../components/SVG/SVG.astro";
 import SVGMarron from "../components/SVG/SVGMarron.astro";
 import  SpeedInsights  from "@vercel/speed-insights/astro"
 import Analytics from '@vercel/analytics/astro'
-
+import LastMusic from "../components/LastMusic/LastMusic.astro";
 import bg from "../img/photo-bg/bourdon1.png";
 
 /** Initialisation du titre de la page*/
@@ -56,6 +56,7 @@ const description =
 				<Breadcrumbs indexText="Index" />
 			</section>
 		</div>
+		<LastMusic  limit="1"/>
 		<Footer />
 	</body></html>
 
