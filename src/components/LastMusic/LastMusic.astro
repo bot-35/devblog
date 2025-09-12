@@ -7,7 +7,7 @@ import dancing from "../../img/profil/dance.png";
 const { limit = 1 } = Astro.props;
 ---
 
-<section class="fixed left-1/2 top-1/2 bg-blog-marron-fond   my-8 min-h-42 min-w-120 flex flex-col border border-blog-marron-shadow" aria-labelledby="lastfm-title">
+<section class="fixed left-1/2 top-1/2 bg-blog-marron-fond/50 backdrop-blur-xl my-8 min-h-42 min-w-120 flex flex-col border border-blog-marron-shadow" aria-labelledby="lastfm-title">
     <h3 id="lastfm-title" class="font-mono text-sm text-blog-black text-center">
         Dernières écoutes
     </h3>
@@ -82,19 +82,13 @@ const { limit = 1 } = Astro.props;
                             a.target = "_blank";
 
                             const by = document.createElement("span");
-                            by.className = "text-neutral-500";
+                            by.className = "text-blog-black";
                             by.textContent = " — " + (t.artist || "Inconnu");
 
                             li.appendChild(a);
                             li.appendChild(by);
 
-                            if (t.nowPlaying) {
-                                const tag = document.createElement("span");
-                                tag.className =
-                                    "text-xs ml-2 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700";
-                                tag.textContent = "En cours";
-                                li.appendChild(tag);
-                            }
+             
 
                             list.appendChild(li);
                         }
@@ -102,12 +96,6 @@ const { limit = 1 } = Astro.props;
                         container.innerHTML = "";
                         container.appendChild(list);
 
-                        if (updatedLabel) {
-                            const small = document.createElement("div");
-                            small.className = "mt-2 text-xs text-neutral-500";
-                            small.textContent = `Mis à jour ${updatedLabel}`;
-                            container.appendChild(small);
-                        }
                     } catch (e) {
                         console.error(e);
                         container.textContent =
