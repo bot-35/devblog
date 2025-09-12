@@ -1,0 +1,117 @@
+---
+import dancing from "../../img/profil/d"
+
+/**
+ * Usage : <LastFmClient limit={5} />
+ */
+const { limit = 1 } = Astro.props;
+
+
+
+---
+
+<section class="my-8" aria-labelledby="lastfm-title">
+  <h3 id="lastfm-title" class="text-xl font-semibold">🎶 Dernières écoutes</h3>
+
+  <astro-lastmusic class="block" data-limit={limit}>
+    <div class="mt-4 text-sm text-neutral-600" data-role="container">
+      Chargement…
+    </div>
+  </astro-lastmusic>
+
+  <script type="module">
+    class AstroLastMusic extends HTMLElement {
+      connectedCallback() {
+        const container = this.querySelector('[data-role="container"]');
+        const LIMIT = Number(this.dataset.limit || 5);
+
+        function timeAgo(ts) {
+          if (!ts) return "";
+          const diff = Date.now() - ts;
+          const mins = Math.floor(diff / 60000);
+          if (mins < 1) return "à l’instant";
+          if (mins < 60) return `il y a ${mins} min`;
+          const h = Math.floor(mins / 60);
+          return `il y a ${h} h`;
+        }
+
+        const load = async () => {
+          try {
+            const res = await fetch('/api/lastfm.json', { cache: 'no-store' });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const data = await res.json();
+
+            const updatedLabel = data?.updatedAtTs ? timeAgo(data.updatedAtTs) : "";
+            const tracks = (data?.tracks ?? []).slice(0, LIMIT);
+
+            if (!tracks.length) {
+              container.textContent = "Aucune donnée disponible pour le moment.";
+              return;
+            }
+
+            const list = document.createElement('ul');
+            list.className = 'space-y-3';
+
+            for (const t of tracks) {
+              const li = document.createElement('li');
+              li.className = 'flex items-center gap-3';
+
+              if (t.image) {
+                const img = document.createElement('img');
+                img.src = t.image;
+                img.alt = "";
+                img.width = 48; img.height = 48;
+                img.loading = "lazy";
+                img.className = "rounded-lg";
+                li.appendChild(img);
+              }
+
+              const a = document.createElement('a');
+              a.href = t.url || "#";
+              a.textContent = t.title || "Sans titre";
+              a.className = "font-medium hover:underline";
+              a.rel = "noopener";
+              a.target = "_blank";
+
+              const by = document.createElement('span');
+              by.className = "text-neutral-500";
+              by.textContent = " — " + (t.artist || "Inconnu");
+
+              li.appendChild(a);
+              li.appendChild(by);
+
+              if (t.nowPlaying) {
+                const tag = document.createElement('span');
+                tag.className = "text-xs ml-2 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700";
+                tag.textContent = "En cours";
+                li.appendChild(tag);
+              }
+
+              list.appendChild(li);
+            }
+
+            container.innerHTML = "";
+            container.appendChild(list);
+
+            if (updatedLabel) {
+              const small = document.createElement('div');
+              small.className = "mt-2 text-xs text-neutral-500";
+              small.textContent = `Mis à jour ${updatedLabel}`;
+              container.appendChild(small);
+            }
+          } catch (e) {
+            console.error(e);
+            container.textContent = "Impossible de charger les écoutes Last.fm pour le moment.";
+          }
+        };
+
+        load();
+      }
+    }
+
+    // 🔑 Enregistrer le custom element
+    if (!customElements.get('astro-lastmusic')) {
+      customElements.define('astro-lastmusic', AstroLastMusic);
+    }
+  </script>
+</section>
