@@ -2,6 +2,7 @@
 import dancing from "../../img/profil/dance.png";
 import dancing1 from "../../img/profil/9675a999-06d8-4d59-8d94-091fbde04083.png";
 import dancing2 from "../../img/profil/91188050-9037-45ca-a595-cd41ccfa8ff7.png";
+import dancing3 from "../../img/profil/ee7db05e-f567-42cf-8301-f9e6ba45c8ea.png";
 
 import { Icon } from 'astro-icon/components';
 
@@ -13,6 +14,7 @@ const { limit = 1 } = Astro.props;
 
 <section class="w-full rounded-4xl max-w-md h-48 flex flex-row border border-blog-marron-text/25 bg-blog-marron-fond/25 backdrop-blur-sm" aria-labelledby="lastfm-title">
     <h3 id="lastfm-title" class="text-sm rounded-4xl text-center uppercase [writing-mode:vertical-rl] [text-orientation:mixed] bg-gradient-to-r origin-left from-blog-marron-shadow/50  font-jost  to-blog-marron-text/75 border-r border-blog-black/15 py-4 px-4 text-blog-black ">
+        <img src={dancing.src} alt='Bot-35 qui danse' class=" h-full w-fit -rotate-12"/>
     </h3>
     <section class="h-32 flex flex-row items-center justify-center relative p-8">
         <astro-lastmusic class="block" data-limit={limit}>
