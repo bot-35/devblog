@@ -1,119 +1,144 @@
 ---
-import dancing from "../../img/profil/dance.png";
-import dancing1 from "../../img/profil/9675a999-06d8-4d59-8d94-091fbde04083.png";
-import dancing2 from "../../img/profil/91188050-9037-45ca-a595-cd41ccfa8ff7.png";
-import dancing3 from "../../img/profil/ee7db05e-f567-42cf-8301-f9e6ba45c8ea.png";
-
-import { Icon } from 'astro-icon/components';
-
 /**
- * Usage : <LastFmClient limit={5} />
+ * Bandeau "Dernière écoute" — style maquette PS
+ * - Robot carré à gauche (vignette + ombre)
+ * - Fond brun/orangé + motif ondes
+ * - DERNIÈRE ÉCOUTE en petit (haut-droit du bloc texte)
+ * - Titre XXL condensé, artiste en dessous, timing en italique
  */
+import '@fontsource-variable/jetbrains-mono';
+import robot from "../../img/profil/vinyl2.png"; // remplace si besoin
 const { limit = 1 } = Astro.props;
 ---
 
-<section class="w-full rounded-4xl max-w-md h-48 flex flex-row border border-blog-marron-text/25 bg-blog-marron-fond/25 backdrop-blur-sm" aria-labelledby="lastfm-title">
-    <h3 id="lastfm-title" class="text-sm rounded-4xl text-center uppercase [writing-mode:vertical-rl] [text-orientation:mixed] bg-gradient-to-r origin-left from-blog-marron-shadow/50  font-jost  to-blog-marron-text/75 border-r border-blog-black/15 py-4 px-4 text-blog-black ">
-        <img src={dancing.src} alt='Bot-35 qui danse' class=" h-full w-fit -rotate-12"/>
-    </h3>
-    <section class="h-32 flex flex-row items-center justify-center relative p-8">
-        <astro-lastmusic class="block" data-limit={limit}>
-            <div class=" mt-16 rounded-4xl text-sm bg-blog-marron-reflet/10 border border-blog-marron-text shadow-2xl shadow-blog-black/25  h-32 flex flex-row items-center justify-center gap-0 text-blog-black" data-role="container">
-                Chargement…
-            </div>
-        </astro-lastmusic>
-    </section>
-</section>
+<section
+  class="relative ml-32 isolate w-full max-w-2xl overflow-hidden rounded-md border border-blog-marron-text/25
+         bg-gradient-to-r from-[#7e522b]  to-[#c78145] px-5 py-4
+         shadow-xl shadow-blog-black/50"
+  aria-labelledby="lfm-title"
+  style="font-family: 'JetBrains Mono Variable', monospace;"
+>
+  <!-- Motif ondes -->
+  <svg class="pointer-events-none absolute inset-0 -z-10 opacity-[0.16]" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="g" x1="0" x2="1">
+        <stop offset="0" stop-color="#000"/>
+        <stop offset="1" stop-color="#000"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,210 C150,170 250,260 400,220 C550,180 650,260 800,220 C950,180 1050,250 1200,210" fill="none" stroke="url(#g)" stroke-width="16" stroke-linecap="round" opacity="0.35"/>
+    <path d="M0,120 C150,80 250,170 400,130 C550,90 650,170 800,130 C950,90 1050,160 1200,120"  fill="none" stroke="url(#g)" stroke-width="16" stroke-linecap="round" opacity="0.25"/>
+  </svg>
 
-    <script type="module">
-        class AstroLastMusic extends HTMLElement {
-            connectedCallback() {
-                const container = this.querySelector('[data-role="container"]');
-                const LIMIT = Number(this.dataset.limit || 5);
+  <div class="flex items-center gap-6">
+    <!-- Vignette robot -->
+    <div class="shrink-0">
+      <div class="relative rounded-lg ring-1 ring-blog-black/20 shadow-2xl shadow-blog-black/30">
+        <img
+          src={robot.src}
+          alt="Bot-35 qui écoute de la musique"
+          width="112" height="112"
+          class="h-46 w-46  object-cover"
+          loading="lazy"
+        />
+        <!-- léger bord clair façon cadre -->
+        <span class="pointer-events-none absolute inset-0 rounded-lg ring-1 ring-white/10"></span>
+      </div>
+    </div>
 
-                function timeAgo(ts) {
-                    if (!ts) return "";
-                    const diff = Date.now() - ts;
-                    const mins = Math.floor(diff / 60000);
-                    if (mins < 1) return "à l’instant";
-                    if (mins < 60) return `il y a ${mins} min`;
-                    const h = Math.floor(mins / 60);
-                    return `il y a ${h} h`;
-                }
+    <!-- Bloc texte -->
+    <astro-lastmusic class="block min-w-0 flex-1" data-limit={limit}>
+      <div class="relative min-w-0">
+        <!-- Légende en haut-droit -->
+        <p class="absolute right-8 -top-8 font-bold text-[11px] uppercase  text-blog-black/70">
+          DERNIÈRE ÉCOUTE
+        </p>
 
-                const load = async () => {
-                    try {
-                        const res = await fetch("/api/lastfm.json", {
-                            cache: "no-store",
-                        });
-                        if (!res.ok) throw new Error("HTTP " + res.status);
-                        const data = await res.json();
+        <!-- Titre (remplacé dynamiquement) -->
+        <h3 id="lfm-title"
+            class="truncate text-5xl uppercase italic  font-bold tracking-wider text-blog-black/90 [letter-spacing:0.02em]">
+          Chargement…
+        </h3>
 
-                        const updatedLabel = data?.updatedAtTs
-                            ? timeAgo(data.updatedAtTs)
-                            : "";
-                        const tracks = (data?.tracks ?? []).slice(0, LIMIT);
+        <!-- Artiste -->
+        <p class="mt-2 truncate text-[15px] tracking-[0.12em] font-medium text-black/75"></p>
 
-                        if (!tracks.length) {
-                            container.textContent =
-                                "Aucune donnée disponible pour le moment.";
-                            return;
-                        }
+        <!-- Timestamp -->
+        <p class="mt-2 text-sm italic tracking-wide text-black/70"></p>
+      </div>
+    </astro-lastmusic>
+  </div>
 
-                        const list = document.createElement("ul");
-                        list.className = "space-y-3";
+  <script type="module">
+    class AstroLastMusic extends HTMLElement {
+      connectedCallback() {
+        const root = this.querySelector("div");
+        const titleEl = root.querySelector("h3");
+        const artistEl = root.querySelector("p:nth-of-type(2)");
+        const timeEl   = root.querySelector("p:nth-of-type(3)");
+        const LIMIT = Number(this.dataset.limit || 1);
 
-                        for (const t of tracks) {
-                            const li = document.createElement("li");
-                            li.className = "flex flex-col items-center gap-3";
+        const timeAgo = (uts) => {
+          if (!uts) return "";
+          const diffMs = Date.now() - (Number(uts) * 1000);
+          const mins = Math.floor(diffMs / 60000);
+          if (mins < 1) return "à l’instant";
+          if (mins < 60) return `il y a ${mins} min`;
+          const h = Math.floor(mins / 60);
+          return `il y a ${h} h`;
+        };
 
-                            if (t.image) {
-                                const img = document.createElement("img");
-                                img.src = t.image;
-                                img.alt = "";
-                                img.width = 48;
-                                img.height = 48;
-                                img.loading = "lazy";
-                                img.className = "rounded-lg";
-                                li.appendChild(img);
-                            }
-
-                            const a = document.createElement("a");
-                            a.href = t.url || "#";
-                            a.textContent = t.title || "Sans titre";
-                            a.className = "font-medium text-xl text-blog-marron-text hover:text-blog-marron-shadow tracking-widest";
-                            a.rel = "noopener";
-                            a.target = "_blank";
-
-                            const by = document.createElement("span");
-                            by.className = "text-center text-xs text-blog-marron-reflet tracking-wider leading-loose";
-                            by.textContent = " — " + (t.artist || "Inconnu");
-
-                            li.appendChild(a);
-                            li.appendChild(by);
-
-             
-
-                            list.appendChild(li);
-                        }
-
-                        container.innerHTML = "";
-                        container.appendChild(list);
-
-                    } catch (e) {
-                        console.error(e);
-                        container.textContent =
-                            "Impossible de charger les écoutes Last.fm pour le moment.";
-                    }
-                };
-
-                load();
+        const load = async () => {
+          try {
+            const res = await fetch("/api/lastfm.json", { cache: "no-store" });
+            let data;
+            try { data = await res.json(); } catch (e) {
+              console.error("Réponse non JSON", e);
+              titleEl.textContent = "Endpoint indisponible";
+              return;
             }
-        }
+            if (!res.ok) {
+              console.error("Erreur endpoint:", data);
+              titleEl.textContent = "Erreur Last.fm";
+              return;
+            }
 
-        // 🔑 Enregistrer le custom element
-        if (!customElements.get("astro-lastmusic")) {
-            customElements.define("astro-lastmusic", AstroLastMusic);
-        }
-    </script>
+            const tracks = (data?.tracks ?? []).slice(0, LIMIT);
+            if (!tracks.length) {
+              titleEl.textContent = "Aucune donnée disponible";
+              artistEl.textContent = "";
+              timeEl.textContent = "";
+              return;
+            }
+
+            const t = tracks[0];
+
+            // Titre cliquable, look condensé (visuel “XXL”)
+            if (t?.url) {
+              const a = document.createElement("a");
+              a.href = t.url; a.target = "_blank"; a.rel = "noopener";
+              a.className = titleEl.className + " hover:opacity-90";
+              a.textContent = t?.title || "Sans titre";
+              titleEl.replaceWith(a);
+            } else {
+              titleEl.textContent = t?.title || "Sans titre";
+            }
+
+            artistEl.textContent = t?.artist ? `${t.artist}` : "Artiste inconnu";
+            timeEl.textContent   = t?.nowPlaying ? "en cours" : timeAgo(t?.date);
+          } catch (e) {
+            console.error(e);
+            titleEl.textContent = "Impossible de charger";
+            artistEl.textContent = "";
+            timeEl.textContent = "";
+          }
+        };
+
+        load();
+      }
+    }
+    if (!customElements.get("astro-lastmusic")) {
+      customElements.define("astro-lastmusic", AstroLastMusic);
+    }
+  </script>
 </section>
