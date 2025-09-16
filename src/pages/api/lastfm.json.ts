@@ -64,7 +64,7 @@ export const GET: APIRoute = async () => {
     return new Response(JSON.stringify(payload), {
       headers: {
         "content-type": "application/json; charset=utf-8",
-        "cache-control": "public, s-maxage=600, stale-while-revalidate=300",
+        "cache-control": "public, s-maxage=180, stale-while-revalidate=60"
       },
     });
   } catch (err: any) {
