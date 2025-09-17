@@ -1,5 +1,5 @@
 ---
-import '@fontsource-variable/jetbrains-mono';
+import "@fontsource-variable/jetbrains-mono";
 
 import robot from "../../img/profil/vinyl2.png";
 
@@ -13,233 +13,271 @@ const { limit = 1 } = Astro.props;
   aria-labelledby="lfm-title"
   style="font-family: 'JetBrains Mono Variable', monospace;"
 >
-<div class="absolute  bg-blog-marron-reflet/25 top-0 left-0 h-[100%] w-[100%] "  />
- <div class="absolute right-2 font-black text-[14px] uppercase text-blog-marron-reflet italic rotate-12 z-50
-        before:absolute before:top-[-30%] before:left-[-250%] before:w-[500%] before:h-[150%] before:bg-blog-black/25  before:-z-10 before:border-2 before:border-blog-marron-fond">
-          <span>DERNIÈRE ÉCOUTE</span>
-      </div>
+  <div class="absolute bg-blog-marron-reflet/25 top-0 left-0 h-[100%] w-[100%]">
+  </div>
+  <div
+    class="absolute right-2 font-black text-[14px] uppercase text-blog-marron-reflet italic rotate-12 z-50
+        before:absolute before:top-[-30%] before:left-[-250%] before:w-[500%] before:h-[150%] before:bg-blog-black/25 before:-z-10 before:border-2 before:border-blog-marron-fond"
+  >
+    <span>DERNIÈRE ÉCOUTE</span>
+  </div>
 
   <!-- SVG -- Motif ondes -->
-  <svg class="pointer-events-none absolute inset-0 -z-10 opacity-[0.6]" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#7e522b"/>
-      <stop offset="100%" stop-color="#c78145"/>
-    </linearGradient>
+  <svg
+    class="pointer-events-none absolute inset-0 -z-10 opacity-[0.6]"
+    viewBox="0 0 1200 800"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#7e522b"></stop>
+        <stop offset="100%" stop-color="#c78145"></stop>
+      </linearGradient>
 
-    <!-- Une seule onde, réutilisée et décalée -->
-    <path id="wave" fill="none" stroke="#c7814550" stroke-width="5"
-          d="M -50,0
+      <!-- Une seule onde, réutilisée et décalée -->
+      <path
+        id="wave"
+        fill="none"
+        stroke="#c7814550"
+        stroke-width="5"
+        d="M -50,0
              C 150,-100 350,200 550,0
              S 950,-100 1150,0
-             S 1550,100 1950,0" />
-  </defs>
+             S 1550,100 1950,0"
+      ></path>
+    </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg)"/>
+    <rect width="100%" height="100%" fill="url(#bg)"></rect>
 
-  <!-- Bloc d’ondes -->
-  <g transform="translate(-80, 260)">
-    <use href="#wave" />
-    <use href="#wave" transform="translate(0, -240)"/>
-    <use href="#wave" transform="translate(0, -180)"/>
-    <use href="#wave" transform="translate(0, -120)"/>
-    <use href="#wave" transform="translate(0, -60)"/>
-    <use href="#wave" transform="translate(0, 0)"/>
-    <use href="#wave" transform="translate(0, 60)"/>
-    <use href="#wave" transform="translate(0, 120)"/>
-    <use href="#wave" transform="translate(0, 180)"/>
-    <use href="#wave" transform="translate(0, 240)"/>
-    <use href="#wave" transform="translate(0, 300)"/>
-    <use href="#wave" transform="translate(0, 360)"/>
-  </g>
-</svg>
-
-
+    <!-- Bloc d’ondes -->
+    <g transform="translate(-80, 260)">
+      <use href="#wave"></use>
+      <use href="#wave" transform="translate(0, -240)"></use>
+      <use href="#wave" transform="translate(0, -180)"></use>
+      <use href="#wave" transform="translate(0, -120)"></use>
+      <use href="#wave" transform="translate(0, -60)"></use>
+      <use href="#wave" transform="translate(0, 0)"></use>
+      <use href="#wave" transform="translate(0, 60)"></use>
+      <use href="#wave" transform="translate(0, 120)"></use>
+      <use href="#wave" transform="translate(0, 180)"></use>
+      <use href="#wave" transform="translate(0, 240)"></use>
+      <use href="#wave" transform="translate(0, 300)"></use>
+      <use href="#wave" transform="translate(0, 360)"></use>
+    </g>
+  </svg>
 
   <div class="flex items-end gap-6">
-    
     <!-- Vignette robot -->
-    <div class="shrink-0 relative rounded-full brightness-10" id="lastmusic_vinyl">
-        <img
-          src={robot.src}
-          alt="Bot-35 qui écoute de la musique"
-          class="h-46 w-46  object-cover border-8 border-blog-marron-text/15 rounded-full "
-          loading="lazy"
-        />
-        <!-- léger bord clair façon cadre -->
-        <span class="pointer-events-none absolute inset-0 rounded-full ring-4 ring-blog-black/5"></span>
+    <div
+      class="shrink-0 relative rounded-full brightness-10"
+      id="lastmusic_vinyl"
+    >
+      <img
+        src={robot.src}
+        alt="Bot-35 qui écoute de la musique"
+        class="h-46 w-46 object-cover border-8 border-blog-marron-text/15 rounded-full"
+        loading="lazy"
+      />
+      <!-- léger bord clair façon cadre -->
+      <span
+        class="pointer-events-none absolute inset-0 rounded-full ring-4 ring-blog-black/5"
+      ></span>
     </div>
 
     <!-- Bloc texte -->
     <astro-lastmusic class="block min-w-0 flex-1 px-8" data-limit={limit}>
-      <div class="relative min-w-0 flex flex-col ">
+      <div class="relative min-w-0 flex flex-col">
         <!-- Légende en haut-droit -->
-       
 
         <!-- Titre (remplacé dynamiquement) -->
-        <h3 id="lfm-title"
-            class=" text-5xl uppercase italic  font-bold tracking-wider text-blog-black/90 [letter-spacing:0.02em]">
+        <h3
+          id="lfm-title"
+          class="text-5xl uppercase italic font-bold tracking-wider text-blog-black/90 [letter-spacing:0.02em]"
+        >
           Chargement…
         </h3>
 
         <!-- Artiste -->
-        <p class="mt-2  text-[15px] tracking-[0.12em] font-bold text-blog-black/90 self-start ml-2" ></p>
+        <p
+          class="mt-2 text-[15px] tracking-[0.12em] font-bold text-blog-black/90 self-start ml-2"
+        >
+        </p>
 
         <!-- Timestamp -->
-        <p class="mt-4 text-sm italic tracking-wide  text-blog-black/90 self-end" id="lastmusic_status"></p>
+        <p
+          class="mt-4 text-sm italic tracking-wide text-blog-black/90 self-end"
+          id="lastmusic_status"
+        >
+        </p>
       </div>
     </astro-lastmusic>
   </div>
-
-  <script type="module">
-  class AstroLastMusic extends HTMLElement {
-    #timer = null;
-    #backoff = 0;
-    #lastKey = "";
-    #onVisibility;
-
-    connectedCallback() {
-      const root = this.querySelector("div");
-      const titleEl  = root.querySelector("h3, a") || root.querySelector("h3");
-      const artistEl = root.querySelector("p:nth-of-type(1)");
-      const timeEl   = root.querySelector("p:nth-of-type(2)");
-      const LIMIT = Number(this.dataset.limit || 1);
-
-      const vinyl  = document.getElementById("lastmusic_vinyl");
-      const status = document.getElementById("lastmusic_status");
-      const prefersNoMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      this.#onVisibility = () => {
-        if (!document.hidden) { clearTimeout(this.#timer); refresh().finally(planNext); }
-      };
-      document.addEventListener("visibilitychange", this.#onVisibility);
-      const timeAgo = (uts) => {
-        if (!uts) return "";
-        const mins = Math.floor((Date.now() - Number(uts) * 1000) / 60000);
-        if (mins < 1) return "à l’instant";
-        if (mins < 60) return `il y a ${mins} min`;
-        const h = Math.floor(mins / 60);
-        return `il y a ${h} h`;
-      };
-
-      const applyAnimations = (isPlaying) => {
-        if (!vinyl || !status) return;
-        if (isPlaying && !prefersNoMotion) {
-          vinyl.classList.add("animate-[spin_10s_linear_infinite]");
-          vinyl.classList.replace("brightness-10", "brightness-100");
-          status.classList.add("animate-bounce", "text-red-500");
-        } else {
-          vinyl.classList.remove("animate-[spin_10s_linear_infinite]");
-          status.classList.remove("animate-bounce", "text-red-500");
-        }
-      };
-
-      const paint = (t) => {
-        // Titre cliquable (conserve tes classes)
-        if (t?.url) {
-          const currentIsLink = titleEl?.tagName === "A";
-          if (!currentIsLink) {
-            const a = document.createElement("a");
-            a.href = t.url; a.target = "_blank"; a.rel = "noopener";
-            a.className = titleEl.className + " hover:opacity-90";
-            a.textContent = t?.title || "Sans titre";
-            titleEl.replaceWith(a);
-          } else {
-            titleEl.textContent = t?.title || "Sans titre";
-            titleEl.href = t.url;
-          }
-        } else {
-          // S'il n'y a pas d'URL, assure-toi qu'on a un élément texte
-          if (titleEl?.tagName === "A") {
-            const h3 = document.createElement("h3");
-            h3.className = titleEl.className.replace(" hover:opacity-90", "");
-            h3.textContent = t?.title || "Sans titre";
-            titleEl.replaceWith(h3);
-          } else {
-            titleEl.textContent = t?.title || "Sans titre";
-          }
-        }
-
-        artistEl.textContent = t?.artist || "Artiste inconnu";
-        timeEl.textContent = t?.nowPlaying ? "👨🏼‍🎤 LIVE !" : timeAgo(t?.date);
-
-        applyAnimations(!!t?.nowPlaying);
-      };
-
-      const REFRESH_MS = 3 * 60 * 1000; // 3 minutes
-
-      const fetchData = async () => {
-        // Timeout via AbortController
-        const ac = new AbortController();
-        const kill = setTimeout(() => ac.abort(), 8000);
-
-        const res = await fetch("/api/lastfm.json", { cache: "no-store", signal: ac.signal });
-        clearTimeout(kill);
-
-        let data;
-        try { data = await res.json(); } catch (e) {
-          throw new Error("Réponse non JSON");
-        }
-        if (!res.ok) {
-          // Erreur API / rate-limit → laisser le backoff agir
-          throw new Error("Erreur endpoint: " + (data?.error || res.status));
-        }
-        return (data?.tracks ?? []).slice(0, LIMIT);
-      };
-
-      const refresh = async () => {
-        if (document.hidden) return; // ne pas rafraîchir si onglet non visible
-        try {
-          const tracks = await fetchData();
-          if (!tracks.length) {
-            titleEl.textContent = "Aucune donnée disponible";
-            artistEl.textContent = "";
-            timeEl.textContent = "";
-            applyAnimations(false);
-            this.#backoff = 0;
-            return;
-          }
-
-          const t = tracks[0];
-          const key = `${t?.title}::${t?.artist}::${t?.date || (t?.nowPlaying ? "now" : "")}`;
-          if (key !== this.#lastKey) {
-            paint(t);
-            this.#lastKey = key;
-          } else {
-            // Même morceau → juste remettre à jour l’horodatage si nécessaire
-            if (!t?.nowPlaying) timeEl.textContent = timeAgo(t?.date);
-          }
-
-          this.#backoff = 0; // reset backoff au succès
-        } catch (e) {
-          console.warn(e);
-          // Backoff progressif: 5 → 10 → 20 → 30 min (max)
-          this.#backoff = Math.min(this.#backoff ? this.#backoff * 2 : 5 * 60 * 1000, 30 * 60 * 1000);
-        }
-      };
-
-      const planNext = () => {
-        const base = this.#backoff || REFRESH_MS;
-        const jitter = Math.floor(Math.random() * 30_000) - 15_000; // ±15 s
-        clearTimeout(this.#timer);
-        this.#timer = setTimeout(async () => { await refresh(); planNext(); }, base + jitter);
-      };
-
-      // Premier chargement + planification
-      refresh().finally(planNext);
-
-      // Replanifier quand l’onglet revient au premier plan
-
-    }
-
-    disconnectedCallback() {
-      clearTimeout(this.#timer);
-      document.removeEventListener("visibilitychange", this.#onVisibility);
-    }
-  }
-
-  if (!customElements.get("astro-lastmusic")) {
-    customElements.define("astro-lastmusic", AstroLastMusic);
-  }
-</script>
-
 </section>
+  <script type="module">
+    class AstroLastMusic extends HTMLElement {
+      #timer = null;
+      #backoff = 0;
+      #lastKey = "";
+      #onVisibility;
+
+      connectedCallback() {
+        const root = this.querySelector("div");
+        const titleEl = root.querySelector("h3, a") || root.querySelector("h3");
+        const artistEl = root.querySelector("p:nth-of-type(1)");
+        const timeEl = root.querySelector("p:nth-of-type(2)");
+        const LIMIT = Number(this.dataset.limit || 1);
+
+        const vinyl = document.getElementById("lastmusic_vinyl");
+        const status = document.getElementById("lastmusic_status");
+        const prefersNoMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        this.#onVisibility = () => {
+          if (!document.hidden) {
+            clearTimeout(this.#timer);
+            refresh().finally(planNext);
+          }
+        };
+        document.addEventListener("visibilitychange", this.#onVisibility);
+        const timeAgo = (uts) => {
+          if (!uts) return "";
+          const mins = Math.floor((Date.now() - Number(uts) * 1000) / 60000);
+          if (mins < 1) return "à l’instant";
+          if (mins < 60) return `il y a ${mins} min`;
+          const h = Math.floor(mins / 60);
+          return `il y a ${h} h`;
+        };
+
+        const applyAnimations = (isPlaying) => {
+          if (!vinyl || !status) return;
+          if (isPlaying && !prefersNoMotion) {
+            vinyl.classList.add("animate-[spin_10s_linear_infinite]");
+            vinyl.classList.replace("brightness-10", "brightness-100");
+            status.classList.add("animate-bounce", "text-red-500");
+          } else {
+            vinyl.classList.remove("animate-[spin_10s_linear_infinite]");
+            status.classList.remove("animate-bounce", "text-red-500");
+          }
+        };
+
+        const paint = (t) => {
+          // Titre cliquable (conserve tes classes)
+          if (t?.url) {
+            const currentIsLink = titleEl?.tagName === "A";
+            if (!currentIsLink) {
+              const a = document.createElement("a");
+              a.href = t.url;
+              a.target = "_blank";
+              a.rel = "noopener";
+              a.className = titleEl.className + " hover:opacity-90";
+              a.textContent = t?.title || "Sans titre";
+              titleEl.replaceWith(a);
+            } else {
+              titleEl.textContent = t?.title || "Sans titre";
+              titleEl.href = t.url;
+            }
+          } else {
+            // S'il n'y a pas d'URL, assure-toi qu'on a un élément texte
+            if (titleEl?.tagName === "A") {
+              const h3 = document.createElement("h3");
+              h3.className = titleEl.className.replace(" hover:opacity-90", "");
+              h3.textContent = t?.title || "Sans titre";
+              titleEl.replaceWith(h3);
+            } else {
+              titleEl.textContent = t?.title || "Sans titre";
+            }
+          }
+
+          artistEl.textContent = t?.artist || "Artiste inconnu";
+          timeEl.textContent = t?.nowPlaying ? "👨🏼‍🎤 LIVE !" : timeAgo(t?.date);
+
+          applyAnimations(!!t?.nowPlaying);
+        };
+
+        const REFRESH_MS = 3 * 60 * 1000; // 3 minutes
+
+        const fetchData = async () => {
+          // Timeout via AbortController
+          const ac = new AbortController();
+          const kill = setTimeout(() => ac.abort(), 8000);
+
+          const res = await fetch("/api/lastfm.json", {
+            cache: "no-store",
+            signal: ac.signal,
+          });
+          clearTimeout(kill);
+
+          let data;
+          try {
+            data = await res.json();
+          } catch (e) {
+            throw new Error("Réponse non JSON");
+          }
+          if (!res.ok) {
+            // Erreur API / rate-limit → laisser le backoff agir
+            throw new Error("Erreur endpoint: " + (data?.error || res.status));
+          }
+          return (data?.tracks ?? []).slice(0, LIMIT);
+        };
+
+        const refresh = async () => {
+          if (document.hidden) return; // ne pas rafraîchir si onglet non visible
+          try {
+            const tracks = await fetchData();
+            if (!tracks.length) {
+              titleEl.textContent = "Aucune donnée disponible";
+              artistEl.textContent = "";
+              timeEl.textContent = "";
+              applyAnimations(false);
+              this.#backoff = 0;
+              return;
+            }
+
+            const t = tracks[0];
+            const key = `${t?.title}::${t?.artist}::${t?.date || (t?.nowPlaying ? "now" : "")}`;
+            if (key !== this.#lastKey) {
+              paint(t);
+              this.#lastKey = key;
+            } else {
+              // Même morceau → juste remettre à jour l’horodatage si nécessaire
+              if (!t?.nowPlaying) timeEl.textContent = timeAgo(t?.date);
+            }
+
+            this.#backoff = 0; // reset backoff au succès
+          } catch (e) {
+            console.warn(e);
+            // Backoff progressif: 5 → 10 → 20 → 30 min (max)
+            this.#backoff = Math.min(
+              this.#backoff ? this.#backoff * 2 : 5 * 60 * 1000,
+              30 * 60 * 1000,
+            );
+          }
+        };
+
+        const planNext = () => {
+          const base = this.#backoff || REFRESH_MS;
+          const jitter = Math.floor(Math.random() * 30_000) - 15_000; // ±15 s
+          clearTimeout(this.#timer);
+          this.#timer = setTimeout(async () => {
+            await refresh();
+            planNext();
+          }, base + jitter);
+        };
+
+        // Premier chargement + planification
+        refresh().finally(planNext);
+
+        // Replanifier quand l’onglet revient au premier plan
+      }
+
+      disconnectedCallback() {
+        clearTimeout(this.#timer);
+        document.removeEventListener("visibilitychange", this.#onVisibility);
+      }
+    }
+
+    if (!customElements.get("astro-lastmusic")) {
+      customElements.define("astro-lastmusic", AstroLastMusic);
+    }
+  </script>
