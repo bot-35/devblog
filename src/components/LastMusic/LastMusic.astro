@@ -19,9 +19,8 @@ const { limit = 1 } = Astro.props;
           <span>DERNIÈRE ÉCOUTE</span>
       </div>
 
-  <!-- Motif ondes -->
+  <!-- SVG -- Motif ondes -->
   <svg class="pointer-events-none absolute inset-0 -z-10 opacity-[0.6]" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
-  <!-- Fond dégradé (retire le <rect> si tu veux un fond transparent) -->
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#7e522b"/>
@@ -29,22 +28,11 @@ const { limit = 1 } = Astro.props;
     </linearGradient>
 
     <!-- Une seule onde, réutilisée et décalée -->
-    <!-- Modifie amplitude/phase via les points C/S -->
     <path id="wave" fill="none" stroke="#c7814550" stroke-width="5"
           d="M -50,0
              C 150,-100 350,200 550,0
              S 950,-100 1150,0
              S 1550,100 1950,0" />
-    <!-- Option : bruit très léger (décommente le groupe <g filter=...> et le <filter>) -->
-    <!--
-    <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch" />
-      <feColorMatrix type="saturate" values="0" />
-      <feComponentTransfer>
-        <feFuncA type="table" tableValues="0 0.02"/>
-      </feComponentTransfer>
-    </filter>
-    -->
   </defs>
 
   <rect width="100%" height="100%" fill="url(#bg)"/>
@@ -64,8 +52,6 @@ const { limit = 1 } = Astro.props;
     <use href="#wave" transform="translate(0, 300)"/>
     <use href="#wave" transform="translate(0, 360)"/>
   </g>
-
-  <!-- Si tu veux le grain : enveloppe tout le contenu (sauf defs) dans <g filter="url(#grain)">…</g> -->
 </svg>
 
 
