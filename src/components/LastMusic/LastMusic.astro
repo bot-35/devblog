@@ -1,55 +1,45 @@
 ---
-/* ASSETS  IMPORT */
+/**
+ *? Import des assets 
+ */ 
 import "@fontsource-variable/jetbrains-mono";
 import robot from "../../img/profil/vinyl2.png";
 import Ondes from "./onde.svg";
 
-/* DATA */
+/**
+ *@param limit Nombre de morceau a remonter depuis l'api 
+ */ 
 const { limit = 1 } = Astro.props;
 ---
-
-<section
-  class="relative ml-32 isolate w-full max-w-2xl overflow-hidden rounded-md border border-blog-marron-text/25
-         bg-gradient-to-tl origin-left from-blog-marron-fond via-blog-marron-text to-blog-marron-reflet px-5 py-4
-         shadow-xl shadow-blog-black/50"
+<!-- * wrapper du composant astro-lastmusic -->
+<section class="relative w-full max-w-2xl px-5 py-4 ml-32 overflow-hidden origin-left border rounded-md shadow-xl isolate border-blog-marron-text/25 bg-gradient-to-tl from-blog-marron-fond via-blog-marron-text to-blog-marron-reflet shadow-blog-black/50"
   aria-labelledby="lfm-title"
-  style="font-family: 'JetBrains Mono Variable', monospace;"
->
-  <!-- TODO : Remplacer full tailwind inline par classe utilitaire (REFACTOR GLOBAL) -->
-  <!-- Overlay  pour teinter le composant-->
-  <div class="absolute bg-blog-marron-reflet/25 top-0 left-0 h-full w-full"/>
+  style="font-family: 'JetBrains Mono Variable', monospace;">
   
-  <div
-    class="absolute right-2 font-black text-[14px] uppercase text-blog-marron-reflet italic rotate-12 z-50
-        before:absolute before:top-[-30%] before:left-[-250%] before:w-[500%] before:h-[150%] before:bg-blog-black/25 before:-z-10 before:border-2 before:border-blog-marron-fond"
-  >
+  <!-- TODO : Remplacer full tailwind inline par classe utilitaire (REFACTOR GLOBAL) -->
+  <!-- * Overlay  pour teinter le composant-->
+  <div class="absolute top-0 left-0 w-full h-full bg-blog-marron-reflet/25"/>
+  
+    <!-- * Bandeau décoratif-->
+  <div class="absolute right-2 font-black text-[14px] uppercase text-blog-marron-reflet italic rotate-12 z-50 before:absolute before:top-[-30%] before:left-[-250%] before:w-[500%] before:h-[150%] before:bg-blog-black/25 before:-z-10 before:border-2 before:border-blog-marron-fond">
     <span>DERNIÈRE ÉCOUTE</span>
   </div>
 
-  <!-- SVG -- Motif ondes -->
+  <!-- * SVG -->
   <Ondes class="absolute inset-0 -z-10 opacity-60" />
-
+  
+  <!-- * Vignette robot -->
   <div class="flex items-end gap-6">
-    <!-- Vignette robot -->
-    <div
-      class="shrink-0 relative rounded-full brightness-10"
-      id="lastmusic_vinyl"
-    >
-      <img
-        src={robot.src}
-        alt="Bot-35 qui écoute de la musique"
-        class="h-46 w-46 object-cover border-8 border-blog-marron-text/15 rounded-full"
-        loading="lazy"
-      />
-      <!-- léger bord clair façon cadre -->
-      <span
-        class="pointer-events-none absolute inset-0 rounded-full ring-4 ring-blog-black/5"
-      ></span>
+    <div class="relative rounded-full shrink-0 brightness-10" id="lastmusic_vinyl">
+      <img src={robot.src} alt="Bot-35 qui écoute de la musique"
+        class="object-cover border-8 rounded-full h-46 w-46 border-blog-marron-text/15" loading="lazy"/>
+      <!-- * léger border pour donner impression ombrage total -->
+      <span class="absolute inset-0 rounded-full pointer-events-none ring-4 ring-blog-black/5"/>
     </div>
 
     <!-- Bloc texte -->
-    <astro-lastmusic class="block min-w-0 flex-1 px-8" data-limit={limit}>
-      <div class="relative min-w-0 flex flex-col">
+    <astro-lastmusic class="flex-1 block min-w-0 px-8" data-limit={limit}>
+      <div class="relative flex flex-col min-w-0">
         <!-- Légende en haut-droit -->
 
         <!-- Titre (remplacé dynamiquement) -->
@@ -68,7 +58,7 @@ const { limit = 1 } = Astro.props;
 
         <!-- Timestamp -->
         <p
-          class="mt-4 text-sm italic tracking-wide text-blog-black/90 self-end"
+          class="self-end mt-4 text-sm italic tracking-wide text-blog-black/90"
           id="lastmusic_status"
         >
         </p>
