@@ -1,0 +1,43 @@
+<svg
+    class="pointer-events-none absolute inset-0 -z-10 opacity-[0.6]"
+    viewBox="0 0 1200 800"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#7e522b"></stop>
+        <stop offset="100%" stop-color="#c78145"></stop>
+      </linearGradient>
+
+      <!-- Une seule onde, réutilisée et décalée -->
+      <path
+        id="wave"
+        fill="none"
+        stroke="#c7814550"
+        stroke-width="5"
+        d="M -50,0
+             C 150,-100 350,200 550,0
+             S 950,-100 1150,0
+             S 1550,100 1950,0"
+      ></path>
+    </defs>
+
+    <rect width="100%" height="100%" fill="url(#bg)"></rect>
+
+    <!-- Bloc d’ondes -->
+    <g transform="translate(-80, 260)">
+      <use href="#wave"></use>
+      <use href="#wave" transform="translate(0, -240)"></use>
+      <use href="#wave" transform="translate(0, -180)"></use>
+      <use href="#wave" transform="translate(0, -120)"></use>
+      <use href="#wave" transform="translate(0, -60)"></use>
+      <use href="#wave" transform="translate(0, 0)"></use>
+      <use href="#wave" transform="translate(0, 60)"></use>
+      <use href="#wave" transform="translate(0, 120)"></use>
+      <use href="#wave" transform="translate(0, 180)"></use>
+      <use href="#wave" transform="translate(0, 240)"></use>
+      <use href="#wave" transform="translate(0, 300)"></use>
+      <use href="#wave" transform="translate(0, 360)"></use>
+    </g>
+  </svg>
