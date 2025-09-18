@@ -1,7 +1,7 @@
 <svg
     class="pointer-events-none absolute inset-0 -z-10 opacity-[0.6]"
     viewBox="0 0 1200 800"
-    preserveAspectRatio="none"
+  preserveAspectRatio="xMidYMid slice"
     aria-hidden="true"
   >
     <defs>
