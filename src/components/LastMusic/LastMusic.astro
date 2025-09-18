@@ -28,16 +28,16 @@ const { limit = 1 } = Astro.props;
   </div>
 
   <!-- * SVG -->
-  <Ondes class="absolute inset-0 -z-10 opacity-60" aria-hidden="true" focusable="false"/>
+  <Ondes class="absolute inset-0 hidden -z-10 opacity-60 sm:block " aria-hidden="true" focusable="false"/>
   
-  <div class="flex flex-col sm:flex-row items-center sm:items-end gap-6">
-     <div class="block sm:hidden font-black text-[14px] uppercase text-blog-black italic">
+  <div class="flex flex-col items-center gap-4 sm:gap-6 sm:flex-row sm:items-end">
+     <div class="block sm:hidden font-black text-[14px] uppercase text-blog-black italic z-50">
         <span>DERNIÈRE ÉCOUTE</span>
     </div>
     <!-- * Vignette robot -->
     <div class="relative rounded-full shrink-0 brightness-10" id="lastmusic_vinyl">
       <img src={robot.src} alt="Bot-35 qui écoute de la musique"
-        class="object-cover w-36 h-36 sm:w-48 sm:h-48 border-4 sm:border-8 rounded-full border-blog-marron-text/15" loading="lazy" decoding="async" fetchpriority="low"/>
+        class="object-cover w-32 h-32 border-4 rounded-full sm:w-48 sm:h-48 sm:border-8 border-blog-marron-text/15" loading="lazy" decoding="async" fetchpriority="low"/>
       <!-- * léger border pour donner impression ombrage total -->
       <span class="absolute inset-0 rounded-full pointer-events-none ring-2 sm:ring-4 ring-blog-black/5"></span>
     </div>
@@ -46,13 +46,13 @@ const { limit = 1 } = Astro.props;
     <astro-lastmusic class="flex-1 block min-w-0 px-8" data-limit={limit} aria-live="polite">
       <!-- ? Titre  -->
       <div class="relative flex flex-col min-w-0">
-        <h3 id="lastmusic_titre" class="line-clamp-2 break-words [text-wrap:balance] text-2xl sm:text-5xl uppercase italic font-bold tracking-wider text-blog-black/90 [letter-spacing:0.02em]">
+        <h3 id="lastmusic_titre" class="line-clamp-2 break-words [text-wrap:balance] text-md sm:text-5xl text-center sm:text-left uppercase italic font-bold tracking-wider text-blog-black/90 [letter-spacing:0.02em]">
           Chargement…
         </h3>
         <!-- ? Artiste -->
         <p data-artist class="mt-2 text-[12px] sm:text-[15px] tracking-[0.12em] font-bold text-blog-black/90 self-start ml-2"></p>
         <!-- ? Timestamp -->
-        <p data-time class="self-center sm:self-end mt-4 text-xs sm:text-sm italic tracking-wide text-blog-black/90" id="lastmusic_status"></p>
+        <p data-time class="self-center mt-4 text-xs italic tracking-wide sm:self-end sm:text-sm text-blog-black/90" id="lastmusic_status"></p>
       </div>
     </astro-lastmusic>
   </div>
