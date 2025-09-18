@@ -11,6 +11,9 @@ class AstroLastMusic extends HTMLElement {
     const LIMIT = Number(this.dataset.limit || 1);
 
     const vinyl  = document.getElementById("lastmusic_vinyl");
+    const imageIdle = vinyl?.querySelector("img");
+    const imageOnLive = vinyl?.querySelector("img:nth-of-type(2)");
+    const ondeDerriereImageVinyl = vinyl?.querySelector("span");
     const status = document.getElementById("lastmusic_status");
     const prefersNoMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -27,11 +30,17 @@ class AstroLastMusic extends HTMLElement {
       if (!vinyl || !status) return;
       if (isPlaying && !prefersNoMotion) {
         vinyl.classList.add("animate-[spin_1800ms_linear_infinite]");
-        vinyl.classList.replace("brightness-10", "brightness-100");
+        vinyl.classList.replace("brightness-40", "brightness-100");
+        imageIdle?.classList.replace("block","hidden");
+        imageOnLive?.classList.replace("hidden","block");
+        ondeDerriereImageVinyl?.classList.replace("animate-[ping_3800ms_ease-out_infinite]","animate-[ping_1300ms_ease-out_infinite]")
         status.classList.add("animate-bounce", "text-red-500");
       } else {
         vinyl.classList.remove("animate-[spin_1800ms_linear_infinite]");
-        vinyl.classList.replace("brightness-100", "brightness-10");
+        imageOnLive?.classList.replace("block","hidden");
+        imageIdle?.classList.replace("hidden","block");
+        vinyl.classList.replace("brightness-100", "brightness-40");
+        ondeDerriereImageVinyl?.classList.replace("animate-[ping_1300ms_ease-out_infinite]","animate-[ping_3800ms_ease-out_infinite]")
         status.classList.remove("animate-bounce", "text-red-500");
       }
     };
