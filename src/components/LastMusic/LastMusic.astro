@@ -1,0 +1,70 @@
+---
+/**
+ *? Import des assets 
+ */ 
+import "@fontsource-variable/jetbrains-mono";
+import robot from "../../img/profil/vinyl2.png";
+import robotiddle from "../../img/profil/vinyl_iddle.png";
+import Ondes from "./onde.svg";
+
+/**
+ *@param limit Nombre de morceau a remonter depuis l'api 
+ */ 
+const { limit = 1 } = Astro.props;
+---
+<!-- TODO : Refactoriser pour responsive -->
+<!-- TODO : Remplacer full tailwind inline par classe utilitaire (REFACTOR GLOBAL) -->
+<!-- * wrapper du composant astro-lastmusic -->
+<section class="relative w-3/4 sm:w-full sm:max-w-2xl px-5 py-4  self-center sm:self-start font-['JetBrains_Mono_Variable'] overflow-hidden border rounded-md shadow-xl isolate border-blog-marron-text/25 bg-gradient-to-tl from-blog-marron-fond via-blog-marron-text to-blog-marron-reflet shadow-blog-black/50"
+  aria-labelledby="lastmusic_titre"
+  aria-label="Dernière écoute Last.fm">
+
+
+  <!-- * Overlay  pour teinter le composant-->
+  <div class="absolute top-0 left-0 w-full h-full pointer-events-none bg-blog-marron-reflet/25"></div>
+  
+    <!-- * Bandeau décoratif-->
+  <div class="absolute hidden sm:block right-2 font-black text-[14px] uppercase text-blog-marron-reflet italic rotate-12 z-50 before:absolute before:top-[-30%] before:left-[-250%] before:w-[500%] before:h-[150%] before:bg-blog-black/25 before:-z-10 before:border-2 before:border-blog-marron-fond">
+    <span>DERNIÈRE ÉCOUTE</span>
+  </div>
+
+  <!-- * SVG -->
+  <Ondes class="absolute inset-0 hidden -z-10 opacity-60 sm:block " aria-hidden="true" focusable="false"/>
+  
+  <div class="flex flex-col items-center gap-4 sm:gap-6 sm:flex-row sm:items-end">
+      <!-- * Bandeau décoratif pour mobiles-->
+     <div class="block sm:hidden  text-[12px] uppercase text-blog-black z-50">
+        <span>DERNIÈRE ÉCOUTE</span>
+    </div>
+    <!-- * Vignette robot -->
+    <div class="relative rounded-full shrink-0 brightness-40 " id="lastmusic_vinyl">
+      <!-- ? Absent -->
+      <img src={robotiddle.src} alt="Bot-35 qui dors."
+        class="object-cover block  w-32 h-32 border-4 rounded-full sm:w-48 sm:h-48 sm:border-8 border-blog-marron-text/15" loading="lazy" decoding="async" fetchpriority="low"/>
+      <!-- ? ON LIVE -->
+        <img src={robot.src} alt="Bot-35 qui écoute de la musique"
+        class="hidden object-cover w-32 h-32 border-4 rounded-full sm:w-48 sm:h-48 sm:border-8 border-blog-marron-text/15" loading="lazy" decoding="async" fetchpriority="low"/>
+      
+        <!-- * léger border pour donner impression ombrage total -->
+      <span class="absolute animate-[ping_3800ms_ease-out_infinite] inset-0 rounded-full pointer-events-none ring-2 sm:ring-4 ring-blog-black/5"></span>
+    </div>
+
+    <!-- * Composant astro-lastmusic (toute la partie influencé par le TS) -->
+    <astro-lastmusic class="flex-1 block min-w-0 px-8" data-limit={limit} aria-live="polite">
+      <!-- ? Titre  -->
+      <div class="relative flex flex-col min-w-0">
+        <h3 id="lastmusic_titre" class="line-clamp-2 break-words [text-wrap:balance] text-md sm:text-5xl text-center sm:text-left uppercase italic font-bold tracking-wider text-blog-black/90 [letter-spacing:0.02em]">
+          Chargement…
+        </h3>
+        <!-- ? Artiste -->
+        <p data-artist class="mt-2 text-[12px] text-center sm:text-left sm:text-[15px] tracking-[0.12em] font-bold text-blog-black/90 self-start ml-2"></p>
+        <!-- ? Timestamp -->
+        <p data-time class="self-center mt-12 sm:mt-4 text-xs italic tracking-wide sm:self-end sm:text-sm text-blog-black/90" id="lastmusic_status"></p>
+      </div>
+    </astro-lastmusic>
+  </div>
+</section>
+
+<script>
+    import "./LastMusic.ts";
+</script>
