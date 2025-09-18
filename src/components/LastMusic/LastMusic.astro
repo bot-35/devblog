@@ -31,7 +31,8 @@ const { limit = 1 } = Astro.props;
   <Ondes class="absolute inset-0 hidden -z-10 opacity-60 sm:block " aria-hidden="true" focusable="false"/>
   
   <div class="flex flex-col items-center gap-4 sm:gap-6 sm:flex-row sm:items-end">
-     <div class="block sm:hidden font-black text-[14px] uppercase text-blog-black italic z-50">
+      <!-- * Bandeau décoratif pour mobiles-->
+     <div class="block sm:hidden  text-[12px] uppercase text-blog-black z-50">
         <span>DERNIÈRE ÉCOUTE</span>
     </div>
     <!-- * Vignette robot -->
@@ -46,13 +47,13 @@ const { limit = 1 } = Astro.props;
     <astro-lastmusic class="flex-1 block min-w-0 px-8" data-limit={limit} aria-live="polite">
       <!-- ? Titre  -->
       <div class="relative flex flex-col min-w-0">
-        <h3 id="lastmusic_titre" class="line-clamp-2 break-words [text-wrap:balance] text-md sm:text-5xl text-center sm:text-left uppercase italic font-bold tracking-wider text-blog-black/90 [letter-spacing:0.02em]">
+        <h3 id="lastmusic_titre" class="line-clamp-2 break-words [text-wrap:balance] text-md sm:text-5xl text-center sm:text-right uppercase italic font-bold tracking-wider text-blog-black/90 [letter-spacing:0.02em]">
           Chargement…
         </h3>
         <!-- ? Artiste -->
-        <p data-artist class="mt-2 text-[12px] sm:text-[15px] tracking-[0.12em] font-bold text-blog-black/90 self-start ml-2"></p>
+        <p data-artist class="mt-2 text-[12px] text-center sm:text-right sm:text-[15px] tracking-[0.12em] font-bold text-blog-black/90 self-start ml-2"></p>
         <!-- ? Timestamp -->
-        <p data-time class="self-center mt-4 text-xs italic tracking-wide sm:self-end sm:text-sm text-blog-black/90" id="lastmusic_status"></p>
+        <p data-time class="self-center mt-12 sm:mt-4 text-xs italic tracking-wide sm:self-end sm:text-sm text-blog-black/90" id="lastmusic_status"></p>
       </div>
     </astro-lastmusic>
   </div>
