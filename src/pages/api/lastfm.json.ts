@@ -1,3 +1,5 @@
+// * On retire le prerender pour build vercel
+export const prerender = false;
 import type { APIRoute } from "astro";
 
 // Petit helper pour normaliser la réponse Last.fm
