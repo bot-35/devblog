@@ -14,13 +14,12 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeToc from '@jsdevtools/rehype-toc';
 import rehypeClassNames from 'rehype-class-names';
-import vercel from "@astrojs/vercel/serverless"; // ou edge
+
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [],
-  adapter: vercel(),
-   // 👇 ICI : on limite ce que Vite/Astro surveille
+  // 👇 ICI : on limite ce que Vite/Astro surveille
   vite: {
     plugins: [tailwind()],        // ✅ ← ICI, pas dans `integrations`
     server: {
@@ -39,64 +38,69 @@ export default defineConfig({
       // fs: { strict: true },
     },
   },
-    markdown: {
-      shikiConfig: { 
-        wrap: true,
-      },
-      remarkPlugins: [remarkReadingTime],
-      rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, {
-        behavior: 'append'
-      }], [rehypeToc, {
-        headings: ["h2", "h3"],
-        position: "afterend"
-      }], [rehypeClassNames, {
-        'p': '',
-        'h1': '',
-        'h2': '',
-        'h3': '',
-        'h4': '',
-        'h5': '',
-        'li': '',
-        'blockquote': ''
-      }]]
+
+  markdown: {
+    shikiConfig: { 
+      wrap: true,
     },
-    site: 'https://devblog-bot-35.vercel.app/devblog/',
-    integrations: [
-      mdx({
-      shikiConfig: { 
-        wrap: true,
-      },
-      remarkPlugins: 
-      [[remarkReadingTime],       
-      [remarkGitHubLink, {}],],
-      rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, {
-        behavior: 'append'
-      }], [rehypeToc, {
-        headings: ["h2", "h3"],
-        position: "afterend"
-      }], [rehypeClassNames, {
-        'p': '',
-        'h1': '',
-        'h2': '',
-        'h3': '',
-        'h4': '',
-        'h5': '',
-        'li': '',
-        'blockquote': ''
-      }]]
-    }), sitemap({
-      filter: page => {
-      let include = true
-      let slug = page.split('https://devblog-bot-35.vercel.app/devblog/posts/').pop().slice(0, -1);
-    
-      const isDraftBlogPostPage = Boolean(blogDrafts.find(fileName => fileName.split('.mdx')[0] === slug));
-      
-      if (isDraftBlogPostPage) {
-          console.log(`⛔️ "${page}" has been excluded from the sitemap`)
-          include = false
-      }
+    remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, {
+      behavior: 'append'
+    }], [rehypeToc, {
+      headings: ["h2", "h3"],
+      position: "afterend"
+    }], [rehypeClassNames, {
+      'p': '',
+      'h1': '',
+      'h2': '',
+      'h3': '',
+      'h4': '',
+      'h5': '',
+      'li': '',
+      'blockquote': ''
+    }]]
+  },
+
+  site: 'https://devblog-bot-35.vercel.app/devblog/',
+
+  integrations: [
+    mdx({
+    shikiConfig: { 
+      wrap: true,
+    },
+    remarkPlugins: 
+    [[remarkReadingTime],       
+    [remarkGitHubLink, {}],],
+    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, {
+      behavior: 'append'
+    }], [rehypeToc, {
+      headings: ["h2", "h3"],
+      position: "afterend"
+    }], [rehypeClassNames, {
+      'p': '',
+      'h1': '',
+      'h2': '',
+      'h3': '',
+      'h4': '',
+      'h5': '',
+      'li': '',
+      'blockquote': ''
+    }]]
+  }), sitemap({
+    filter: page => {
+    let include = true
+    let slug = page.split('https://devblog-bot-35.vercel.app/devblog/posts/').pop().slice(0, -1);
   
-      return include
-      },
-  }), icon()]
-  });
+    const isDraftBlogPostPage = Boolean(blogDrafts.find(fileName => fileName.split('.mdx')[0] === slug));
+    
+    if (isDraftBlogPostPage) {
+        console.log(`⛔️ "${page}" has been excluded from the sitemap`)
+        include = false
+    }
+
+    return include
+    },
+}), icon()],
+
+  adapter: vercel(),
+});
