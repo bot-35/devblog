@@ -1,17 +1,31 @@
+// ✅ route dynamique (jamais prérendue)
+export const prerender = false;
+
 import type { APIRoute } from "astro";
 
-// Petit helper pour normaliser la réponse Last.fm
 function mapTracks(raw: any[]) {
   return (raw ?? []).map((t) => ({
     title: t?.name ?? null,
     artist: t?.artist?.["#text"] ?? null,
     album: t?.album?.["#text"] ?? null,
     url: t?.url ?? null,
-    image: (t?.image ?? []).at(-1)?.["#text"] || null, // plus grande vignette
+    image: (t?.image ?? []).at(-1)?.["#text"] || null,
     nowPlaying: t?.["@attr"]?.nowplaying === "true",
     date: t?.date?.uts ? Number(t.date.uts) : null,
   }));
 }
+
+// 🛡️ headers zéro cache (navigateur + CDN Vercel)
+const noCacheHeaders = {
+  "content-type": "application/json; charset=utf-8",
+  "Cache-Control": "no-store, no-cache, must-revalidate",
+  "Pragma": "no-cache",
+  "Expires": "0",
+  // Vercel priorise ce header pour son CDN :
+  "CDN-Cache-Control": "max-age=0, s-maxage=0, stale-while-revalidate=0",
+  // (compat optionnelle)
+  "Vercel-CDN-Cache-Control": "max-age=0, s-maxage=0, stale-while-revalidate=0",
+};
 
 export const GET: APIRoute = async () => {
   const apiKey = import.meta.env.LASTFM_API_KEY;
@@ -20,11 +34,11 @@ export const GET: APIRoute = async () => {
   if (!apiKey || !user) {
     return new Response(
       JSON.stringify({ error: "Missing LASTFM_API_KEY or LASTFM_USERNAME" }),
-      { status: 500, headers: { "content-type": "application/json" } }
+      { status: 500, headers: noCacheHeaders }
     );
   }
 
-  const LIMIT = 10;
+  const LIMIT = 1; // 🎯 un seul titre
   const url =
     `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks` +
     `&user=${encodeURIComponent(user)}` +
@@ -32,20 +46,13 @@ export const GET: APIRoute = async () => {
     `&format=json&limit=${LIMIT}`;
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { cache: "no-store" }); // on évite aussi le cache intermédiaire
     const text = await res.text();
 
     if (!res.ok) {
-      // Si rate limit (erreur 29) ou autre, on renvoie un code 503 + cache court
       return new Response(
         JSON.stringify({ error: "lastfm_error", status: res.status, body: text }),
-        {
-          status: res.status === 200 ? 503 : res.status,
-          headers: {
-            "content-type": "application/json; charset=utf-8",
-            "cache-control": "public, s-maxage=120, stale-while-revalidate=60",
-          },
-        }
+        { status: res.status === 200 ? 503 : res.status, headers: noCacheHeaders }
       );
     }
 
@@ -57,26 +64,14 @@ export const GET: APIRoute = async () => {
       updatedAt: new Date().toISOString(),
       updatedAtTs: Date.now(),
       count: tracks.length,
-      tracks,
+      tracks, // ← contient max 1 élément
     };
 
-    // Cache côté edge/CDN : 10 min, avec SWR 5 min
-    return new Response(JSON.stringify(payload), {
-      headers: {
-        "content-type": "application/json; charset=utf-8",
-        "cache-control": "public, s-maxage=180, stale-while-revalidate=60"
-      },
-    });
+    return new Response(JSON.stringify(payload), { headers: noCacheHeaders });
   } catch (err: any) {
     return new Response(
       JSON.stringify({ error: "network_error", message: String(err?.message ?? err) }),
-      {
-        status: 502,
-        headers: {
-          "content-type": "application/json; charset=utf-8",
-          "cache-control": "public, s-maxage=120, stale-while-revalidate=60",
-        },
-      }
+      { status: 502, headers: noCacheHeaders }
     );
   }
 };
