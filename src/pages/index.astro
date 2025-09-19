@@ -1,4 +1,9 @@
 ---
+/**
+ * ! PRERENDER (NO-SSR)
+ */
+export const prerender = true
+
 import Layout from '../layouts/layout.astro';
 
 import LastPost from '../components/Index/LastPost/LastPost.astro'
@@ -7,7 +12,7 @@ import Posts from '../components/Index/Posts/Posts.astro'
 
 const title = 'Le blog de bot-35';
 ---
-
+   
 <Layout title={title}>
 	<LastPost/>
 	<Posts/>
