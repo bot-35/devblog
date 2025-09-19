@@ -14,9 +14,12 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeToc from '@jsdevtools/rehype-toc';
 import rehypeClassNames from 'rehype-class-names';
+import vercel from "@astrojs/vercel/serverless"; // ou edge
 
 // https://astro.build/config
 export default defineConfig({
+  integrations: [],
+  adapter: vercel(),
    // 👇 ICI : on limite ce que Vite/Astro surveille
   vite: {
     plugins: [tailwind()],        // ✅ ← ICI, pas dans `integrations`
