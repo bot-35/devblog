@@ -19,12 +19,11 @@ import LastMusic from "../LastMusic/LastMusic.astro";
   <div  id="bgContactFooter" style=`background-image: url("${profil2.src}")` class="  absolute bg-right-top bg-no-repeat bg-contain top-0   opacity-100 -rotate-[9deg] origin-bottom-right     left-48 xl:left-24  -z-20   h-1/4 xl:h-2/4 w-full   "/>
 
   <section class='w-full xl:w-10/12 xl:mx-[9%] flex flex-col gap-16 z-10'>
-    <div class='flex flex-col mx-8 xl:flex-row  xl:justify-around gap-8'>
-
-    </div>
     <FooterGeek/>
-    <FooterGitHub/>
-    <LastMusic  limit="1"/>
+    <div class='flex flex-col  xl:flex-row  xl:justify-around justify-center items-center gap-8'>
+          <LastMusic  limit="1"/>
+          <FooterGitHub/>
+    </div>
     <FooterMenu/>
     <FooterBottom/>
 

@@ -2,23 +2,37 @@
 import { getGithubStats } from "../../lib/github/github";
 const GH_LOGIN = "bot-35";
 const stats = await getGithubStats(GH_LOGIN, "devblog");
+import "@fontsource-variable/jetbrains-mono";
+import Ondes from "./onde2.svg";
+
 ---
 
-<section class="rounded-2xl p-6 bg-blog-marron-fond/10 shadow-sm">
-  <h3 class="text-xl font-bold uppercase tracking-wider">GitHub</h3>
-  <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div><p class="text-sm opacity-70">Followers</p><p class="text-3xl font-extrabold">{stats.followers}</p></div>
-    <div><p class="text-sm opacity-70">Repos publics</p><p class="text-3xl font-extrabold">{stats.publicRepos}</p></div>
-    <div><p class="text-sm opacity-70">Étoiles</p><p class="text-3xl font-extrabold">{stats.totalStars}</p></div>
-    <div><p class="text-sm opacity-70">Commits (12 mois)</p><p class="text-3xl font-extrabold">{stats.commitsLast12Months}</p></div>
+<section class="relative rounded-md xl:self-stretch flex flex-col justify-center    overflow-hidden  w-3/4 sm:w-full sm:max-w-2xl p-6 pl-14 bg-gradient-to-tr backdrop-blur-xs from-blog-black via-blog-black/50 to-blog-black/20 text-white  border  border-blog-black">
+  
+  <!-- * Overlay  pour teinter le composant-->
+  <div class="absolute top-0 left-0 w-full h-full pointer-events-none bg-blog-marron-shadow/3 "></div>
+  
+    <!-- * Bandeau décoratif-->
+  <div class="absolute hidden sm:block top-3 left-8 font-black text-[14px] uppercase   italic -rotate-18 z-10 before:absolute before:top-[-30%] before:left-[-250%] before:w-[500%] before:h-[150%] before:bg-blog-black/25 before:-z-10 before:border-2 before:border-blog-black">
+    <span>GitHub</span>
   </div>
 
-  <div class="mt-6">
-    <p class="text-sm opacity-70">devblog — commits (branche par défaut)</p>
-    <p class="text-2xl font-bold">{stats.devblog.totalCommitsDefaultBranch}</p>
+  <!-- * SVG -->
+  <Ondes class="absolute inset-0 hidden -z-10 opacity-50  sm:block origin-center  -rotate-180 " aria-hidden="true" focusable="false"/>
+  <div class="mt-4 pl-2 grid grid-cols-2 md:grid-cols-5 gap-4 z-20">
+    <div><p class="text-xs">Followers 👀</p><p class="text-sm font-extrabold">{stats.followers}</p></div>
+    <div><p class="text-xs">Repos publics 🙋🏼‍♂️</p><p class="text-sm font-extrabold">{stats.publicRepos}</p></div>
+    <div><p class="text-xs">Étoiles ⭐</p><p class="text-sm font-extrabold">{stats.totalStars}</p></div>
+    <div><p class="text-xs">Commits 📝 </p><p class="text-sm font-extrabold">{stats.commitsLast12Months}</p></div>
+  </div>
+
+
+  <div class="mt-6 z-10 pl-2">
+    <p class="text-xs">devblog — commits (main)</p>
+    <p class="text-sm font-bold">{stats.devblog.totalCommitsDefaultBranch}</p>
     <ul class="mt-3 flex flex-wrap gap-2">
       {stats.devblog.languages.map((l) => (
-        <li class="px-3 py-1 rounded-full border text-sm" style={`border-color:${l.color ?? 'currentColor'}`}>
+        <li class="px-3 py-1 rounded-full border text-xs" style={`border-color:${l.color ?? 'currentColor'}`}>
           {l.name} · {l.share}%
         </li>
       ))}
