@@ -67,7 +67,7 @@ backdrop-blur-xs bg-gradient-to-tl from-[#1a1a1a]/80 to-[#010101]/60
               class="relative px-4 py-2 rounded-full border text-xs   badgeGH
                     bg-gradient-to-br  from-[var(--badge-color)]/5 via-[var(--badge-color)]/25 to-[var(--badge-color)]/30  
                     text-white border-[var(--badge-color)]/35
-                    text-center
+                    text-center before:skew-x-[15deg] before:skew-y-[15deg] before:opacity-20
                     before:absolute before:-top-[50%] before:-left-[50%] before:w-[200%] before:animate-[breathe_5s_ease-in-out_infinite] before:[filter:blur(100px)] before:h-[200%] before:content-[''] before:bg-[var(--badge-color)] before:-z-10
                     odd:before:animate-[breathe_10s_ease-in-out_infinite]
          even:before:animate-[breathe_10s_ease-in-out_infinite]
@@ -93,7 +93,7 @@ backdrop-blur-xs bg-gradient-to-tl from-[#1a1a1a]/80 to-[#010101]/60
 
 <style is:global>
 @keyframes breathe {
-  0%,100% { opacity:0.4; transform:  skew(15deg, 15deg); }
+  0%,100% { opacity:0.20; transform:  skew(15deg, 15deg); }
   50%     { opacity:1; transform: skew(31deg, 31deg);}
 }
 @media (prefers-reduced-motion: reduce) {
