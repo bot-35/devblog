@@ -15,7 +15,6 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeToc from '@jsdevtools/rehype-toc';
 import rehypeClassNames from 'rehype-class-names';
 
-import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
@@ -100,7 +99,4 @@ export default defineConfig({
 
     return include
     },
-}), icon()],
-
-  adapter: vercel(),
-});
+}), icon()]});
