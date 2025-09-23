@@ -44,6 +44,7 @@
 
 /* Tes styles (base/components) */
 @import "./global.css";
+@import "./print.css";
 @layer base {
   button:not(:disabled),
   [role="button"]:not(:disabled) {

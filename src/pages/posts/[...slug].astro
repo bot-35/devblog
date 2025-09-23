@@ -1,10 +1,13 @@
 ---
 
 import { getCollection } from "astro:content";
-import { Icon } from "astro-icon/components";
 import Layout from "../../layouts/layoutPosts.astro";
 import MultipleParts from "../../components/MultipleParts/MultipleParts.astro";
 import InspiredBy from "../../components/InspiredBy/InspiredBy.astro";
+
+/** Import pour génération PDF */
+import PDFCouverture from "../../components/PDFCouverture/PDFCouverture.astro";
+import ServeurPDF from '../../img/profil/serveur_pdf_mirroir.png';
 
 
 export async function getStaticPaths() {
@@ -34,6 +37,14 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
 ---
 
 <Layout title={title}>
+  <PDFCouverture/>
+     <section class="fixed left-2 bottom-2 w-70 h-70">
+              <a
+                href={`/pdfs/${remarkPluginFrontmatter.slug.replaceAll('/', '__')}.pdf`}
+                download >
+                <img src={ServeurPDF.src} alt=""/>  
+              </a>
+      </section>
   <section class="relative flex flex-row xl:gap-8 xl:pr-72 justify-end w-full"  transition:name=`postsbox`>
     <aside class="sticky top-1/3 self-start order-0 hidden xl:block basis-1/5">
              <section class='mt-12' transition:name=`post ${remarkPluginFrontmatter.slug} tag`>
@@ -47,13 +58,14 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
       </ul> 
         </section>
     </aside>
-    <aside         transition:name=`post ${remarkPluginFrontmatter.slug} box`
+    <aside transition:name=`post ${remarkPluginFrontmatter.slug} box`
     class="sticky top-1/3 self-start order-2 hidden xl:block basis-1/5">
       <p class="font-bold text-xl underline uppercase mb-8">
         Table des matières
       </p>
       <section class="overflow-y-auto max-h-[50vh] py-2 my-8  text-sm border-b" id="tdm">
       </section>
+   
       <section class="w-full flex flex-row justify-center gap-2  items-center">
         <p class = "text-xs text-white">
           Source :
@@ -85,7 +97,7 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
       </section>
       <section
         id="details"
-        class="w-full flex flex-row justify-between mb-4 px-4 pb-2 border-b border-blog-marron-text"
+        class="w-full flex flex-row justify-between mb-4 px-4 pb-2 border-b border-blog-marron-text no-print"
       >
         <time         transition:name=`post ${remarkPluginFrontmatter.slug} date`
         datetime={entry.data.publishedDate.toISOString()}
@@ -94,7 +106,7 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
         <p><span class="mr-4" transition:name=`post ${remarkPluginFrontmatter.slug} mintoread`>☕</span>{remarkPluginFrontmatter.minutesRead}</p>
       </section>
       
-      <section class="flex flex-row justify-center w-full">
+      <section class="flex flex-row justify-center w-full no-print">
         <img
           src={remarkPluginFrontmatter.image}
           class="rounded-xl max-h-[420px]  mt-4 mb-12 shadow"
@@ -141,6 +153,7 @@ const ghUrl = remarkPluginFrontmatter.ghUrl; // injecté par le plugin
   @reference "tailwindcss/theme.css";
   @reference "../../styles/main.css";
   
+
 
   .toc li { @apply relative pl-4 font-jost  ; }
   .toc > ol > li {
