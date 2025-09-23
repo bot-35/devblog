@@ -1,7 +1,7 @@
 # 🤖 Bot35 Devblog
 
 <p align="center">
-    <img src="public/img/github/bot-35-profil.png" width="200">
+    <img src="src/img/pdf/main_couverture.png" width="650">
 </p>
 
 <p align="center">
@@ -47,7 +47,11 @@ Rapide, flexible, bref, parfait pour un blog.
 ---
 
 ## 📰 Derniers articles
-- [🐱‍🏍 Carnet d'aventure DevOps ] #1 => Qu'est-ce que ce truc ?!
+<!-- LAST_POST_START -->
+**Dernier article :** [Carnet d'aventure DevOps #2 : Mini Projet - Un README de DevOpseur !](https://devblog-bot-35.vercel.app/posts/carnet-aventure-devops-2-miniprojet_readme_devopseur)
+> Premier mini-projet pour comprendre le DevOps, créer un README de DevOpseur !
+*Publié le 2025-09-02*
+<!-- LAST_POST_END -->
 ---
 
 ## 👀 Envie d’en savoir plus ?
