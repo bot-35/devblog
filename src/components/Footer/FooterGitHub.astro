@@ -1,0 +1,102 @@
+---
+import { getGithubStats } from "../../lib/github/github";
+const GH_LOGIN = "bot-35";
+const stats = await getGithubStats(GH_LOGIN, "devblog");
+import "@fontsource-variable/jetbrains-mono";
+import { Icon } from "astro-icon/components";
+---
+
+<section
+  class="relative flex-1 rounded-md xl:self-stretch flex flex-col justify-center overflow-hidden w-3/4 sm:w-full sm:max-w-2xl
+backdrop-blur-xs bg-gradient-to-tl from-[#1a1a1a]/80 to-[#010101]/60
+ text-blog-marron-reflet border border-blog-marron-text/50"
+>
+  <!-- * Bandeau décoratif-->
+  <div
+    class="absolute block -top-4 -left-4 font-semibold text-[14px] uppercase italic z-10"
+  >
+    <Icon
+      name="bi:github"
+      class="inline text-6xl sm:text-8xl text-blog-marron-text/25 -rotate-30"
+    />
+  </div>
+
+  <div>
+    <!-- * Stats GitHub-->
+    <div class="z-20 flex flex-row justify-around w-full gap-0 sm:px-8 mt-12 xl:mt-4">
+      <div>
+        <p class="text-xs text-center">👀<br />Followers</p>
+        <p class="mt-2 text-sm font-extrabold text-center">
+          {stats.followers}
+        </p>
+      </div>
+      <div>
+        <p class="text-xs text-center">🙋🏼‍♂️<br />Repos publics</p>
+        <p class="mt-2 text-sm font-extrabold text-center">
+          {stats.publicRepos}
+        </p>
+      </div>
+      <div>
+        <p class="text-xs text-center">⭐<br />Étoiles</p>
+        <p class="mt-2 text-sm font-extrabold text-center">
+          {stats.totalStars}
+        </p>
+      </div>
+      <div>
+        <p class="text-xs text-center">📝<br />Commits</p>
+        <p class="mt-2 text-sm font-extrabold text-center">
+          {stats.devblog.totalCommitsDefaultBranch}
+        </p>
+      </div>
+    </div>
+
+    <!-- * Stats languages-->
+    <div class="z-10 sm:pl-2 mt-3 sm:mt-4 mb-0 sm:mb-8 xl:mb-0">
+      <ul class="flex sm:flex-row flex-col items-center sm:justify-around w-full sm:mt-3">
+        {
+          stats.devblog.languages.map((l) => (
+            <li
+              class="relative sm:px-4 sm:py-2 sm:rounded-full border text-xs badgeGH sm:w-fit w-full
+        bg-gradient-to-t            sm:bg-gradient-to-br  from-[var(--badge-color)]/5 via-[var(--badge-color)]/25 to-[var(--badge-color)]/30  
+                    text-white border-[var(--badge-color)]/35
+                    text-center before:skew-x-[15deg] before:skew-y-[15deg] before:opacity-20 sm:before:block before:hidden
+                    before:absolute before:-top-[50%] before:-left-[50%] before:w-[200%] before:animate-[breathe_5s_ease-in-out_infinite] before:[filter:blur(100px)] before:h-[200%] before:content-[''] before:bg-[var(--badge-color)] before:-z-10
+                    odd:before:animate-[breathe_10s_ease-in-out_infinite]
+         even:before:animate-[breathe_10s_ease-in-out_infinite]
+         even:before:[animation-delay:5s]"
+              style={`
+        --badge-color: ${l.color};        
+      `}
+            >
+              {l.name} <br />{" "}
+              <span class="font-semibold text-blog-marron-reflet">
+                {l.share}%
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  @keyframes breathe {
+    0%,
+    100% {
+      opacity: 0.2;
+      transform: skew(15deg, 15deg);
+    }
+    50% {
+      opacity: 1;
+      transform: skew(31deg, 31deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .badgeGH::before {
+      animation: none;
+      opacity: 0.5;
+      transform: none;
+    }
+  }
+</style>

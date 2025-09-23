@@ -78,6 +78,7 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
+    "@octokit/graphql": "^9.0.1",
     "@tailwindcss/postcss": "^4.1.12",
     "@tailwindcss/vite": "^4.1.12",
     "globby": "^14.1.0",

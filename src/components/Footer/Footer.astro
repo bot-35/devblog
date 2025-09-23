@@ -1,6 +1,7 @@
 ---
 import FooterBottom from "./FooterBottom.astro";
 import FooterGeek from "./FooterGeek.astro";
+import FooterGitHub from "./FooterGitHub.astro"
 import FooterMenu from "./FooterMenu.astro";
 import bg from "../../img/photo-bg/sable.jpg";
 import profil2 from '../../img/profil/bot-35-travel.png';
@@ -9,20 +10,19 @@ import LastMusic from "../LastMusic/LastMusic.astro";
 ---
 
 
-<footer class=' pt-32 relative  overflow-hidden'>
-  <div class='absolute top-0 left-0 h-2 w-full bg-gradient-to-tr origin-left from-blog-marron-fond via-blog-marron-text to-blog-marron-reflet ' 
+<footer class='relative pt-32 overflow-hidden '>
+  <div class='absolute top-0 left-0 w-full h-2 origin-left bg-gradient-to-tr from-blog-marron-fond via-blog-marron-text to-blog-marron-reflet ' 
   id="footerBorder"   
    /> 
   <div class='absolute bg-center bg-cover h-full bottom-0 left-0  w-full opacity-100 -z-20  bg-gradient-to-b from-blog-black from-30%'/>
-  <div style=`background-image: url("${bg.src}")` class=" absolute bg-center bg-cover bottom-0 left-0  h-full w-full  -z-30 -hue-rotate-180"/>
-  <div  id="bgContactFooter" style=`background-image: url("${profil2.src}")` class="  absolute bg-right-top bg-no-repeat bg-contain top-0   opacity-100 -rotate-[9deg] origin-bottom-right     left-48 xl:left-24  -z-20   h-1/4 xl:h-2/4 w-full   "/>
+  <div style=`background-image: url("${bg.src}")` class="absolute bottom-0 left-0 w-full h-full bg-center bg-cover  -z-30 -hue-rotate-180"/>
 
   <section class='w-full xl:w-10/12 xl:mx-[9%] flex flex-col gap-16 z-10'>
-    <div class='flex flex-col mx-8 xl:flex-row  xl:justify-around gap-8'>
-
-    </div>
     <FooterGeek/>
-    <LastMusic  limit="1"/>
+    <div class='flex flex-col  items-center gap-8 xl:flex-row xl:justify-around xl:items-stretch'>
+          <LastMusic  limit="1"/>
+          <FooterGitHub/>
+    </div>
     <FooterMenu/>
     <FooterBottom/>
 
