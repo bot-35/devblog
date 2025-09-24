@@ -15,26 +15,52 @@ import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
 
     <section id='article'>
 
-        <section id='entete'>
-        Au fil du développement du blog, j'ai compris que j'aurais beaucoup de mal à me tenir aux principes clés du Devops (laisser le main tranquille, créer des branches spécifiques pour chaque idée, merger en moins de 48h, pusher de petites quantités de code etc...)<br/>
-        J'ai donc décidé de mettre en place des gardes-fou qui m'empêcheront dorénavant de modifier comme un dératé et sans cohérence des dixaines de fichiers astro différents avant de les pushs direct dans le main 🙈
+       <section id='entete'>
+  Parfois, j’aime emporter un article ou un tuto dans ma liseuse.  
+  J’utilise en général **Instapaper**, fourni nativement avec ma Kobo.  
+  Mais parfois… ça casse. Rien ne s’importe.  
+
+  Dans ce cas, je me rabats sur une extension Brave pour télécharger la page en PDF.  
+  Et si l’article est découpé en plusieurs pages, je dois encore fusionner les fichiers à la main.  
+
+  Bref, pas pratique.  
+  C’est dans cette optique que j’ai voulu mettre à disposition un bouton magique : **« Je veux mon PDF »**.  
+
+  Après plusieurs essais, j’en ai conclu que le jeu n’en valait pas la chandelle.  
+  Voici mon histoire… *tin tin !*
+</section>
+
+## Les objectifs
+
+Avant de plonger dans le code, voyons ensemble ce que nous allons faire :
+
+- **Conversion automatique** : générer le PDF dès qu’un article sort de la zone brouillon.  
+- **Découpage et fusion** : un PDF par post, mais aussi un PDF fusionné pour l’article entier.  
+- **Gestion de la mise à jour** : soit les PDF évoluent avec les nouveaux posts, soit ils restent figés jusqu’à la fin du sujet.  
+
+Pour ça, nous allons explorer trois étapes :  
+👉 le **@media print en CSS** pour styliser l’impression,  
+👉 un peu de magie avec **Playwright**,  
+👉 et pour conclure, une touche de **DevOps** avec GitHub Actions.  
+
+P.S. : Les plus malins auront déjà remarqué l’absence du bouton PDF sur le site.  
+Non, je n’ai pas échoué 😏. Si vous voulez directement savoir *pourquoi* je ne l’ai pas mis en place, passez direct à la conclusion !
+
+
+    ## On nettoie l'article
+
+Quand on écrit sur le web — et encore plus sur un blog — la mise en forme, c’est un vrai plaisir.
+Travailler le design d’un site est probablement l’une des étapes les plus satisfaisantes du processus, au point qu’on a souvent du mal à ne pas en rajouter.
+
+Un peu de marge par-ci, un léger espacement par-là, pourquoi pas une ombre ou une bordure élégante… bref, vous l’avez compris : on publie rarement du texte brut.
+Mais si un visiteur décide d’imprimer la page, il risque de se retrouver avec toutes ces petites fioritures étalées sur son A4, et le confort de lecture en prend un coup.
+
+C’est pour ça qu’a été inventé le @media print en CSS.
+En gros, il dit à votre navigateur : “À l’impression, ce sont ces styles-là qui priment.”
+
+    ### Surchargeons le tout
     
-        </section>
-
-    ## Traitons le main avec le respect qui lui ai dû !
-
-    Le main c'est la version publique de ce blog, c'est le liens qui nous unis et je me dois donc de tout faire pour ne pas le briser 😊.
-
-    En temps normal, je travaille en local sur mon dépôt maison que je push sur le main une fois que le résultat me convient.
-
-    Alors, évidemment, même si il advenait que je push une erreur, la criticité de celle ci resterait minimal, voir nul -étant pour le moment mon seul et unique lecteur 😎-.
-
-    Mais ce n'est absolument pas une bonne pratique, et dans un cadre professionel, cela pourrait causer de gros problèmes aussi bien à mon employeur qu'à moi même.
-
-    Il me faut donc prendre des mesures drastique pour ne plus y toucher avec des pushs ! 
-
-    ## Les mesures
-
+    Tout d'abord surchageons
 
     
 
