@@ -24,7 +24,7 @@ const { posts } = Astro.props;
 ---
 <BaseLayout pageTitle={tag}>
     <div class="xl:mt-64 mt-32 flex flex-col gap-4 ">
-        <p class="ml-8">Tag : <span class='text-red-500 font-mono capitalize'>{tag}</span></p>
+        <p class="ml-8">Tag : <span class='text-red-500 capitalize'>{tag}</span></p>
         <ul class=" grid grid-cols-1 gap-8 xl:grid-cols-3">
             {posts.map((post) => 			<PostCard collection={post.collection} id={post.id} slug={post.slug} />)} 
         </ul>

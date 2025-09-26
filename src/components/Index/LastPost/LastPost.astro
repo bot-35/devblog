@@ -55,7 +55,7 @@ else
                 <ul class=" xl:flex xl:flex-col xl:justify-left flex-wrap justify-end  xl:gap-4 pl-4 xl:pl-0 h-32"  >
                     {lastPost.remarkPluginFrontmatter.tags.map((tag : string) => (
                         <a href=`/tags/${tag}` class="mr-4 xl:mr-0 z-10">
-                            <li class="text-blog-marron-reflet transition hover:text-blog-marron-text  font-mono hover-underline-animation "><span class="text-[0.7rem] mr-1">#</span>{tag}</li>
+                            <li class="text-blog-marron-reflet transition hover:text-blog-marron-text  hover-underline-animation "><span class="text-[0.7rem] mr-1">#</span>{tag}</li>
                         </a>
                     ))}
                 </ul> 
@@ -70,7 +70,7 @@ else
        alt="Image en rapport avec la news." />
 </div>
         <div         transition:name=`post ${slug} date`
-        class="text-blog-black font-semibold font-mono absolute top-8 right-0 z-50  xl:-right-16   xl:text-2xl">
+        class="text-blog-black font-semibold  absolute top-8 right-0 z-50  xl:-right-16   xl:text-2xl">
             <p class='inline-block bg-blog-marron-fond px-1 rounded-bl-3xl rounded-tl-2xl pl-4'>{day} {month} {year}</p>
         </div>
     </div>

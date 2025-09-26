@@ -18,7 +18,7 @@ const overlayIcon =
 ---
 
 <astro-imagebox
-  class="relative postimagebox my-32 w-full flex flex-col justify-center items-center cursor-pointer"
+  class="relative postimagebox  w-full flex flex-col justify-center items-center cursor-pointer"
   data-src={src.src}
   data-legend={legend || ""}
   data-step={(step ?? "").toString()}
@@ -43,7 +43,7 @@ const overlayIcon =
           {overlayIcon && (
             <img src={overlayIcon} alt="" aria-hidden="true" class="h-8 w-8 opacity-90 shrink-0" />
           )}
-          <span class="text-sm leading-tight text-white/95 font-mono">
+          <span class="text-sm leading-tight text-white/95 ">
             {legend}
           </span>
           {step && (
@@ -179,7 +179,7 @@ function getOrCreateModal() {
                         bg-gradient-to-t from-black/100 to-blog-black/90
                         backdrop-blur-[2px] rounded-b-xl">
               ${icon ? `<img src="${icon}" alt="" class="h-8 w-8 opacity-90 shrink-0">` : ''}
-              <span class="text-sm leading-tight text-white/95 font-mono">${legend}</span>
+              <span class="text-sm leading-tight text-white/95 ">${legend}</span>
               ${step ? `<span class="ml-auto text-[11px] px-4 py-0.5 rounded-full
                                    bg-blog-black ring-1 ring-blog-marron-fond text-blog-marron-text
                                    uppercase shadow-blog-marron-shadow shadow">➡ Étape ${step}</span>` : ''}
