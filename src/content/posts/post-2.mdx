@@ -3,9 +3,12 @@ title: "Carnet d'aventure DevOps #3 : Mini Projet - Je m'auto-discipline pour é
 slug: 'carnet-aventure-devops-3-miniprojet_auto-discipline'
 publishedDate: 2025-09-04
 image: /img/post/2/1.png
-description:  Mini-projet pour comprendre le DevOps, comment éviter les gros lots dans un projet !
+description: |
+    Au fil du développement du blog, j'ai compris que j'aurais beaucoup de mal à me tenir aux principes clés du Devops (laisser le main tranquille, créer des branches spécifiques pour chaque idée, merger en moins de 48h, pusher de petites quantités de code etc...)  
+    J'ai donc décidé de mettre en place des gardes-fou qui m'empêcheront dorénavant de modifier comme un dératé et sans cohérence des dixaines de fichiers astro différents avant de les pushs direct dans le main 🙈
 tags: ["github","CI","CD","devops"]
 draft: true
+layout: ../../layouts/layoutPosts.astro
 ---
 import ImageBox from '../../components/ImageBox/ImageBox.astro';
 import CodeBox from '../../components/CodeBox/CodeBox.astro';
@@ -13,13 +16,6 @@ import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
 
 
 
-    <section id='article'>
-
-        <section id='entete'>
-        Au fil du développement du blog, j'ai compris que j'aurais beaucoup de mal à me tenir aux principes clés du Devops (laisser le main tranquille, créer des branches spécifiques pour chaque idée, merger en moins de 48h, pusher de petites quantités de code etc...)<br/>
-        J'ai donc décidé de mettre en place des gardes-fou qui m'empêcheront dorénavant de modifier comme un dératé et sans cohérence des dixaines de fichiers astro différents avant de les pushs direct dans le main 🙈
-    
-        </section>
 
     ## Traitons le main avec le respect qui lui ai dû !
 
@@ -38,4 +34,3 @@ import badgeYaml from '../../../.github/workflows/articles-badge.yml?raw'
 
     
 
-    </section>
