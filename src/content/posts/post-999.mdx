@@ -1,0 +1,124 @@
+---
+title: "Démo Markdown / MDX"
+slug: 'demo_mdx'
+publishedDate: 2025-09-24
+image: /img/post/999/1.png
+description: |
+  Exemple de **toutes** les balises et syntaxes Markdown de base. Normal, **gras**, *italique*, ***gras+italique***, ~~barré~~,  
+tags: ["github","CI","CD","devops","astro"]
+draft: true
+layout: ../../layouts/layoutPosts.astro
+---
+
+
+
+# H1 : Titre principal
+## H2 : Sous-titre
+### H3 : Niveau 3
+#### H4 : Niveau 4
+##### H5
+###### H6
+
+---
+
+## Texte
+
+Normal, **gras**, *italique*, ***gras+italique***, ~~barré~~,  
+`inline code`, et <u>souligné (HTML)</u>.
+
+Texte avec une note[^1].
+
+---
+  
+  ## Liens & Images
+  
+  - Lien classique : [Astro](https://astro.build)
+  - Lien avec titre : [OpenAI](https://openai.com "Site officiel")
+  - Lien automatique : https://github.com
+  
+  Image :
+  ![Logo Astro](https://astro.build/assets/press/astro-icon-dark.png "Astro logo")
+  
+  ---
+  
+  ## Listes
+  
+  ### Liste non ordonnée
+  - Item 1
+  - Item 2
+    - Sous-item
+    - Autre sous-item
+  - Item 3
+  
+  ### Liste ordonnée
+  1. Premier
+  2. Deuxième
+  3. Troisième
+  
+  ### Liste de tâches
+  - [ ] À faire
+  - [x] Fait
+  
+  ---
+  
+  ## Citation
+  
+  > Ceci est une citation Markdown.
+  > Avec un retour à la ligne.
+  
+  ---
+  
+  ## Séparateur
+  
+  Texte au-dessus
+  
+  ---
+  
+  Texte en dessous
+  
+  ---
+  
+  ## Code
+  
+  ### Inline
+  Du texte avec du `inline code`.
+  
+  ### Bloc
+  ```js
+  // Exemple JS
+  console.log("Hello Markdown!");
+  ```
+  
+  ```bash
+  # Exemple Bash
+  ls -la
+  ```
+  
+  ---
+  
+  ## Tableaux
+  
+  | Colonne A | Colonne B | Colonne C |
+  |-----------|-----------|-----------|
+  | Valeur 1  | Valeur 2  | Valeur 3  |
+  | **Gras**  | *Italique*| `Code`    |
+  
+
+
+  
+  ---
+  
+  ## Footnotes
+  
+  Texte avec une autre note[^2].
+  
+  [^1]: Exemple de note de bas de page.
+  [^2]: Seconde note.
+  
+  ---
+  
+  ## HTML brut autorisé
+  
+  <div style="padding:1rem;border:1px dashed #e6a54a;">
+    Exemple de bloc HTML natif dans ton MDX.
+  </div>
