@@ -2,15 +2,14 @@
 
 @layer base {
   body {
-    @apply font-jost bg-blog-black  text-blog-marron-text;
+    @apply font-jetbrains bg-blog-black  text-blog-marron-text;
   }
 
-  h1, h2, h3, h4, h5 {
-    @apply font-medium tracking-widest font-rozha text-blog-marron-fond;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium tracking-widest font-jetbrains text-blog-marron-fond;
   }
 
   kbd, blockquote, quote, samp, details, summary, dl, dd, dt {
-    @apply font-mono;
   }
 
   h1 { @apply text-4xl sm:text-7xl; }
@@ -26,7 +25,7 @@
   .codebox > pre > code{ @apply bg-transparent; }
 
   code {
-    @apply px-1 py-1 font-mono text-base tracking-tight;
+    @apply px-1 py-1 font-jetbrains text-base tracking-tight;
     background-color: #121212;
     color: #c2bfb4;
   }
@@ -38,7 +37,7 @@
   blockquote {
     @apply  pl-12 xl:pl-32 pt-8 w-full !my-8 bg-blog-black font-serif text-white relative border-b-2  border-b-blog-marron-shadow
            before:absolute before:top-4 before:left-4 before:h-fit before:w-fit before:text-blog-marron-text
-           before:text-5xl before:xl:text-9xl before:font-mono before:content-['"'];
+           before:text-5xl before:xl:text-9xl  before:content-['"'];
     & p      { @apply text-sm italic my-4; }
     & footer { @apply ml-12 text-blog-marron-text; }
   }
@@ -95,15 +94,15 @@
   }
 
   /* ----------- Liens article ----------- */
-  #article a {
+  article a {
     @apply relative inline-block;
   }
-  #article a::after {
+  article a::after {
     content: "";
     @apply absolute left-0 -bottom-[2px] h-[2px] w-full origin-left scale-x-0 transition-transform bg-blog-marron-fond;
   }
-  #article a:hover::after,
-  #article a:focus-visible::after {
+  article a:hover::after,
+  article a:focus-visible::after {
     @apply scale-x-100;
   }
 

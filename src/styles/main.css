@@ -1,6 +1,7 @@
 /* Ordre des layers */
 @import '@fontsource-variable/jost/wght.css';
 @import '@fontsource/rozha-one';
+@import "@fontsource-variable/jetbrains-mono";
 
 @layer theme, base, components, utilities;
 
@@ -8,6 +9,7 @@
 @theme {
   --font-jost: "Jost Variable", "Times New Roman", ui-sans-serif, system-ui, sans-serif;
   --font-rozha: "Rozha One", ui-serif, Georgia, serif;
+  --font-jetbrains: "JetBrains_Mono_Variable";
   /* === palette blog (ex- theme.extend.colors.blog.*) === */
   --color-blog-black: #0e0e0e;
   --color-blog-marron-text: #dd9429;
