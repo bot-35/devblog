@@ -5,7 +5,7 @@ publishedDate: 2025-09-02
 image: /img/post/1/1.png
 description: | 
   Je travaillais sur le **README** du repo GitHub de ce blog quand je me suis dit : Ça serait cool si j’avais un badge qui calcule automatiquement le nombre d’articles que j’ai écrits !  
-  Et puis pourquoi pas un badge qui calcule le nombre total de mots écrits dans tous mes articles ?! 😲  
+  <br/>Et puis pourquoi pas un badge qui calcule le nombre total de mots écrits dans tous mes articles ?! 😲  
   Voyons ensemble comment faire ça et pourquoi c’est un peu du DevOps. 😉
 tags: ["github","mdx","CI","CD","devops","github actions"]
 draft: false
@@ -37,7 +37,7 @@ Il sert de **guide** pour comprendre ce qu’est le projet, comment l’utiliser
 
 C’est au final, la page d’accueil de votre projet.
 
-## Mais pourquoi diable automatiser le README ?
+## Pourquoi diable automatiser le README ?
 Automatiser le README peut être utile pour plusieurs raisons :
 - **Mise à jour automatique** : Si votre projet évolue fréquemment, automatiser certaines parties du README peut garantir que les informations restent à jour sans nécessiter de modifications manuelles constantes.
 - **Cohérence** : L’automatisation peut aider à maintenir une structure et un format cohérents dans le README, ce qui facilite la lecture et la compréhension pour les utilisateurs.
@@ -85,7 +85,7 @@ En gros, ici on va créer un workflow qui s’exécute à **chaque fois qu’on 
 
 Ce workflow va **compter le nombre d’articles et le nombre de mots**, puis **mettre à jour** le README avec ces informations.
 
-### Mon workflow GitHub Actions pour automatiser le README
+### Mon workflow GitHub Actions
 Comment faire ça concrètement ? Tout d’abord il faut ajouter un fichier YAML dans le dossier `.github/workflows/` de votre repo GitHub. Ce fichier va **définir le workflow**.
 
 <CodeBox code={badgeYaml} lang="yml" theme="vitesse-dark" header="articles-badge.yml"/>
