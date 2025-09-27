@@ -36,7 +36,7 @@ const description = "Le journal de bot-35 sur son aventure vers le monde du DevO
 		<SVGMarron/>
 		<Header/>
 
-  <section class="relative flex  mt-[70vh] flex-row w-full justify-start" transition:name=`postsbox`>
+  <section class="relative flex min-w-[80ch]  mt-[70vh] flex-row w-full justify-start" transition:name=`postsbox`>
     <div class ="fixed top-0 left-0 w-full h-screen bg-top bg-no-repeat bg-cover "
       style=`background-image :url(${frontmatter.image})`
     >
@@ -81,21 +81,24 @@ const description = "Le journal de bot-35 sur son aventure vers le monde du DevO
               )}
       </section>
     </aside>
-    <article class="relative w-full px-8 pt-12 max-w-prose ml-auto mr-96  backdrop-blur-xl rounded-2xl">
+    <article class="relative w-full px-8 pt-12  ml-auto mr-96  backdrop-blur-xl rounded-2xl">
       <section class="flex flex-col gap-8 ">
         <h1 class="my-4 text-4xl font-extrabold text-left text-blog-marron-text" transition:name=`post ${frontmatter.slug} title`>
           {frontmatter.title}
         </h1>
-        <section class="flex flex-row py-6">
+          <img src={frontmatter.image}/>
+
+        <section class="flex flex-row py-6 max-w-[75ch] ml-auto" >
           <section id="et"  class="relative w-full" transition:name=`post ${frontmatter.slug} desc`>
           {frontmatter.description && (
             <Markdown content={frontmatter.description} />
           )}
           </section>
         </section>
+        
         <section
           id="details"
-          class="flex flex-row justify-between w-full pb-2 border-b border-blog-marron-text "
+          class="flex flex-row justify-between w-full  pb-2 border-b border-blog-marron-text "
         >
           <time         transition:name=`post ${frontmatter.slug} date`
           datetime={pub?.toISOString?.()}
@@ -104,8 +107,9 @@ const description = "Le journal de bot-35 sur son aventure vers le monde du DevO
           <p><span class="mr-4 " transition:name=`post ${frontmatter.slug} mintoread`>☕</span>{frontmatter.minutesRead}</p>
         </section>
       </section>
-  
+      <section class=" max-w-[75ch] ml-auto">
           <slot/>
+      </section>
     </article>
   </section>
   {frontmatter && frontmatter.parts && (
