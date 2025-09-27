@@ -13,12 +13,14 @@ import Footer from "../components/Footer/Footer.astro";
 import Modal from "../components/Modal/Modal.astro";
 import SVG from "../components/SVG/SVG.astro";
 import SVGMarron from "../components/SVG/SVGMarron.astro";
+import MultipleParts from "../components/MultipleParts/MultipleParts.astro";
+import InspiredBy from "../components/InspiredBy/InspiredBy.astro";
+import Markdown from "../components/Markdown/Markdown.astro";
+import descEcusson from "../img/logo/ecusson_descirption.png"
+const {frontmatter, title } = Astro.props;
 
+const pub = typeof frontmatter.publishedDate === 'string' ? new Date(frontmatter.publishedDate) : frontmatter.publishedDate;
 
-
-
-/** Initialisation du titre de la page*/
-const { title } = Astro.props;
 
 const description = "Le journal de bot-35 sur son aventure vers le monde du DevOps !";
 ---
@@ -28,36 +30,135 @@ const description = "Le journal de bot-35 sur son aventure vers le monde du DevO
 		<Head title={title} description={description}/>
 	</head>
 	<body class="antialiased" >
+ 
 		<Modal/>
 		<SVG/>
 		<SVGMarron/>
 		<Header/>
 
+  <section class="relative flex min-w-[80ch]  mt-[70vh] flex-row w-full justify-start" transition:name=`postsbox`>
+    <div class ="fixed top-0 left-0 w-full h-screen bg-top bg-no-repeat bg-cover "
+      style=`background-image :url(${frontmatter.image})`
+    >
+      <div class="absolute left-0 w-full h-full bg-gradient-to-br from-10% to-50% from-blog-black to-transparent"/>
+      <div class="absolute left-0 w-full h-full bg-gradient-to-bl from-10% to-50% from-blog-black to-transparent"/>
+      <div class="absolute  left-0 w-full h-full bg-gradient-to-b from-blog-black/50 from-25% via-blog-black/75 via-50% to-blog-black"/>
+    </div>
+    <aside class="sticky self-start hidden top-1/3 order-0 xl:block  mt-[30vh]  p-4">
+             <section transition:name=`post ${frontmatter.slug} tag`>
+        <p class=''>Tag(s) :</p>
+        <ul class="flex flex-col w-fit"  >
+          {frontmatter.tags.map((tag : string) => (
+              <a href=`/tags/${tag}` class="transition w-fit text-blog-marron-reflet hover:text-blog-marron-text hover-underline-animation">
+                 <li> <span class="">#</span>{tag}</li>
+              </a>
+          ))}
+      </ul> 
+        </section>
+    </aside>
+    <aside         transition:name=`post ${frontmatter.slug} box`
+    class="sticky self-start order-0 hidden top-1/3 xl:block  mt-[30vh]">
+      <p class="mb-4 text-blog-marron-shadow">
+        Table des matières
+      </p>
+      <section class="overflow-y-auto max-h-[50vh] pb-2 mb-8  text-sm border-b" id="tdm">
+      </section>
+      <section class="flex flex-row items-center justify-center w-full gap-2">
+        <p class = "text-xs text-white">
+          Source :
+        </p>
+                  {frontmatter.ghUrl && (
+                <a href={frontmatter.ghUrl} target="_blank" class="transition-all grayscale-100 hover:grayscale-0"  rel="noopener noreferrer" aria-label="Voir le fichier source sur GitHub"
+                  class="" title="Voir le MDX sur GitHub"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 32 32">
+                  <rect width="28" height="11.4" x="2" y="10.3" fill="#f9ac00" rx=".923" />
+                  <path fill="none" stroke="#000" stroke-width="1.23" d="m27 18.6l-6-6m.051 6l6-6zm-15.8.564v-5.13l2.82 2.82l2.87-2.87v5.13m5.38-.769v-6zm-2.77-2.62l2.77 2.77l2.77-2.77" />
+                  <path fill="none" stroke="#d00" stroke-width="0.41" d="m4.31 19.8l.615.615l.615-.615l.615.615l.615-.615l.615.615L8 19.8l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615l.615.615l.615-.615" />
+                </svg>            
+                <span class="sr-only">Source GitHub</span>
+                </a>
+              )}
+      </section>
+    </aside>
+    <article class="relative w-full px-8 pt-12  ml-auto mr-96  backdrop-blur-xl rounded-2xl">
+      <section class="flex flex-col gap-8 ">
+        <h1 class="my-4 text-4xl font-extrabold text-left text-blog-marron-text" transition:name=`post ${frontmatter.slug} title`>
+          {frontmatter.title}
+        </h1>
+          <img src={frontmatter.image}/>
 
-		<div class='w-full flex flex-col items-center pt-44 xl:pt-64 '> 
+        <section class="flex flex-row w-full bg-red-300 py-6 items-center justify-center" >
+          <section>
+            <img src={descEcusson.src} class="h-32"/>
+          </section>
+          <section id="et"  class=" self-end justify-self-end" transition:name=`post ${frontmatter.slug} desc`>
+            {frontmatter.description && (
+            <Markdown content={frontmatter.description} />
+          )}
+          </section>
+        </section>
+        
+        <section
+          id="details"
+          class="flex flex-row justify-between w-full  pb-2 border-b border-blog-marron-text "
+        >
+          <time         transition:name=`post ${frontmatter.slug} date`
+          datetime={pub?.toISOString?.()}
+            >  {pub ? pub.toLocaleDateString('fr-FR') : ''}
+            </time>
+          <p><span class="mr-4 " transition:name=`post ${frontmatter.slug} mintoread`>☕</span>{frontmatter.minutesRead}</p>
+        </section>
+      </section>
+      <section class=" max-w-[75ch] ml-auto">
+          <slot/>
+      </section>
+    </article>
+  </section>
+  {frontmatter && frontmatter.parts && (
+    <MultipleParts title={frontmatter.title} parts={frontmatter.parts}/>
+  )}
 
-			
-	
-			<slot/>
-			<section class='     flex  flex-col xl:flex-row gap-8 w-full content-center justify-center items-center capitalize mt-64  my-8 '>
-				<p class='font-semibold text-xs'>Fil d'Ariane 💃</p>
+  {frontmatter && frontmatter.base && (
+   <InspiredBy data={frontmatter.base}/>
+  )}
+<div id="popup_success" class='fixed left-0 z-50 flex-row items-center content-center justify-center hidden w-screen h-24 duration-1000 origin-bottom scale-y-0 bottom-10'>
+  <div class='relative flex flex-row items-center content-center justify-center h-24 shadow backdrop-blur backdrop-saturate-150 w-72'>
+    <span class='z-50 text-xl font-semibold text-white'>
+     Copié
+    </span>
+    <div class='absolute top-0 left-0 z-40 w-full h-full bg-green-500 rounded opacity-10' />
+</div>
+
+
+		</div>
+    			<section class='flex flex-col items-center content-center justify-center w-full gap-8 my-8 mt-64 capitalize xl:flex-row'>
+				<p class='text-xs font-semibold'>Fil d'Ariane 💃</p>
 				<SpeedInsights/>
 				<Analytics/>
 				<Breadcrumbs  indexText="Index"/>
 			</section>
-		</div>
 		<Footer/>
 	</body>
 </html>
 
 
-
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const toc = document.querySelector(".toc");
+    const tdm = document.getElementById("tdm");
+    if (tdm) {
+      tdm.appendChild(toc);
+    }
+  });
+</script>
 
 
 
 <style is:global>
 @reference "tailwindcss/utilities.css";
 @reference "tailwindcss/theme.css";
+@reference "../styles/main.css";
 	.c-breadcrumbs__crumbs {
 		@apply flex flex-row gap-1;
 	}
@@ -67,6 +168,74 @@ const description = "Le journal de bot-35 sur son aventure vers le monde du DevO
 	.c-breadcrumbs__crumb:first-of-type {
 		@apply   before:content-[''];
 	}
-	
+  .toc li { @apply relative  font-jetbrains ; }
+  .toc > ol > li {
+    @apply mb-5;
+  }
+
+  .toc > ol > li > ol > li{
+    @apply my-3;
+  }
+  .toc-link { color: rgb(225, 201, 167); }
+  .toc-link:hover { color: rgb(185, 126, 39); }
+
+  .toc-link-h2 { @apply uppercase  hover:pl-0.5 transition-all text-blog-marron-fond ; }
+
+
+  .toc-link-h3 { @apply  hover:pl-1 transition-all text-blog-marron-reflet; }
+
+
+  article { }
+
+  article blockquote { @apply leading-relaxed; }
+  article p { @apply tracking-widest leading-relaxed xl:text-[21px] text-blog-marron-reflet; }
+
+  article h2, article h3, article h4, article h5, article h6 { @apply relative; }
+  article h2 { @apply tracking-widest leading-relaxed  xl:text-5xl; }
+  article h3 { @apply tracking-widest leading-relaxed  xl:text-2xl  ; }
+  article h4 { @apply tracking-widest leading-relaxed  xl:text-lg  ; }
+  article h5 { @apply tracking-widest leading-relaxed  xl:text-base ; }
+  article h6 { @apply tracking-widest leading-relaxed  xl:text-base ; }
+
+  article p + p {  }
+  article * + h2 { }
+  article * + h3 { }
+  article * + h4 {  }
+  article * + h5 {  }
+  article * + h6 {  }
+
+  article p + .postimagebox,
+  article .postimagebox + p {  }
+
+  article h1 + * {  }
+  article h2 + * { }
+  article h3 + * { }
+  article h4 + * {  }
+  article h5 + * { }
+  article h6 + * {  }
+
+  article h2 + h3,
+  article h2 + h4,
+  article h2 + h5 {  }
+
+  article h2:first-of-type::before { @apply hidden; }
+
+  article a { @apply text-blog-marron-text; }
+
+  article ul, article ol {  }
+  article ul li, article ol li {
+    @apply  text-blog-marron-reflet tracking-widest relative;
+  }
+  article ul li::before {
+    content: "";
+    @apply absolute h-1 w-1 top-3 -left-4 bg-red-500 bg-gradient-to-tl from-blog-marron-fond via-gray-50 to-blog-marron-text rounded-full;
+  }
+  article ul li img, article ol li img { @apply w-1/4; }
+
+  article #et p {
+    @apply tracking-wide max-w-prose  text-gray-200 text-[17px]  text-left leading-relaxed;
+  }
+
+  article #details p { @apply text-blog-marron-text; }
 	
 </style>

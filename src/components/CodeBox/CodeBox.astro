@@ -18,7 +18,7 @@ for (let i = 0; i < code.length; i++) {
     <div class='relative codebox flex flex-col gap-0 m-8 shadow'>
         <input id={Y} class='hidden' type="checkbox" />
         <div class="flex flex-row justify-between content-end items-end ">
-            <div  class='w-fit  px-2 pt-2 rounded-t-xl bg-[#121212] font-mono text-gray-500 text-xs '>
+            <div  class='w-fit  px-2 pt-2 rounded-t-xl bg-[#121212]  text-gray-500 text-xs '>
                 <span>📝 <em>Journal de Bot-35</em> | <strong>{header}</strong></span>
             </div>
             {code.split('\n').length > 5 ? (
@@ -26,7 +26,7 @@ for (let i = 0; i < code.length; i++) {
                     <label class="inline-block h-4 w-4 relative z-10 cursor-pointer text-blog-marron-reflet  hover:text-blog-marron-shadow duration-500 transition-all" for={Y}>
                         <Icon name="bi:window-dash" class='h-fit w-fit ' />
                     </label>
-                    <span class="absolute block -top-6 px-4 py-1 -right-12 rounded-xl opacity-50  origin-bottom scale-y-0 w-fit h-fit duration-150 font-mono bg-blog-black text-white text-xs">Réduire la fenêtre</span>
+                    <span class="absolute block -top-6 px-4 py-1 -right-12 rounded-xl opacity-50  origin-bottom scale-y-0 w-fit h-fit duration-150  bg-blog-black text-white text-xs">Réduire la fenêtre</span>
                 </div>
             ) : null}
             <div class='codeboxCopyButton absolute bottom-2 right-4 ' >            
@@ -34,11 +34,11 @@ for (let i = 0; i < code.length; i++) {
                     <Icon name="ph:copy-fill" class='h-fit w-fit text-blog-marron-reflet  hover:text-blog-marron-shadow duration-500 ' />
                 </button>
                 <div />
-                <span class="absolute block bottom-9 px-4 py-1 -right-6 rounded-xl opacity-50  origin-bottom scale-y-0 w-fit h-fit duration-150 font-mono bg-blog-black text-white text-xs">Copier</span>
+                <span class="absolute block bottom-9 px-4 py-1 -right-6 rounded-xl opacity-50  origin-bottom scale-y-0 w-fit h-fit duration-150  bg-blog-black text-white text-xs">Copier</span>
             </div>
         </div>
         <div class="h-0 flex flex-row justify-center opacity-0 items-center content-center bg-[#e6e6e605]">
-            <span class=' font-mono uppercase text-blog-marron-text text-xs origin-top'>
+            <span class='  uppercase text-blog-marron-text text-xs origin-top'>
                 <Icon name="fluent:eye-hide-24-filled" class='h-12 w-fit animate-pulse' />    
             </span>
         </div>

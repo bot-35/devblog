@@ -68,6 +68,7 @@
     "astro-particles": "^2.10.0",
     "gray-matter": "^4.0.3",
     "lorem-ipsum": "^2.0.8",
+    "marked": "^16.3.0",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^7.0.0",

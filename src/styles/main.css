@@ -1,13 +1,11 @@
 /* Ordre des layers */
-@import '@fontsource-variable/jost/wght.css';
-@import '@fontsource/rozha-one';
+@import "@fontsource-variable/jetbrains-mono";
 
 @layer theme, base, components, utilities;
 
 /* Tes tokens (repris de ton ancien tailwind.config) */
 @theme {
-  --font-jost: "Jost Variable", "Times New Roman", ui-sans-serif, system-ui, sans-serif;
-  --font-rozha: "Rozha One", ui-serif, Georgia, serif;
+  --font-jetbrains: "JetBrains_Mono_Variable";
   /* === palette blog (ex- theme.extend.colors.blog.*) === */
   --color-blog-black: #0e0e0e;
   --color-blog-marron-text: #dd9429;
@@ -70,5 +68,5 @@
 * { scrollbar-width: thin; scrollbar-color: var(--color-blog-marron-reflet) transparent; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { @apply rounded-full; }
-::-webkit-scrollbar-thumb { @apply bg-blog-marron-reflet rounded-full shadow-2xl shadow-blog-marron-reflet; }
+::-webkit-scrollbar-thumb { @apply rounded-full shadow-2xl bg-blog-marron-reflet shadow-blog-marron-reflet; }
 ::-webkit-scrollbar-thumb:hover { @apply bg-blog-marron-fond; }

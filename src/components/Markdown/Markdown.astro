@@ -1,0 +1,10 @@
+---
+import { marked } from "marked";
+
+const { content = "" } = Astro.props;
+
+// Convertit le Markdown en HTML
+const html = marked.parse(content);
+---
+
+<div set:html={html} />
