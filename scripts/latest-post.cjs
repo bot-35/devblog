@@ -1,6 +1,13 @@
 // scripts/latest-post.js
+// Import des dépendances
 const fs = require('fs');
 const path = require('path');
+
+/* 
+exécute une commande shell (ex : git log) et renvoie le résultat.
+→ ici utilisé pour récupérer la date d’un fichier dans Git (git log -1 …).
+→ ça permet d’avoir une date de secours si le front-matter n’a pas de publishedDate 
+*/
 const { execSync } = require('child_process');
 
 function safeExec(cmd) {
@@ -8,6 +15,11 @@ function safeExec(cmd) {
   catch { return ''; }
 }
 
+/* 
+→ parcours un dossier (ici src/content/posts) récursivement.
+→ ne garde que les fichiers .md ou .mdx.
+→ résultat : une liste des fichiers d’articles. 
+*/
 function listFilesRec(dir, exts = ['.md', '.mdx']) {
   const out = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -18,9 +30,11 @@ function listFilesRec(dir, exts = ['.md', '.mdx']) {
   return out;
 }
 
+/* 
+parse minimal front-matter sans dépendance
+Compatible YAML "simple" — si besoin, on peux passer par gray-matter 
+ */
 function parseFrontmatter(fileContent) {
-  // parse minimal front-matter sans dépendance
-  // Compatible YAML "simple" — si besoin, tu peux passer à gray-matter
   const fmMatch = fileContent.match(/^---\n([\s\S]*?)\n---\n?/);
   if (!fmMatch) return { data: {}, content: fileContent };
   const yaml = fmMatch[1];
@@ -40,20 +54,40 @@ function parseFrontmatter(fileContent) {
   return { data, content };
 }
 
+/*
+→ essaie de convertir une chaîne en Date.
+→ renvoie null si ce n’est pas valide.
+*/
 function isoOrNull(s) {
   const d = new Date(s);
   return isNaN(d.getTime()) ? null : d;
 }
 
+
+/*
+→ fait un git log -1 --format=%cI pour avoir la date du dernier commit sur le fichier.
+→ utile quand ton front-matter n’a pas de date.
+*/
 function fileGitDateIso(file) {
   const iso = safeExec(`git log --follow -1 --format=%cI -- "${file}"`);
   return iso || '';
 }
 
+/*
+→ prend un tableau de posts avec une clé date.
+→ trie par date décroissante.
+→ renvoie le plus récent.
+*/
 function pickLatest(posts) {
   return posts.sort((a, b) => b.date - a.date)[0];
 }
 
+/**
+→ ouvre le README.
+→ cherche les balises <!-- START --> … <!-- END -->.
+→ remplace tout ce qu’il y a entre par ton nouveau contenu.
+→ si les marqueurs n’existent pas, les ajoute en bas du fichier. 
+*/
 function readmeReplaceBlock(readmePath, startMarker, endMarker, replacement) {
   const start = `<!-- ${startMarker} -->`;
   const end = `<!-- ${endMarker} -->`;
@@ -68,10 +102,28 @@ function readmeReplaceBlock(readmePath, startMarker, endMarker, replacement) {
   fs.writeFileSync(readmePath, txt);
 }
 
+/*
+Lister tous les fichiers dans src/content/posts.
+
+Pour chaque fichier :
+
+1 . Lire le contenu.
+2 . Extraire front-matter (title, slug, description, publishedDate).
+3 . Déterminer la date : publishedDate > date > date Git.
+4 . Construire un objet {title, slug, desc, date}.
+5 . Choisir le plus récent.
+6 . Générer un bloc Markdown :
+    |------------------------------------
+    | **Dernier article :** [Titre](URL)
+    | > description
+    | *Publié le YYYY-MM-DD*
+    |------------------------------------
+7. Remplacer le bloc dans le README.md.
+*/
 (function main() {
   const POSTS_DIR = process.env.POSTS_DIR || 'src/content/posts';
   const README = process.env.README_PATH || 'README.md';
-  const BASE_URL = process.env.BLOG_BASE_URL || 'https://devblog-bot-35.vercel.app'; // adapte si besoin
+  const BASE_URL = process.env.BLOG_BASE_URL || 'https://devblog-bot-35.vercel.app';
   const START = process.env.START_MARKER || 'LAST_POST_START';
   const END = process.env.END_MARKER || 'LAST_POST_END';
 
@@ -87,7 +139,7 @@ function readmeReplaceBlock(readmePath, startMarker, endMarker, replacement) {
   }
 
   const posts = [];
- for (const f of files) {
+  for (const f of files) {
     const raw = fs.readFileSync(f, 'utf8');
     const { data } = parseFrontmatter(raw);
 
